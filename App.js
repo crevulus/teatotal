@@ -1,21 +1,44 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import "react-native-gesture-handler";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
-export default function App() {
+import { StyleSheet, Text, View } from "react-native";
+
+import { StatusBar } from "expo-status-bar";
+
+import Home from "./views/Home";
+import Account from "./views/Account";
+import { Button } from "react-native";
+
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <SafeAreaProvider>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: "#7B232C",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "semi-bold",
+            },
+            headerRight: () => (
+              <Button title="info" onPress={() => alert("heyooooo")} />
+            ),
+          }}
+        >
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Account" component={Account} />
+        </Stack.Navigator>
+        <StatusBar style="dark" />
+      </SafeAreaProvider>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
