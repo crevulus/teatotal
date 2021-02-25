@@ -9,7 +9,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 import Home from "./views/Home";
-import Account from "./views/Account";
+import TeaPage from "./views/TeaPage";
 import { Button } from "react-native";
 
 const Stack = createStackNavigator();
@@ -33,7 +33,7 @@ const App = () => {
           }}
         >
           <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Account" component={Account} />
+          <Stack.Screen name="TeaPage" component={TeaPage} />
         </Stack.Navigator>
         <StatusBar style="dark" />
       </SafeAreaProvider>
@@ -42,3 +42,5 @@ const App = () => {
 };
 
 export default App;
+
+// https://www.smashingmagazine.com/2020/08/mobx-state-manager-react-native-applications/
