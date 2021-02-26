@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
 
+import TeaCard from "../components/TeaCard";
+
 const Home = ({ navigation }) => {
   const [teaData, setTeaData] = useState("");
 
@@ -17,18 +19,9 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text>This is the Home page</Text>
       {teaData &&
         teaData.map((teaObj) => (
-          <Button
-            key={teaObj.id}
-            title={`Go to ${teaObj.name}`}
-            onPress={() =>
-              navigation.navigate("TeaPage", {
-                teaId: teaObj.id,
-              })
-            }
-          />
+          <TeaCard id={teaObj.id} teaData={teaObj} key={teaObj.id} />
         ))}
     </View>
   );
@@ -39,7 +32,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
   },
 });
 
