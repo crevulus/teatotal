@@ -1,5 +1,8 @@
+// @ts-nocheck
 import "react-native-gesture-handler";
 import React from "react";
+import { Button } from "react-native";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -8,8 +11,9 @@ import { StatusBar } from "expo-status-bar";
 
 import Home from "./views/Home";
 import TeaPage from "./views/TeaPage";
-import { Button } from "react-native";
 // import ListsDisplay from "./mobx-training/ListsDisplay";
+
+import AppStyles from "./AppStyles";
 
 const Stack = createStackNavigator();
 
@@ -20,14 +24,15 @@ const App = () => {
         <Stack.Navigator
           screenOptions={{
             headerStyle: {
-              backgroundColor: "#7B232C",
+              backgroundColor: AppStyles.colour.primary,
             },
             headerTintColor: "#fff",
-            headerTitleStyle: {
-              fontWeight: "semi-bold",
-            },
             headerRight: () => (
-              <Button title="info" onPress={() => alert("heyooooo")} />
+              <Button
+                title="info"
+                onPress={() => alert("heyooooo")}
+                color={AppStyles.colour.secondary}
+              />
             ),
           }}
         >

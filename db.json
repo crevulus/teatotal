@@ -1,6 +1,6 @@
 {
   "teas": [
-    { "id": 1, "name": "PGTips", "rating": 4 },
-    { "id": 2, "name": "Twinings", "rating": 5 }
+    { "id": 1, "name": "PGTips", "rating": 4, "strength": 7 },
+    { "id": 2, "name": "Twinings", "rating": 5, "strength": 5 }
   ]
 }
