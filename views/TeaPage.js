@@ -1,5 +1,6 @@
+// @ts-nocheck
 import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Image, StyleSheet, Linking, Button } from "react-native";
 
 const TeaPage = (props) => {
   const [teaData, setTeaData] = useState("");
@@ -16,11 +17,26 @@ const TeaPage = (props) => {
   }, []);
 
   return (
-    <View>
-      <Text>This is the TeaPage page</Text>
-      {teaData && <Text>{teaData.name}</Text>}
-    </View>
+    <>
+      {teaData && (
+        <View>
+          <Text>{teaData.name}</Text>
+          <Image style={styles.logo} source={{ uri: teaData.logo }} />
+          <Button
+            title={`Get some ${teaData.name}`}
+            onPress={() => Linking.openURL(teaData.url)}
+          />
+        </View>
+      )}
+    </>
   );
 };
+
+const styles = StyleSheet.create({
+  logo: {
+    width: 100,
+    height: 100,
+  },
+});
 
 export default TeaPage;

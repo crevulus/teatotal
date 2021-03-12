@@ -16,14 +16,14 @@ export default function Rating({ count }) {
   ));
   return (
     <View style={styles.ratingsContainer}>
-      <FadeInView style={childStyles.ratingsContainer}>{fullStars}</FadeInView>
+      <FadeInView style={childStyles.ratingsRow}>{fullStars}</FadeInView>
       <FadeInView style="">{emptyStars}</FadeInView>
     </View>
   );
 }
 
 const childStyles = {
-  ratingsContainer: {
+  ratingsRow: {
     flexDirection: "row",
   },
 };

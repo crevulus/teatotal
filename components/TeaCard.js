@@ -35,30 +35,29 @@ function TeaCard({ teaData, strength }) {
 
   return (
     <View style={styles.card}>
-      {/* <Pressable
-        key={id}
-        title={`Go to ${teaData.name}`}
+      <Pressable
+        key={teaData.id}
         onPress={() =>
           navigation.navigate("TeaPage", {
-            teaId: id,
+            teaId: teaData.id,
           })
         }
-      > */}
-      {store.tea && <Text>{store.tea}</Text>}
-      <View>
-        <Text>{teaData.name}</Text>
-        <Text>
-          {roundToHalf(strength * (10 - teaData.strength))} mins for the perfect
-          brew
-        </Text>
-      </View>
-      <Rating count={teaData.rating} />
-      <Button
-        title="Choose"
-        onPress={handleClick}
-        color={AppStyles.colour.secondary}
-      />
-      {/* </Pressable> */}
+      >
+        {store.tea && <Text>{store.tea}</Text>}
+        <View>
+          <Text>{teaData.name}</Text>
+          <Text>
+            {roundToHalf(strength * (10 - teaData.strength))} mins for the
+            perfect brew
+          </Text>
+        </View>
+        <Rating count={teaData.rating} />
+        <Button
+          title="Choose"
+          onPress={handleClick}
+          color={AppStyles.colour.secondary}
+        />
+      </Pressable>
     </View>
   );
 }

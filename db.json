@@ -1,6 +1,13 @@
 {
   "teas": [
-    { "id": 1, "name": "PGTips", "rating": 4, "strength": 7 },
+    {
+      "id": 1,
+      "name": "PGTips",
+      "url": "https://www.pgtips.co.uk/",
+      "logo": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F1367397420359970817%2F0ZD3mGlb.jpg&imgrefurl=https%3A%2F%2Ftwitter.com%2Fpgtips&tbnid=gIsshYJg2q31wM&vet=12ahUKEwjC9oSe76rvAhXQuqQKHaHzBgQQMygGegUIARCoAg..i&docid=Mmswof_FZUqZRM&w=400&h=400&q=pgtips&ved=2ahUKEwjC9oSe76rvAhXQuqQKHaHzBgQQMygGegUIARCoAg",
+      "rating": 4,
+      "strength": 7
+    },
     { "id": 2, "name": "Twinings", "rating": 5, "strength": 5 }
   ]
 }
