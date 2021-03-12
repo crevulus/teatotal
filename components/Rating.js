@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import { Icon } from "react-native-elements";
+import FadeInView from "../animations/FadeIn";
 
 import AppStyles from "../AppStyles";
 
@@ -15,14 +16,24 @@ export default function Rating({ count }) {
   ));
   return (
     <View style={styles.ratingsContainer}>
-      {fullStars}
-      {emptyStars}
+      <FadeInView style={childStyles.ratingsContainer}>{fullStars}</FadeInView>
+      <FadeInView style="">{emptyStars}</FadeInView>
     </View>
   );
 }
 
+const childStyles = {
+  ratingsContainer: {
+    flexDirection: "row",
+  },
+};
+
 const styles = StyleSheet.create({
   ratingsContainer: {
     flexDirection: "row",
+    color: "red",
+  },
+  test: {
+    color: "red",
   },
 });
