@@ -4,10 +4,14 @@ import { StyleSheet, View, Text, Button } from "react-native";
 
 import TeaCard from "../components/TeaCard";
 
-import AppStyles from "../AppStyles";
 import StrengthSlider from "../components/StrengthSlider";
 
-const Home = ({ navigation }) => {
+import { ChooseTea } from "../data/store";
+import { observer } from "mobx-react";
+
+export const Home = observer(() => {
+  const store = new ChooseTea();
+
   const [teaData, setTeaData] = useState("");
   const [teaStrength, setTeaStrength] = useState(0.5);
 
@@ -22,12 +26,18 @@ const Home = ({ navigation }) => {
     fetchTeaData();
   }, []);
 
+  const handleChildChoose = (tea) => {
+    store.selectTea(tea);
+    console.log(store.tea);
+  };
+
   const handleChildSliderChange = (value) => {
     setTeaStrength(value);
   };
 
   return (
     <View style={styles.container}>
+      <Text>You love {store.tea}</Text>
       <View style={styles.teaCardContainer}>
         {teaData &&
           teaData.map((teaObj) => (
@@ -36,13 +46,14 @@ const Home = ({ navigation }) => {
               teaData={teaObj}
               key={teaObj.id}
               strength={teaStrength * 2}
+              handleChoose={handleChildChoose}
             />
           ))}
       </View>
       <StrengthSlider handleChildSliderChange={handleChildSliderChange} />
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -58,5 +69,3 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
-
-export default Home;

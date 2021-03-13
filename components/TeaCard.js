@@ -2,22 +2,15 @@ import React from "react";
 import { View, Text, Button, Pressable, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { observer } from "mobx-react";
-import { ChooseTea } from "../data/store";
-
 import Rating from "./Rating";
 
 import AppStyles from "../AppStyles";
 
-const store = new ChooseTea();
-
-function TeaCard({ teaData, strength }) {
+function TeaCard({ teaData, strength, handleChoose }) {
   const navigation = useNavigation();
 
-  const handleClick = () => {
-    console.log(store);
-    console.log("Tea name: ", store.tea);
-    store.selectTea(teaData.name);
+  const handleClick = (tea) => {
+    handleChoose(tea);
   };
 
   const roundToHalf = (value) => {
@@ -43,7 +36,7 @@ function TeaCard({ teaData, strength }) {
           })
         }
       >
-        {store.tea && <Text>{store.tea}</Text>}
+        {/* {store.tea && <Text>{store.tea}</Text>} */}
         <View>
           <Text>{teaData.name}</Text>
           <Text>
@@ -54,7 +47,7 @@ function TeaCard({ teaData, strength }) {
         <Rating count={teaData.rating} />
         <Button
           title="Choose"
-          onPress={handleClick}
+          onPress={() => handleClick(teaData.name)}
           color={AppStyles.colour.secondary}
         />
       </Pressable>
@@ -70,4 +63,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default observer(TeaCard);
+export default TeaCard;

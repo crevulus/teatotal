@@ -9,7 +9,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { StatusBar } from "expo-status-bar";
 
-import Home from "./views/Home";
+import { Home } from "./views/Home";
 import TeaPage from "./views/TeaPage";
 // import ListsDisplay from "./mobx-training/ListsDisplay";
 
