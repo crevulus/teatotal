@@ -11,7 +11,7 @@ function List(props) {
         <View>
           <Text>{props.list.value}</Text>
           <Button
-            onClick={props.deleteList.bind(this, props.list)}
+            onClick={props.deleteFromList.bind(this, props.list)}
             title="delete"
           />
         </View>

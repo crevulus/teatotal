@@ -3,7 +3,7 @@ import { View, Text, Button } from "react-native";
 
 import { observer } from "mobx-react";
 
-import { ListStore } from "../data/store";
+import { ListStore } from "./store";
 import { TextInput } from "react-native-gesture-handler";
 
 const store = new ListStore();
@@ -11,15 +11,15 @@ const store = new ListStore();
 function TitleInput() {
   const [value, setValue] = useState("");
 
-  const { addList, filteredLists } = store;
+  const { addToList, filteredLists } = store;
 
   const handleTextChange = (e) => {
     setValue(e);
     console.log(value);
   };
 
-  const handleAdd = () => {
-    addList(value);
+  const handleAdd = (value) => {
+    addToList(value);
     console.log(filteredLists);
     setValue("");
   };

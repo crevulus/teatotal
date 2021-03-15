@@ -36,7 +36,6 @@ function TeaCard({ teaData, strength, handleChoose }) {
           })
         }
       >
-        {/* {store.tea && <Text>{store.tea}</Text>} */}
         <View>
           <Text>{teaData.name}</Text>
           <Text>

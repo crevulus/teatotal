@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import { Icon } from "react-native-elements";
-import FadeInView from "../animations/FadeIn";
+import FadeInView from "./animations/FadeIn";
 
 import AppStyles from "../AppStyles";
 

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
 
 import TeaCard from "../components/TeaCard";
@@ -10,8 +10,7 @@ import { ChooseTea } from "../data/store";
 import { observer } from "mobx-react";
 
 export const Home = observer(() => {
-  const store = new ChooseTea();
-
+  const store = useMemo(() => new ChooseTea(), []);
   const [teaData, setTeaData] = useState("");
   const [teaStrength, setTeaStrength] = useState(0.5);
 
@@ -28,7 +27,6 @@ export const Home = observer(() => {
 
   const handleChildChoose = (tea) => {
     store.selectTea(tea);
-    console.log(store.tea);
   };
 
   const handleChildSliderChange = (value) => {
@@ -37,7 +35,7 @@ export const Home = observer(() => {
 
   return (
     <View style={styles.container}>
-      <Text>You love {store.tea}</Text>
+      {store.tea && <Text>You love {store.tea}</Text>}
       <View style={styles.teaCardContainer}>
         {teaData &&
           teaData.map((teaObj) => (
