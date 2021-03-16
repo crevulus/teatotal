@@ -1,22 +1,32 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 
+import firebase from "firebase/app";
+import "firebase/firestore";
+
 import { Button } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-  statusCodes,
-} from "react-native-google-signin";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [userInfo, setUserInfo] = useState([]);
 
-  const onSignUp = () => {};
+  const onSignUp = () => {
+    console.log("signup");
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, pw)
+      .then((res) => {
+        firebase
+          .firestore()
+          .collection("users")
+          .doc(firebase.auth().currentUser.uid)
+          .set({
+            email,
+          });
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
     <View>
@@ -32,5 +42,3 @@ const Auth = () => {
 };
 
 export default Auth;
-
-// https://www.freecodecamp.org/news/google-login-with-react-native-and-firebase/

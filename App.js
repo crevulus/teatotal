@@ -1,20 +1,24 @@
 // @ts-nocheck
 import "react-native-gesture-handler";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 
-import { Icon } from "react-native-elements";
-
 import * as firebase from "firebase";
 import firebaseConfig from "./firebaseConfig.js";
+
+import { LoginUser } from "./data/store";
+import { observer } from "mobx-react";
+
+import { Icon } from "react-native-elements";
 
 import { Home } from "./views/Home";
 import TeaPage from "./views/TeaPage";
 import Auth from "./views/Auth.js";
+import Profile from "./views/Profile.js";
 // import ListsDisplay from "./mobx-training/ListsDisplay";
 
 import AppStyles from "./AppStyles";
@@ -24,6 +28,19 @@ firebase.initializeApp(firebaseConfig);
 const Stack = createStackNavigator();
 
 const App = () => {
+  const [store] = useState(() => new LoginUser());
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        console.log(user);
+        store.setUser(user);
+        setLoggedIn(true);
+      }
+    });
+  });
+
   return (
     <NavigationContainer>
       <SafeAreaProvider>
@@ -50,6 +67,7 @@ const App = () => {
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="TeaPage" component={TeaPage} />
           <Stack.Screen name="Auth" component={Auth} />
+          <Stack.Screen name="Profile" component={Profile} />
         </Stack.Navigator>
         <StatusBar style="dark" />
       </SafeAreaProvider>
@@ -57,6 +75,6 @@ const App = () => {
   );
 };
 
-export default App;
+export default observer(App);
 
 // https://www.smashingmagazine.com/2020/08/mobx-state-manager-react-native-applications/

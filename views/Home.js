@@ -39,6 +39,7 @@ export const Home = observer(() => {
   return (
     <View style={styles.container}>
       <Button title="Auth" onPress={() => navigation.navigate("Auth")} />
+      <Button title="Profile" onPress={() => navigation.navigate("Profile")} />
       {store.tea && <Text>You love {store.tea}</Text>}
       <View style={styles.teaCardContainer}>
         {teaData &&
