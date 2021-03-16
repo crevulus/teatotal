@@ -1,16 +1,19 @@
 // @ts-nocheck
 import React, { useEffect, useState, useMemo } from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
+import { ChooseTea } from "../data/store";
+import { observer } from "mobx-react";
 
 import TeaCard from "../components/TeaCard";
 
 import StrengthSlider from "../components/StrengthSlider";
 
-import { ChooseTea } from "../data/store";
-import { observer } from "mobx-react";
-
 export const Home = observer(() => {
-  const store = useMemo(() => new ChooseTea(), []);
+  const navigation = useNavigation();
+
+  const [store] = useState(() => new ChooseTea());
   const [teaData, setTeaData] = useState("");
   const [teaStrength, setTeaStrength] = useState(0.5);
 
@@ -35,6 +38,7 @@ export const Home = observer(() => {
 
   return (
     <View style={styles.container}>
+      <Button title="Auth" onPress={() => navigation.navigate("Auth")} />
       {store.tea && <Text>You love {store.tea}</Text>}
       <View style={styles.teaCardContainer}>
         {teaData &&

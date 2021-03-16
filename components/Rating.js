@@ -8,11 +8,16 @@ import AppStyles from "../AppStyles";
 
 export default function Rating({ count }) {
   const emptyStarsCount = 5 - count;
-  const emptyStars = Array.from({ length: emptyStarsCount }, () => (
-    <Icon name="star-border" size={30} color={AppStyles.colour.primary} />
+  const emptyStars = Array.from({ length: emptyStarsCount }, (_, i) => (
+    <Icon
+      name="star-border"
+      size={30}
+      color={AppStyles.colour.primary}
+      key={i}
+    />
   ));
-  const fullStars = Array.from({ length: count }, () => (
-    <Icon name="star" size={30} color={AppStyles.colour.primary} />
+  const fullStars = Array.from({ length: count }, (_, i) => (
+    <Icon name="star" size={30} color={AppStyles.colour.primary} key={i} />
   ));
   return (
     <View style={styles.ratingsContainer}>

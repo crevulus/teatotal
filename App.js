@@ -1,19 +1,25 @@
 // @ts-nocheck
 import "react-native-gesture-handler";
 import React from "react";
-import { Button } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-
 import { StatusBar } from "expo-status-bar";
+
+import { Icon } from "react-native-elements";
+
+import * as firebase from "firebase";
+import firebaseConfig from "./firebaseConfig.js";
 
 import { Home } from "./views/Home";
 import TeaPage from "./views/TeaPage";
+import Auth from "./views/Auth.js";
 // import ListsDisplay from "./mobx-training/ListsDisplay";
 
 import AppStyles from "./AppStyles";
+
+firebase.initializeApp(firebaseConfig);
 
 const Stack = createStackNavigator();
 
@@ -26,12 +32,16 @@ const App = () => {
             headerStyle: {
               backgroundColor: AppStyles.colour.primary,
             },
+            headerTitleAlign: "center",
             headerTintColor: "#fff",
+            // headerLeft: () => (
+            //   <Icon name="menu" size={30} color={AppStyles.colour.white} />
+            // ),
             headerRight: () => (
-              <Button
-                title="info"
-                onPress={() => alert("heyooooo")}
-                color={AppStyles.colour.secondary}
+              <Icon
+                name="account-circle"
+                size={30}
+                color={AppStyles.colour.white}
               />
             ),
           }}
@@ -39,6 +49,7 @@ const App = () => {
           {/* <Stack.Screen name="ListDisplay" component={ListsDisplay} /> */}
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="TeaPage" component={TeaPage} />
+          <Stack.Screen name="Auth" component={Auth} />
         </Stack.Navigator>
         <StatusBar style="dark" />
       </SafeAreaProvider>
