@@ -3,14 +3,10 @@ import { View, Text } from "react-native";
 
 import firebase from "firebase/app";
 
-import { LoginUser } from "../data/store";
+import { userStore } from "../data/store";
 
 const Profile = () => {
-  const [store] = useState(() => new LoginUser());
-
-  console.log(store.user);
-
-  return <View>{/* <Text>{user.displayName}</Text> */}</View>;
+  return <View>{userStore.user && <Text>{userStore.user.email}</Text>}</View>;
 };
 
 export default Profile;

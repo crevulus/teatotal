@@ -10,7 +10,7 @@ import { StatusBar } from "expo-status-bar";
 import * as firebase from "firebase";
 import firebaseConfig from "./firebaseConfig.js";
 
-import { LoginUser } from "./data/store";
+import { userStore } from "./data/store";
 import { observer } from "mobx-react";
 
 import { Icon } from "react-native-elements";
@@ -28,14 +28,12 @@ firebase.initializeApp(firebaseConfig);
 const Stack = createStackNavigator();
 
 const App = () => {
-  const [store] = useState(() => new LoginUser());
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log(user);
-        store.setUser(user);
+        userStore.setUser(user);
         setLoggedIn(true);
       }
     });

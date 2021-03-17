@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import firebase from "firebase/app";
 import "firebase/firestore";
 
-import { Button } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
 const Auth = () => {
+  const navigation = useNavigation();
+
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
 
   const onSignUp = () => {
-    console.log("signup");
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, pw)
@@ -26,6 +27,7 @@ const Auth = () => {
           });
       })
       .catch((err) => console.error(err));
+    navigation.navigate("Profile");
   };
 
   return (

@@ -3,17 +3,15 @@ import React, { useEffect, useState, useMemo } from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { ChooseTea } from "../data/store";
 import { observer } from "mobx-react";
 
 import TeaCard from "../components/TeaCard";
 
 import StrengthSlider from "../components/StrengthSlider";
 
-export const Home = observer(() => {
+export const Home = observer(({ userStore }) => {
   const navigation = useNavigation();
 
-  const [store] = useState(() => new ChooseTea());
   const [teaData, setTeaData] = useState("");
   const [teaStrength, setTeaStrength] = useState(0.5);
 
@@ -29,7 +27,7 @@ export const Home = observer(() => {
   }, []);
 
   const handleChildChoose = (tea) => {
-    store.selectTea(tea);
+    // store.selectTea(tea);
   };
 
   const handleChildSliderChange = (value) => {
@@ -40,7 +38,7 @@ export const Home = observer(() => {
     <View style={styles.container}>
       <Button title="Auth" onPress={() => navigation.navigate("Auth")} />
       <Button title="Profile" onPress={() => navigation.navigate("Profile")} />
-      {store.tea && <Text>You love {store.tea}</Text>}
+      {/* {store.tea && <Text>You love {store.tea}</Text>} */}
       <View style={styles.teaCardContainer}>
         {teaData &&
           teaData.map((teaObj) => (
