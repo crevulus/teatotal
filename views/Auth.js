@@ -1,17 +1,37 @@
 import React, { useState } from "react";
-import { View, Text, Button } from "react-native";
+import { Text, Button, TextInput, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import firebase from "firebase/app";
 import "firebase/firestore";
 
-import { TextInput } from "react-native-gesture-handler";
+import { userStore } from "../data/store";
+import { observer } from "mobx-react";
 
 const Auth = () => {
   const navigation = useNavigation();
 
+  const [signUp, setSignUp] = useState(false);
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const onLogIn = () => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, pw)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        return user;
+      })
+      .then((user) => userStore.setUser(user))
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setErrorMsg(errorCode + ": " + errorMessage);
+      });
+    navigation.navigate("Profile");
+  };
 
   const onSignUp = () => {
     firebase
@@ -25,22 +45,31 @@ const Auth = () => {
           .set({
             email,
           });
+        return res.user;
       })
+      .then((user) => userStore.setUser(user))
       .catch((err) => console.error(err));
     navigation.navigate("Profile");
   };
 
   return (
-    <View>
-      <Text>Sign Up</Text>
+    <SafeAreaView>
+      <Button title="Toggle" onPress={() => setSignUp(true)} />
+      <Text>{signUp ? "Sign Up" : "Log In"}</Text>
       <TextInput
         placeholder="Enter your email"
         onChangeText={(name) => setEmail(name)}
       />
       <TextInput placeholder="Enter your pw" onChangeText={(pw) => setPw(pw)} />
-      <Button title="Sign Up" onPress={onSignUp} />
-    </View>
+      {signUp ? (
+        <Button title="Sign Up" onPress={onSignUp} />
+      ) : (
+        <Button title="Log In" onPress={onLogIn} />
+      )}
+      {errorMsg && <Text>{errorMsg}</Text>}
+      {userStore.user && <Text>{userStore.user.email}</Text>}
+    </SafeAreaView>
   );
 };
 
-export default Auth;
+export default observer(Auth);

@@ -33,7 +33,6 @@ const App = () => {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        userStore.setUser(user);
         setLoggedIn(true);
       }
     });

@@ -6,7 +6,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "mockapi": "json-server -w db.json"
+    "mockapi": "json-server -w db.json",
+    "fbrules": "firebase deploy --only firestore:rules"
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
