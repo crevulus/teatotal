@@ -1,7 +1,6 @@
 import { makeAutoObservable, observable } from "mobx";
-import { unstable_renderSubtreeIntoContainer } from "react-dom";
 
-class LoginUser {
+class UserDetails {
   user = {};
 
   constructor() {
@@ -12,6 +11,10 @@ class LoginUser {
 
   setUser = (user) => {
     this.user = user;
+  };
+
+  getUserEmail = () => {
+    return this.user.email;
   };
 }
 
@@ -29,7 +32,7 @@ class ChooseTea {
   };
 }
 
-const userStore = new LoginUser();
+const userStore = new UserDetails();
 const teaStore = new ChooseTea();
 
 export { userStore, teaStore };

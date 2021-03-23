@@ -9,7 +9,7 @@ import TeaCard from "../components/TeaCard";
 
 import StrengthSlider from "../components/StrengthSlider";
 
-export const Home = observer(({ userStore }) => {
+export const EnglishBreakfastHome = observer(() => {
   const navigation = useNavigation();
 
   const [teaData, setTeaData] = useState("");
@@ -51,6 +51,7 @@ export const Home = observer(({ userStore }) => {
             />
           ))}
       </View>
+      <Button title="Drawer" onPress={() => navigation.toggleDrawer()} />
       <StrengthSlider handleChildSliderChange={handleChildSliderChange} />
     </View>
   );
