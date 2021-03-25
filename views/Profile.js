@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Text, Button } from "react-native";
+import React from "react";
+import { SafeAreaView, Text, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import firebase from "firebase/app";
@@ -29,11 +29,11 @@ const Profile = () => {
 
   return (
     userStore.user.email && (
-      <View>
+      <SafeAreaView>
         <Text>{userStore.user.email}</Text>
         <Button title="console log" onPress={handleLog} />
         <Button title="Log out" onPress={onLogOut} />
-      </View>
+      </SafeAreaView>
     )
   );
 };

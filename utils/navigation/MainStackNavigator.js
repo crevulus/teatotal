@@ -16,28 +16,21 @@ const Stack = createStackNavigator();
 const MainStackNavigator = () => {
   return (
     <Stack.Navigator
-      screenOptions={{
+      screenOptions={({ route, navigation }) => ({
         headerStyle: {
           backgroundColor: AppStyles.colour.primary,
         },
         headerTitleAlign: "center",
         headerTintColor: "#fff",
-        // headerLeft: () => (
-        //   <Icon
-        //     name="menu"
-        //     size={30}
-        //     color={AppStyles.colour.white}
-        //     // onPress={() => navigation.toggleDrawer()}
-        //   />
-        // ),
         headerRight: () => (
           <Icon
             name="account-circle"
             size={30}
             color={AppStyles.colour.white}
+            onPress={() => navigation.navigate("Profile")}
           />
         ),
-      }}
+      })}
     >
       <Stack.Screen
         name="Home"

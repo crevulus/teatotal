@@ -1,5 +1,11 @@
 import React from "react";
-import { View, Text, Button, Pressable, StyleSheet } from "react-native";
+import {
+  SafeAreaView,
+  Text,
+  Button,
+  Pressable,
+  StyleSheet,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import Rating from "./Rating";
@@ -27,7 +33,7 @@ function TeaCard({ teaData, strength, handleChoose }) {
   };
 
   return (
-    <View style={styles.card}>
+    <SafeAreaView style={styles.card}>
       <Pressable
         key={teaData.id}
         onPress={() =>
@@ -36,13 +42,13 @@ function TeaCard({ teaData, strength, handleChoose }) {
           })
         }
       >
-        <View>
+        <SafeAreaView>
           <Text>{teaData.name}</Text>
           <Text>
             {roundToHalf(strength * (10 - teaData.strength))} mins for the
             perfect brew
           </Text>
-        </View>
+        </SafeAreaView>
         <Rating count={teaData.rating} />
         <Button
           title="Choose"
@@ -50,7 +56,7 @@ function TeaCard({ teaData, strength, handleChoose }) {
           color={AppStyles.colour.secondary}
         />
       </Pressable>
-    </View>
+    </SafeAreaView>
   );
 }
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, SafeAreaView } from "react-native";
 
 import Slider from "@react-native-community/slider";
 
@@ -14,7 +14,7 @@ export default function StrengthSlider({ handleChildSliderChange }) {
   };
 
   return (
-    <View>
+    <SafeAreaView>
       <Text>Strengthometer: {sliderValue * 10}</Text>
       <Slider
         style={{ width: 200, height: 40 }}
@@ -26,7 +26,7 @@ export default function StrengthSlider({ handleChildSliderChange }) {
         step={0.1}
         onValueChange={(value) => handleSliderChange(value)}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 

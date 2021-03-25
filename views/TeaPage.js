@@ -1,6 +1,13 @@
 // @ts-nocheck
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, StyleSheet, Linking, Button } from "react-native";
+import {
+  SafeAreaView,
+  Text,
+  Image,
+  StyleSheet,
+  Linking,
+  Button,
+} from "react-native";
 
 const TeaPage = (props) => {
   const [teaData, setTeaData] = useState("");
@@ -19,14 +26,14 @@ const TeaPage = (props) => {
   return (
     <>
       {teaData && (
-        <View>
+        <SafeAreaView>
           <Text>{teaData.name}</Text>
           <Image style={styles.logo} source={{ uri: teaData.logo }} />
           <Button
             title={`Get some ${teaData.name}`}
             onPress={() => Linking.openURL(teaData.url)}
           />
-        </View>
+        </SafeAreaView>
       )}
     </>
   );

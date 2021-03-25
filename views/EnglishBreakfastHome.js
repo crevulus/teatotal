@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useEffect, useState, useMemo } from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, SafeAreaView, Text, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { observer } from "mobx-react";
@@ -35,11 +35,9 @@ export const EnglishBreakfastHome = observer(() => {
   };
 
   return (
-    <View style={styles.container}>
-      <Button title="Auth" onPress={() => navigation.navigate("Auth")} />
-      <Button title="Profile" onPress={() => navigation.navigate("Profile")} />
+    <SafeAreaView style={styles.container}>
       {/* {store.tea && <Text>You love {store.tea}</Text>} */}
-      <View style={styles.teaCardContainer}>
+      <SafeAreaView style={styles.teaCardContainer}>
         {teaData &&
           teaData.map((teaObj) => (
             <TeaCard
@@ -50,10 +48,9 @@ export const EnglishBreakfastHome = observer(() => {
               handleChoose={handleChildChoose}
             />
           ))}
-      </View>
-      <Button title="Drawer" onPress={() => navigation.toggleDrawer()} />
+      </SafeAreaView>
       <StrengthSlider handleChildSliderChange={handleChildSliderChange} />
-    </View>
+    </SafeAreaView>
   );
 });
 

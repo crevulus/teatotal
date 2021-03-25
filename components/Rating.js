@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, SafeAreaView } from "react-native";
 
 import { Icon } from "react-native-elements";
 import FadeInView from "../utils/animations/FadeIn";
@@ -22,10 +22,10 @@ export default function Rating({ count }) {
   ));
 
   return (
-    <View style={styles.ratingsContainer}>
+    <SafeAreaView style={styles.ratingsContainer}>
       <FadeInView style={childStyles.ratingsRow}>{fullStars}</FadeInView>
       <FadeInView style="">{emptyStars}</FadeInView>
-    </View>
+    </SafeAreaView>
   );
 }
 

@@ -68,7 +68,6 @@ const Auth = () => {
       )}
       {errorMsg && <Text>{errorMsg}</Text>}
       {userStore.user && <Text>{userStore.user.email}</Text>}
-      <Button title="Drawer" onPress={() => navigation.toggleDrawer()} />
     </SafeAreaView>
   );
 };

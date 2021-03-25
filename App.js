@@ -3,7 +3,6 @@ import "react-native-gesture-handler";
 import React, { useEffect, useState } from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
-import { createDrawerNavigator } from "@react-navigation/drawer";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 
@@ -13,8 +12,9 @@ import firebaseConfig from "./firebaseConfig.js";
 import { observer } from "mobx-react";
 
 import DrawerNavigator from "./utils/navigation/DrawerNavigator";
+import { getTeas } from "./data/firebase.js";
 
-firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -25,6 +25,7 @@ const App = () => {
         setLoggedIn(true);
       }
     });
+    // getTeas(app);
   });
 
   return (
