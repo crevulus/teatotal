@@ -4,6 +4,7 @@ import { StyleSheet, SafeAreaView, Text, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { observer } from "mobx-react";
+import { teaStore } from "../data/store";
 
 import TeaCard from "../components/TeaCard";
 
@@ -28,6 +29,7 @@ export const EnglishBreakfastHome = observer(() => {
 
   const handleChildChoose = (tea) => {
     // store.selectTea(tea);
+    console.log(teaStore.teas);
   };
 
   const handleChildSliderChange = (value) => {

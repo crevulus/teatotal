@@ -25,7 +25,7 @@ const App = () => {
         setLoggedIn(true);
       }
     });
-    // getTeas(app);
+    getTeas(app);
   });
 
   return (

@@ -34,6 +34,7 @@ const Auth = () => {
   };
 
   const onSignUp = () => {
+    let success = false;
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, pw)
@@ -47,9 +48,18 @@ const Auth = () => {
           });
         return res.user;
       })
-      .then((user) => userStore.setUser(user))
-      .catch((err) => console.error(err));
-    navigation.navigate("Profile");
+      .then((user) => {
+        success = true;
+        userStore.setUser(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setErrorMsg(errorCode + ": " + errorMessage);
+      });
+    if (success) {
+      navigation.navigate("Profile");
+    }
   };
 
   return (
