@@ -1,16 +1,22 @@
 import * as firebase from "firebase";
+import React, { useContext, useEffect } from "react";
+import AppContext from "./createContext";
 
-import { teaStore } from "./store";
-
-export function getTeas(app) {
+export function useGetTeas(app) {
   const db = firebase.firestore(app);
-  const teas = [];
-  db.collection("teas")
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        teas.push({ id: doc.id, data: doc.data() });
+  const { teas, setTeas } = useContext(AppContext);
+  const teaData = [];
+
+  useEffect(() => {
+    db.collection("teas")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          teaData.push({ id: doc.id, data: doc.data() });
+        });
       });
-    });
-  teaStore.setTeas(teas);
+    setTeas(teaData);
+  }, []);
+
+  return;
 }

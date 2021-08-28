@@ -12,7 +12,7 @@ import Rating from "./Rating";
 
 import AppStyles from "../AppStyles";
 
-function TeaCard({ teaData, strength, handleChoose }) {
+function TeaCard({ id, teaData, strength, handleChoose }) {
   const navigation = useNavigation();
 
   const handleClick = (tea) => {
@@ -35,10 +35,10 @@ function TeaCard({ teaData, strength, handleChoose }) {
   return (
     <SafeAreaView style={styles.card}>
       <Pressable
-        key={teaData.id}
+        key={id}
         onPress={() =>
           navigation.navigate("TeaPage", {
-            teaId: teaData.id,
+            teaId: id,
           })
         }
       >
