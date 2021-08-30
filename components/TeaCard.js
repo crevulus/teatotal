@@ -1,16 +1,15 @@
 import React from "react";
-import {
-  SafeAreaView,
-  Text,
-  Button,
-  Pressable,
-  StyleSheet,
-} from "react-native";
+import { SafeAreaView, Pressable, StyleSheet } from "react-native";
+import { Text, Button, Card } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";
 
 import Rating from "./Rating";
 
-import AppStyles from "../AppStyles";
+const TeaCardHeader = ({ name }) => (
+  <SafeAreaView>
+    <Text category="h3">{name}</Text>
+  </SafeAreaView>
+);
 
 function TeaCard({ id, teaData, strength, handleChoose }) {
   const navigation = useNavigation();
@@ -33,39 +32,28 @@ function TeaCard({ id, teaData, strength, handleChoose }) {
   };
 
   return (
-    <SafeAreaView style={styles.card}>
-      <Pressable
-        key={id}
-        onPress={() =>
-          navigation.navigate("TeaPage", {
-            teaId: id,
-          })
-        }
-      >
-        <SafeAreaView>
-          <Text>{teaData.name}</Text>
-          <Text>
-            {roundToHalf(strength * (10 - teaData.strength))} mins for the
-            perfect brew
-          </Text>
-        </SafeAreaView>
-        <Rating count={teaData.rating} />
-        <Button
-          title="Choose"
-          onPress={() => handleClick(teaData.name)}
-          color={AppStyles.colour.secondary}
-        />
-      </Pressable>
+    <SafeAreaView>
+      <Card status="danger" header={<TeaCardHeader name={teaData.name} />}>
+        <Pressable
+          key={id}
+          onPress={() =>
+            navigation.navigate("TeaPage", {
+              teaId: id,
+            })
+          }
+        >
+          <SafeAreaView>
+            <Text>
+              {roundToHalf(strength * (10 - teaData.strength))} mins for the
+              perfect brew
+            </Text>
+          </SafeAreaView>
+          <Rating count={teaData.rating} />
+          <Button onPress={() => handleClick(teaData.name)}>Choose</Button>
+        </Pressable>
+      </Card>
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  card: {
-    margin: "5px",
-    border: "1px solid black",
-    width: "90%",
-  },
-});
 
 export default TeaCard;

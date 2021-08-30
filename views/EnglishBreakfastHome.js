@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
-import { StyleSheet, SafeAreaView, Text } from "react-native";
+import React, { useState, useContext } from "react";
+import { StyleSheet, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import TeaCard from "../components/TeaCard";
