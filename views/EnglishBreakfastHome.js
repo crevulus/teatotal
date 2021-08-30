@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { StyleSheet, SafeAreaView, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -19,15 +19,15 @@ export const EnglishBreakfastHome = () => {
   return (
     <SafeAreaView style={styles.container}>
       <SafeAreaView style={styles.teaCardContainer}>
-        {teas.map((teaObj) => (
-          <TeaCard
-            id={teaObj.id}
-            teaData={teaObj.data}
-            key={teaObj.id}
-            strength={teaStrength * 2}
-            handleChoose={handleChildChoose}
-          />
-        ))}
+        {teas.length > 0 &&
+          teas.map((teaObj) => (
+            <TeaCard
+              id={teaObj.id}
+              teaData={teaObj.data}
+              key={teaObj.id}
+              strength={teaStrength * 2}
+            />
+          ))}
       </SafeAreaView>
       <StrengthSlider handleChildSliderChange={handleChildSliderChange} />
     </SafeAreaView>
