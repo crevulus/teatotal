@@ -10,19 +10,6 @@ import {
 } from "react-native";
 
 const TeaPage = (props) => {
-  const [teaData, setTeaData] = useState("");
-
-  const fetchTeaData = async () => {
-    const teaData = await fetch(
-      `http://localhost:3000/teas/${props.route.params.teaId}`
-    ).then((res) => res.json());
-    setTeaData(teaData);
-  };
-
-  useEffect(() => {
-    fetchTeaData();
-  }, []);
-
   return (
     <>
       {teaData && (

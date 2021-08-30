@@ -1,10 +1,9 @@
 import React from "react";
-
 import { createDrawerNavigator } from "@react-navigation/drawer";
+
 import MainStackNavigator from "./MainStackNavigator";
 
 import Auth from "../../views/Auth";
-import { EnglishBreakfastHome } from "../../views/EnglishBreakfastHome";
 
 const Drawer = createDrawerNavigator();
 

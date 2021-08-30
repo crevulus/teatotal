@@ -10,28 +10,13 @@ import Profile from "../../views/Profile";
 import AppStyles from "../../AppStyles";
 
 import { Icon } from "react-native-elements";
+import { TopNavigation } from "@ui-kitten/components";
 
 const Stack = createStackNavigator();
 
 const MainStackNavigator = () => {
   return (
-    <Stack.Navigator
-      screenOptions={({ route, navigation }) => ({
-        headerStyle: {
-          backgroundColor: AppStyles.colour.primary,
-        },
-        headerTitleAlign: "center",
-        headerTintColor: "#fff",
-        headerRight: () => (
-          <Icon
-            name="account-circle"
-            size={30}
-            color={AppStyles.colour.white}
-            onPress={() => navigation.navigate("Profile")}
-          />
-        ),
-      })}
-    >
+    <Stack.Navigator header={<TopNavigation />}>
       <Stack.Screen
         name="Home"
         component={EnglishBreakfastHome}
