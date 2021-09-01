@@ -1,9 +1,10 @@
-import React from "react";
-import { SafeAreaView, Pressable } from "react-native";
-import { Text, Button, Card } from "@ui-kitten/components";
+import React, { useContext } from "react";
+import { SafeAreaView, Pressable, StyleSheet } from "react-native";
+import { Text, Button, Card, Layout } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";
 
 import Rating from "./Rating";
+import AppContext from "../data/createContext";
 
 const TeaCardHeader = ({ name }) => (
   <SafeAreaView>
@@ -11,11 +12,13 @@ const TeaCardHeader = ({ name }) => (
   </SafeAreaView>
 );
 
-function TeaCard({ id, teaData, strength, handleChoose }) {
+function TeaCard({ id, teaData, strength }) {
+  const { setChosenTea } = useContext(AppContext);
+
   const navigation = useNavigation();
 
   const handleClick = (tea) => {
-    handleChoose(tea);
+    setChosenTea(tea);
   };
 
   const roundToHalf = (value) => {
@@ -32,28 +35,37 @@ function TeaCard({ id, teaData, strength, handleChoose }) {
   };
 
   return (
-    <SafeAreaView>
-      <Card status="danger" header={<TeaCardHeader name={teaData.name} />}>
-        <Pressable
-          key={id}
-          onPress={() =>
-            navigation.navigate("TeaPage", {
-              teaId: id,
-            })
-          }
-        >
-          <SafeAreaView>
-            <Text>
-              {roundToHalf(strength * (10 - teaData.strength))} mins for the
-              perfect brew
-            </Text>
-          </SafeAreaView>
-          <Rating count={parseInt(teaData.rating)} />
-          <Button onPress={() => handleClick(teaData.name)}>Choose</Button>
-        </Pressable>
-      </Card>
-    </SafeAreaView>
+    <Card
+      style={styles.container}
+      status="danger"
+      appearance="filled"
+      header={<TeaCardHeader name={teaData.name} />}
+    >
+      <Pressable
+        key={id}
+        onPress={() =>
+          navigation.navigate("TeaPage", {
+            teaId: id,
+          })
+        }
+      >
+        <Text>
+          {roundToHalf(strength * (10 - teaData.strength))} mins for the perfect
+          brew
+        </Text>
+        <Rating count={parseInt(teaData.rating)} />
+        <Button onPress={() => handleClick({ id, teaData })}>Choose</Button>
+      </Pressable>
+    </Card>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: "100%",
+    margin: "1rem",
+  },
+});
 
 export default TeaCard;

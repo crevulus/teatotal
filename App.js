@@ -45,7 +45,7 @@ const App = () => {
             setChosenTea,
           }}
         >
-          <ApplicationProvider {...eva} theme={{ ...eva.dark, ...theme }}>
+          <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
             <AppContainer />
           </ApplicationProvider>
         </Provider>

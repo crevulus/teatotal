@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Text, SafeAreaView } from "react-native";
+import { Text, Layout } from "@ui-kitten/components";
 import { PropTypes } from "prop-types";
 
 import Slider from "@react-native-community/slider";
+import { StyleSheet } from "react-native";
 
 export default function StrengthSlider({ handleChildSliderChange }) {
   const [sliderValue, setSliderValue] = useState(0.5);
@@ -13,7 +14,7 @@ export default function StrengthSlider({ handleChildSliderChange }) {
   };
 
   return (
-    <SafeAreaView>
+    <Layout style={styles.container}>
       <Text>Strengthometer: {sliderValue * 10}</Text>
       <Slider
         style={{ width: 200, height: 40 }}
@@ -23,10 +24,17 @@ export default function StrengthSlider({ handleChildSliderChange }) {
         step={0.1}
         onValueChange={(value) => handleSliderChange(value)}
       />
-    </SafeAreaView>
+    </Layout>
   );
 }
 
 StrengthSlider.propTypes = {
   handleChildSliderChange: PropTypes.func,
 };
+
+const styles = StyleSheet.create({
+  container: {
+    bottom: 0,
+    width: "100%",
+  },
+});

@@ -18,7 +18,7 @@ export default function Rating({ count }) {
   return (
     <SafeAreaView style={styles.ratingsContainer}>
       <FadeInView style={childStyles.ratingsRow}>{fullStars}</FadeInView>
-      <FadeInView style="">{emptyStars}</FadeInView>
+      <FadeInView style={childStyles.ratingsRow}>{emptyStars}</FadeInView>
     </SafeAreaView>
   );
 }

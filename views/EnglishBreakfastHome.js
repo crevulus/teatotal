@@ -1,10 +1,14 @@
 import React, { useState, useContext } from "react";
-import { StyleSheet, SafeAreaView } from "react-native";
+import { StyleSheet } from "react-native";
+import { Layout } from "@ui-kitten/components";
 
 import TeaCard from "../components/TeaCard";
 
 import StrengthSlider from "../components/StrengthSlider";
 import AppContext from "../data/createContext";
+
+import { AdMobBanner } from "expo-ads-admob";
+import { ScrollView } from "react-native-gesture-handler";
 
 export const EnglishBreakfastHome = () => {
   const [teaStrength, setTeaStrength] = useState(0.5);
@@ -15,20 +19,31 @@ export const EnglishBreakfastHome = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <SafeAreaView style={styles.teaCardContainer}>
-        {teas.length > 0 &&
-          teas.map((teaObj) => (
-            <TeaCard
-              id={teaObj.id}
-              teaData={teaObj.data}
-              key={teaObj.id}
-              strength={teaStrength * 2}
-            />
-          ))}
-      </SafeAreaView>
-      <StrengthSlider handleChildSliderChange={handleChildSliderChange} />
-    </SafeAreaView>
+    <>
+      <Layout style={styles.container}>
+        <ScrollView>
+          <Layout style={styles.teaCardContainer}>
+            {teas.length > 0 &&
+              teas.map((teaObj) => (
+                <TeaCard
+                  id={teaObj.id}
+                  teaData={teaObj.data}
+                  key={teaObj.id}
+                  strength={teaStrength * 2}
+                />
+              ))}
+          </Layout>
+        </ScrollView>
+        <StrengthSlider handleChildSliderChange={handleChildSliderChange} />
+      </Layout>
+      <Layout style={styles.adBanner}>
+        <AdMobBanner
+          bannerSize="banner"
+          adUnitID="ca-app-pub-3940256099942544/6300978111"
+          servePersonalizedAds
+        />
+      </Layout>
+    </>
   );
 };
 
@@ -40,8 +55,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   teaCardContainer: {
-    flex: 1,
     alignItems: "center",
+    width: "100%",
+    padding: "5%",
+  },
+  adBanner: {
+    bottom: 0,
     width: "100%",
   },
 });
