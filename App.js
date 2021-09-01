@@ -10,6 +10,10 @@ import * as firebase from "firebase";
 import AppContext from "./data/createContext.js";
 import AppContainer from "./components/AppContainer";
 
+import { ApplicationProvider } from "@ui-kitten/components";
+import * as eva from "@eva-design/eva";
+import { default as theme } from "./styles/custom-theme.json";
+
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [teas, setTeas] = useState([]);
@@ -28,7 +32,9 @@ const App = () => {
     <NavigationContainer>
       <SafeAreaProvider>
         <Provider value={{ loggedIn, setLoggedIn, teas, setTeas }}>
-          <AppContainer />
+          <ApplicationProvider {...eva} theme={{ ...eva.dark, ...theme }}>
+            <AppContainer />
+          </ApplicationProvider>
         </Provider>
       </SafeAreaProvider>
     </NavigationContainer>

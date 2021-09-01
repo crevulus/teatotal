@@ -1,24 +1,18 @@
 import React from "react";
-import { StyleSheet, Text, SafeAreaView } from "react-native";
-
+import { StyleSheet, SafeAreaView } from "react-native";
 import { Icon } from "react-native-elements";
-import FadeInView from "../utils/animations/FadeIn";
+import PropTypes from "prop-types";
 
-import AppStyles from "../AppStyles";
+import FadeInView from "../utils/animations/FadeIn";
 
 export default function Rating({ count }) {
   const emptyStarsCount = 5 - count;
   const emptyStars = Array.from({ length: emptyStarsCount }, (_, i) => (
-    <Icon
-      name="star-border"
-      size={30}
-      color={AppStyles.colour.primary}
-      key={i}
-    />
+    <Icon name="star-border" size={30} key={i} />
   ));
 
   const fullStars = Array.from({ length: count }, (_, i) => (
-    <Icon name="star" size={30} color={AppStyles.colour.primary} key={i} />
+    <Icon name="star" size={30} key={i} />
   ));
 
   return (
@@ -28,6 +22,10 @@ export default function Rating({ count }) {
     </SafeAreaView>
   );
 }
+
+Rating.propTypes = {
+  count: PropTypes.string,
+};
 
 const childStyles = {
   ratingsRow: {

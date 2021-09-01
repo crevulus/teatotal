@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { StyleSheet, SafeAreaView } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
 import TeaCard from "../components/TeaCard";
 
@@ -8,7 +7,6 @@ import StrengthSlider from "../components/StrengthSlider";
 import AppContext from "../data/createContext";
 
 export const EnglishBreakfastHome = () => {
-  const navigation = useNavigation();
   const [teaStrength, setTeaStrength] = useState(0.5);
   const { teas } = useContext(AppContext);
 
@@ -38,7 +36,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "#fff",
     justifyContent: "space-between",
     alignItems: "center",
   },

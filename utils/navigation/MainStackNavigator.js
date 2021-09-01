@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 
 import { createStackNavigator } from "@react-navigation/stack";
@@ -6,8 +7,6 @@ import { EnglishBreakfastHome } from "../../views/EnglishBreakfastHome";
 import TeaPage from "../../views/TeaPage";
 import Auth from "../../views/Auth";
 import Profile from "../../views/Profile";
-
-import AppStyles from "../../AppStyles";
 
 import { Icon } from "react-native-elements";
 import { TopNavigation } from "@ui-kitten/components";
@@ -23,13 +22,9 @@ const MainStackNavigator = () => {
         options={(props) => {
           const { toggleDrawer } = props.navigation;
           return {
+            // eslint-disable-next-line react/display-name
             headerLeft: () => (
-              <Icon
-                name="menu"
-                size={30}
-                color={AppStyles.colour.white}
-                onPress={toggleDrawer}
-              />
+              <Icon name="menu" size={30} onPress={toggleDrawer} />
             ),
           };
         }}
