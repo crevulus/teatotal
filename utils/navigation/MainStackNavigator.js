@@ -2,14 +2,13 @@
 import React from "react";
 
 import { createStackNavigator } from "@react-navigation/stack";
+import { Icon } from "react-native-elements";
+import { TopNavigation } from "@ui-kitten/components";
 
 import { EnglishBreakfastHome } from "../../views/EnglishBreakfastHome";
 import TeaPage from "../../views/TeaPage";
 import Auth from "../../views/Auth";
 import Profile from "../../views/Profile";
-
-import { Icon } from "react-native-elements";
-import { TopNavigation } from "@ui-kitten/components";
 
 const Stack = createStackNavigator();
 

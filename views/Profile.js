@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { SafeAreaView, Text, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import firebase from "firebase/app";
-
-import { userStore } from "../data/store";
-import { observer } from "mobx-react";
+import AppContext from "../data/createContext";
 
 const Profile = () => {
   const navigation = useNavigation();
+  const { user } = useContext(AppContext);
 
   const onLogOut = () => {
     firebase
@@ -24,13 +23,13 @@ const Profile = () => {
   };
 
   const handleLog = () => {
-    console.log(userStore.getUserEmail());
+    console.log(user);
   };
 
   return (
-    userStore.user.email && (
+    user.email && (
       <SafeAreaView>
-        <Text>{userStore.user.email}</Text>
+        <Text>{user.email}</Text>
         <Button title="console log" onPress={handleLog} />
         <Button title="Log out" onPress={onLogOut} />
       </SafeAreaView>
@@ -38,4 +37,4 @@ const Profile = () => {
   );
 };
 
-export default observer(Profile);
+export default Profile;

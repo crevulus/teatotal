@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, Pressable, StyleSheet } from "react-native";
+import { SafeAreaView, Pressable } from "react-native";
 import { Text, Button, Card } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";
 
@@ -48,7 +48,7 @@ function TeaCard({ id, teaData, strength, handleChoose }) {
               perfect brew
             </Text>
           </SafeAreaView>
-          <Rating count={teaData.rating} />
+          <Rating count={parseInt(teaData.rating)} />
           <Button onPress={() => handleClick(teaData.name)}>Choose</Button>
         </Pressable>
       </Card>

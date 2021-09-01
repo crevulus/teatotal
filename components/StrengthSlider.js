@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Text, SafeAreaView } from "react-native";
+import { PropTypes } from "prop-types";
 
 import Slider from "@react-native-community/slider";
-
-import { PropTypes } from "mobx-react";
 
 export default function StrengthSlider({ handleChildSliderChange }) {
   const [sliderValue, setSliderValue] = useState(0.5);

@@ -17,12 +17,14 @@ import { default as theme } from "./styles/custom-theme.json";
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [teas, setTeas] = useState([]);
+  const [user, setUser] = useState({});
+  const [chosenTea, setChosenTea] = useState({});
 
   const { Provider } = AppContext;
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
+    firebase.auth().onAuthStateChanged((currentUser) => {
+      if (currentUser) {
         setLoggedIn(true);
       }
     });
@@ -31,7 +33,18 @@ const App = () => {
   return (
     <NavigationContainer>
       <SafeAreaProvider>
-        <Provider value={{ loggedIn, setLoggedIn, teas, setTeas }}>
+        <Provider
+          value={{
+            loggedIn,
+            setLoggedIn,
+            teas,
+            setTeas,
+            user,
+            setUser,
+            chosenTea,
+            setChosenTea,
+          }}
+        >
           <ApplicationProvider {...eva} theme={{ ...eva.dark, ...theme }}>
             <AppContainer />
           </ApplicationProvider>

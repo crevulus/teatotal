@@ -1,11 +1,12 @@
-import * as firebase from "firebase";
 import { useContext, useEffect } from "react";
-import AppContext from "./createContext";
+import * as firebase from "firebase/app";
 import firebaseConfig from "../firebaseConfig";
+
+import AppContext from "./createContext";
 
 const app = firebase.initializeApp(firebaseConfig);
 
-export function useGetTeas() {
+export function useGetTeasFromFirebase() {
   const db = firebase.firestore(app);
   const { teas, setTeas } = useContext(AppContext);
 
