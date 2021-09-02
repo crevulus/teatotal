@@ -1,18 +1,29 @@
 import React, { useContext } from "react";
 import { SafeAreaView, Pressable, StyleSheet } from "react-native";
-import { Text, Button, Card, Layout } from "@ui-kitten/components";
+import { Text, Button, Card } from "@ui-kitten/components";
 import { useNavigation } from "@react-navigation/native";
 
 import Rating from "./Rating";
 import AppContext from "../data/createContext";
+import { TeaType } from "../data/firebase";
 
-const TeaCardHeader = ({ name }) => (
+type TeaCardHeaderProps = {
+  name: string;
+};
+
+type TeaCardProps = {
+  id: string;
+  teaData: TeaType;
+  strength: number;
+};
+
+const TeaCardHeader = ({ name }: TeaCardHeaderProps) => (
   <SafeAreaView>
     <Text category="h3">{name}</Text>
   </SafeAreaView>
 );
 
-function TeaCard({ id, teaData, strength }) {
+function TeaCard({ id, teaData, strength }: TeaCardProps) {
   const { setChosenTea } = useContext(AppContext);
 
   const navigation = useNavigation();

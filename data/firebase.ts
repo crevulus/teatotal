@@ -6,7 +6,16 @@ import AppContext from "./createContext";
 
 const app = firebase.initializeApp(firebaseConfig);
 
-export function useGetTeasFromFirebase() {
+export type TeaType = {
+  url: string;
+  rating: number;
+  strength: number;
+  name: string;
+  logo: string;
+  id: string;
+};
+
+export function useGetTeasFromFirebase(): void {
   const db = firebase.firestore(app);
   const { teas, setTeas } = useContext(AppContext);
 
