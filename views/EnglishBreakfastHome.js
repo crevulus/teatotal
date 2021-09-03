@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { StyleSheet } from "react-native";
-import { Layout } from "@ui-kitten/components";
+import { Container } from "native-base";
 
 import TeaCard from "../components/TeaCard";
 
@@ -20,9 +20,9 @@ export const EnglishBreakfastHome = () => {
 
   return (
     <>
-      <Layout style={styles.container}>
+      <Container style={styles.container}>
         <ScrollView>
-          <Layout style={styles.teaCardContainer}>
+          <Container style={styles.teaCardContainer}>
             {teas.length > 0 &&
               teas.map((teaObj) => (
                 <TeaCard
@@ -32,17 +32,17 @@ export const EnglishBreakfastHome = () => {
                   strength={teaStrength * 2}
                 />
               ))}
-          </Layout>
+          </Container>
         </ScrollView>
         <StrengthSlider handleChildSliderChange={handleChildSliderChange} />
-      </Layout>
-      <Layout style={styles.adBanner}>
+      </Container>
+      <Container style={styles.adBanner}>
         <AdMobBanner
           bannerSize="banner"
           adUnitID="ca-app-pub-3940256099942544/6300978111"
           servePersonalizedAds
         />
-      </Layout>
+      </Container>
     </>
   );
 };

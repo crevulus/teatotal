@@ -11,13 +11,11 @@
     "fbrules": "firebase deploy --only firestore:rules"
   },
   "dependencies": {
-    "@eva-design/eva": "^2.1.1",
     "@react-native-community/masked-view": "0.1.10",
     "@react-native-community/slider": "^3.0.3",
     "@react-navigation/drawer": "^5.12.4",
     "@react-navigation/native": "^5.9.3",
     "@react-navigation/stack": "^5.14.3",
-    "@ui-kitten/components": "^5.1.1",
     "expo": "~39.0.2",
     "expo-ads-admob": "~8.3.0",
     "expo-cli": "^4.2.1",
@@ -25,6 +23,7 @@
     "firebase": "^7.9.0",
     "mobx": "^6.1.7",
     "mobx-react": "^7.1.0",
+    "native-base": "^3.1.0",
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -37,6 +36,8 @@
     "react-native-svg": "12.1.0",
     "react-native-vector-icons": "^8.1.0",
     "react-native-web": "~0.13.12",
+    "styled-components": "^5.3.1",
+    "styled-system": "^5.1.5",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

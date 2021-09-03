@@ -1,11 +1,14 @@
-import React, { useState } from "react";
-import { Text, Layout } from "@ui-kitten/components";
-import { PropTypes } from "prop-types";
-
-import Slider from "@react-native-community/slider";
+import React, { ReactNode, useState } from "react";
 import { StyleSheet } from "react-native";
+import { Text, Container, Slider } from "native-base";
 
-export default function StrengthSlider({ handleChildSliderChange }) {
+type StrengthSliderPropTypes = {
+  handleChildSliderChange: () => void;
+};
+
+export default function StrengthSlider({
+  handleChildSliderChange,
+}: StrengthSliderPropTypes): ReactNode {
   const [sliderValue, setSliderValue] = useState(0.5);
 
   const handleSliderChange = (value) => {
@@ -14,7 +17,7 @@ export default function StrengthSlider({ handleChildSliderChange }) {
   };
 
   return (
-    <Layout style={styles.container}>
+    <Container style={styles.container}>
       <Text>Strengthometer: {sliderValue * 10}</Text>
       <Slider
         style={{ width: 200, height: 40 }}
@@ -24,13 +27,9 @@ export default function StrengthSlider({ handleChildSliderChange }) {
         step={0.1}
         onValueChange={(value) => handleSliderChange(value)}
       />
-    </Layout>
+    </Container>
   );
 }
-
-StrengthSlider.propTypes = {
-  handleChildSliderChange: PropTypes.func,
-};
 
 const styles = StyleSheet.create({
   container: {

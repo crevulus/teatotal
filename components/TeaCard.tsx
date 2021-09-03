@@ -1,15 +1,11 @@
-import React, { useContext } from "react";
-import { SafeAreaView, Pressable, StyleSheet } from "react-native";
-import { Text, Button, Card } from "@ui-kitten/components";
+import React, { useContext, ReactNode } from "react";
+import { SafeAreaView, StyleSheet } from "react-native";
+import { Button, Pressable, Text, Container } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 
 import Rating from "./Rating";
 import AppContext from "../data/createContext";
 import { TeaType } from "../data/firebase";
-
-type TeaCardHeaderProps = {
-  name: string;
-};
 
 type TeaCardProps = {
   id: string;
@@ -17,13 +13,7 @@ type TeaCardProps = {
   strength: number;
 };
 
-const TeaCardHeader = ({ name }: TeaCardHeaderProps) => (
-  <SafeAreaView>
-    <Text category="h3">{name}</Text>
-  </SafeAreaView>
-);
-
-function TeaCard({ id, teaData, strength }: TeaCardProps) {
+function TeaCard({ id, teaData, strength }: TeaCardProps): ReactNode {
   const { setChosenTea } = useContext(AppContext);
 
   const navigation = useNavigation();
@@ -46,12 +36,7 @@ function TeaCard({ id, teaData, strength }: TeaCardProps) {
   };
 
   return (
-    <Card
-      style={styles.container}
-      status="danger"
-      appearance="filled"
-      header={<TeaCardHeader name={teaData.name} />}
-    >
+    <Container style={styles.container}>
       <Pressable
         key={id}
         onPress={() =>
@@ -65,9 +50,11 @@ function TeaCard({ id, teaData, strength }: TeaCardProps) {
           brew
         </Text>
         <Rating count={parseInt(teaData.rating)} />
-        <Button onPress={() => handleClick({ id, teaData })}>Choose</Button>
+        <Button bg="amber.400" onPress={() => handleClick({ id, teaData })}>
+          Choose
+        </Button>
       </Pressable>
-    </Card>
+    </Container>
   );
 }
 

@@ -3,7 +3,7 @@ import React from "react";
 
 import { createStackNavigator } from "@react-navigation/stack";
 import { Icon } from "react-native-elements";
-import { TopNavigation } from "@ui-kitten/components";
+import { AppBar } from "../../components/AppBar";
 
 import { EnglishBreakfastHome } from "../../views/EnglishBreakfastHome";
 import TeaPage from "../../views/TeaPage";
@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 
 const MainStackNavigator = () => {
   return (
-    <Stack.Navigator header={<TopNavigation />}>
+    <Stack.Navigator header={<AppBar />}>
       <Stack.Screen
         name="Home"
         component={EnglishBreakfastHome}
