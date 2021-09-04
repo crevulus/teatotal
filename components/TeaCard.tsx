@@ -1,26 +1,17 @@
 import React, { useContext, ReactNode } from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
-import { Button, Pressable, Text, Container } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 
-import Rating from "./Rating";
 import AppContext from "../data/createContext";
 import { TeaType } from "../data/firebase";
+import { Card } from "./atoms/Card";
 
 type TeaCardProps = {
   id: string;
   teaData: TeaType;
-  strength: number;
 };
 
-function TeaCard({ id, teaData, strength }: TeaCardProps): ReactNode {
-  const { setChosenTea } = useContext(AppContext);
-
-  const navigation = useNavigation();
-
-  const handleClick = (tea) => {
-    setChosenTea(tea);
-  };
+function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
+  const { desiredStrength } = useContext(AppContext);
 
   const roundToHalf = (value) => {
     let decimal = value - parseInt(value, 10);
@@ -36,34 +27,14 @@ function TeaCard({ id, teaData, strength }: TeaCardProps): ReactNode {
   };
 
   return (
-    <Container style={styles.container}>
-      <Pressable
-        key={id}
-        onPress={() =>
-          navigation.navigate("TeaPage", {
-            teaId: id,
-          })
-        }
-      >
-        <Text>
-          {roundToHalf(strength * (10 - teaData.strength))} mins for the perfect
-          brew
-        </Text>
-        <Rating count={parseInt(teaData.rating)} />
-        <Button bg="amber.400" onPress={() => handleClick({ id, teaData })}>
-          Choose
-        </Button>
-      </Pressable>
-    </Container>
+    <Card
+      id={id}
+      name={teaData.name}
+      minutes={roundToHalf(desiredStrength * 2 * (10 - teaData.strength))}
+      stars={teaData.rating}
+      imageUrl={teaData.logo}
+    />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: "100%",
-    margin: "1rem",
-  },
-});
 
 export default TeaCard;

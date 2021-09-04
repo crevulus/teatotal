@@ -10,6 +10,8 @@ export type ContextProps = {
   setUser: () => void;
   chosenTea: TeaType;
   setChosenTea: () => void;
+  desiredStrength: number;
+  setDesiredStrength: () => void;
 };
 
 const AppContext = createContext<ContextProps>();

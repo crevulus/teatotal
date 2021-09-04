@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
-import { StyleSheet } from "react-native";
-import { Container } from "native-base";
+import { View } from "native-base";
 
 import TeaCard from "../components/TeaCard";
 
@@ -11,56 +10,30 @@ import { AdMobBanner } from "expo-ads-admob";
 import { ScrollView } from "react-native-gesture-handler";
 
 export const EnglishBreakfastHome = () => {
-  const [teaStrength, setTeaStrength] = useState(0.5);
-  const { teas } = useContext(AppContext);
+  const { teas, setDesiredStrength } = useContext(AppContext);
 
   const handleChildSliderChange = (value) => {
-    setTeaStrength(value);
+    setDesiredStrength(value);
   };
 
   return (
     <>
-      <Container style={styles.container}>
+      <View maxWidth="100%">
         <ScrollView>
-          <Container style={styles.teaCardContainer}>
-            {teas.length > 0 &&
-              teas.map((teaObj) => (
-                <TeaCard
-                  id={teaObj.id}
-                  teaData={teaObj.data}
-                  key={teaObj.id}
-                  strength={teaStrength * 2}
-                />
-              ))}
-          </Container>
+          {teas.length > 0 &&
+            teas.map((teaObj) => (
+              <TeaCard id={teaObj.id} teaData={teaObj.data} key={teaObj.id} />
+            ))}
         </ScrollView>
         <StrengthSlider handleChildSliderChange={handleChildSliderChange} />
-      </Container>
-      <Container style={styles.adBanner}>
+      </View>
+      <View>
         <AdMobBanner
           bannerSize="banner"
           adUnitID="ca-app-pub-3940256099942544/6300978111"
           servePersonalizedAds
         />
-      </Container>
+      </View>
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  teaCardContainer: {
-    alignItems: "center",
-    width: "100%",
-    padding: "5%",
-  },
-  adBanner: {
-    bottom: 0,
-    width: "100%",
-  },
-});

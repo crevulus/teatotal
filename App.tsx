@@ -15,6 +15,7 @@ const App = (): ReactNode => {
   const [teas, setTeas] = useState([]);
   const [user, setUser] = useState({});
   const [chosenTea, setChosenTea] = useState({});
+  const [desiredStrength, setDesiredStrength] = useState(0.5);
 
   const { Provider } = AppContext;
 
@@ -61,6 +62,8 @@ const App = (): ReactNode => {
             setUser,
             chosenTea,
             setChosenTea,
+            desiredStrength,
+            setDesiredStrength,
           }}
         >
           <NativeBaseProvider theme={theme}>

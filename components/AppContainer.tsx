@@ -1,10 +1,10 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { useGetTeasFromFirebase } from "../data/firebase";
+import { useTeasFromFirebase } from "../data/firebase";
 import DrawerNavigator from "../utils/navigation/DrawerNavigator";
 
 export default function AppContainer() {
-  useGetTeasFromFirebase();
+  useTeasFromFirebase();
   return (
     <>
       <DrawerNavigator />
