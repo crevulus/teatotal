@@ -1,9 +1,8 @@
 import React, { useContext, ReactNode } from "react";
-import { useNavigation } from "@react-navigation/native";
 
 import AppContext from "../data/createContext";
 import { TeaType } from "../data/firebase";
-import { Card } from "./atoms/Card";
+import { Card } from "./Card";
 
 type TeaCardProps = {
   id: string;

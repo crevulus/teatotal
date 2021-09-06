@@ -1,19 +1,10 @@
-import React from "react";
-import {
-  VStack,
-  HStack,
-  Button,
-  IconButton,
-  Icon,
-  Text,
-  NativeBaseProvider,
-  Center,
-  Box,
-  StatusBar,
-} from "native-base";
+import React, { ReactNode } from "react";
+import { HStack, IconButton, Icon, Text, Box, StatusBar } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/core";
 
-export function AppBar() {
+export function AppBar(): ReactNode {
+  const navigation = useNavigation();
   return (
     <>
       <StatusBar backgroundColor="#3700B3" barStyle="light-content" />
@@ -21,7 +12,7 @@ export function AppBar() {
       <Box safeAreaTop backgroundColor="#6200ee" />
 
       <HStack
-        bg="#6200ee"
+        bg="amber.400"
         px={1}
         py={3}
         justifyContent="space-between"
@@ -34,6 +25,7 @@ export function AppBar() {
                 size="sm"
                 as={<MaterialIcons name="menu" />}
                 color="white"
+                onPress={() => navigation.toggleDrawer()}
               />
             }
           />

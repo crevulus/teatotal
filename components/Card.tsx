@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { Image, Text, Box, Stack, Heading } from "native-base";
-import Rating from "../Rating";
-import { useImageFromFirebase } from "../../data/firebase";
+import Rating from "./Rating";
+import { useImageFromFirebase } from "../data/firebase";
 
 type CardProps = {
   id: string;
@@ -11,20 +11,12 @@ type CardProps = {
   imageUrl: string;
 };
 
-export function Card({
-  name,
-  minutes,
-  id,
-  stars,
-  imageUrl,
-}: CardProps): ReactNode {
+export function Card({ name, minutes, stars, imageUrl }: CardProps): ReactNode {
   const [image] = useImageFromFirebase(imageUrl);
-
-  console.log(image);
   return (
     <Box bg="white" shadow={2} rounded="lg">
       <Image
-        source={image}
+        source={{ uri: image }}
         alt={`${name} logo`}
         resizeMode="cover"
         height={150}

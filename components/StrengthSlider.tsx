@@ -25,7 +25,7 @@ export default function StrengthSlider({
         maximumValue={1}
         value={sliderValue}
         step={0.1}
-        onValueChange={(value) => handleSliderChange(value)}
+        onChange={(value) => handleSliderChange(value)}
       />
     </Container>
   );

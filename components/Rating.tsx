@@ -1,11 +1,14 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { StyleSheet, SafeAreaView } from "react-native";
 import { Icon } from "react-native-elements";
 import PropTypes from "prop-types";
 
-import FadeInView from "../utils/animations/FadeIn";
+import FadeInView from "../utils/animations/FadeIn.tsx";
 
-export default function Rating({ count }) {
+type RatingPropType = {
+  count: number;
+};
+export default function Rating({ count }: RatingPropType): ReactNode {
   const emptyStarsCount = 5 - count;
   const emptyStars = Array.from({ length: emptyStarsCount }, (_, i) => (
     <Icon name="star-border" size={30} key={i} />
