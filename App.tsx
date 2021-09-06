@@ -8,8 +8,8 @@ import { NativeBaseProvider } from "native-base";
 import * as firebase from "firebase";
 
 import AppContext from "./data/createContext.ts";
-import AppContainer from "./components/AppContainer";
 import theme from "./styles/theme";
+import MainStackNavigator from "./components/navigation/MainStackNavigator";
 
 const App = (): ReactNode => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -46,7 +46,7 @@ const App = (): ReactNode => {
           }}
         >
           <NativeBaseProvider theme={theme}>
-            <AppContainer />
+            <MainStackNavigator />
           </NativeBaseProvider>
         </Provider>
       </SafeAreaProvider>

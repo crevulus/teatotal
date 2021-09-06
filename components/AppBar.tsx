@@ -1,14 +1,19 @@
 import React, { ReactNode, useContext } from "react";
+import { useRoute } from "@react-navigation/native";
+
 import { HStack, IconButton, Text, Box } from "native-base";
 import { Icon } from "react-native-elements";
-import { useNavigation } from "@react-navigation/core";
+
 import AppContext from "../data/createContext";
 
-export function AppBar(): ReactNode {
-  const navigation = useNavigation();
-  const { user } = useContext(AppContext);
+type AppBarPropsType = {
+  navigation: NavigationProp;
+};
 
-  console.log(navigation);
+export function AppBar(props: AppBarPropsType): ReactNode {
+  const { user } = useContext(AppContext);
+  const route = useRoute();
+
   const profileTarget = user.email ? "Profile" : "Auth";
 
   return (
@@ -21,32 +26,48 @@ export function AppBar(): ReactNode {
         justifyContent="space-between"
         alignItems="center"
       >
-        <HStack space={4} alignItems="center">
-          <IconButton
-            icon={
-              <Icon
-                name="menu"
-                size={30}
-                color="white"
-                onPress={() => navigation.toggleDrawer()}
-              />
-            }
-          />
+        <HStack alignItems="center" ml={3}>
+          {props.navigation.canGoBack() && (
+            <IconButton
+              mr={4}
+              icon={
+                <Icon
+                  name="arrow-back"
+                  size={30}
+                  color="white"
+                  onPress={() => props.navigation.goBack()}
+                />
+              }
+            />
+          )}
           <Text color="white" fontSize={20} fontWeight="bold">
-            Home
+            {route.name}
           </Text>
         </HStack>
         <HStack space={2}>
-          <IconButton
-            icon={
-              <Icon
-                name="account-circle"
-                size={30}
-                color="white"
-                onPress={() => navigation.navigate(profileTarget)}
-              />
-            }
-          />
+          {route.name === "Home" ? (
+            <IconButton
+              icon={
+                <Icon
+                  name="account-circle"
+                  size={30}
+                  color="white"
+                  onPress={() => props.navigation.navigate(profileTarget)}
+                />
+              }
+            />
+          ) : (
+            <IconButton
+              icon={
+                <Icon
+                  name="free-breakfast"
+                  size={30}
+                  color="white"
+                  onPress={() => props.navigation.navigate("Home")}
+                />
+              }
+            />
+          )}
         </HStack>
       </HStack>
     </>
