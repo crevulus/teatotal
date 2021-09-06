@@ -19,9 +19,9 @@ const MainStackNavigator = (): ReactNode => {
       }}
     >
       <Stack.Screen name="Home" component={EnglishBreakfastHome} />
-      <Stack.Screen name="TeaPage" component={TeaPage} />
-      <Stack.Screen name="Auth" component={Auth} />
       <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Auth" component={Auth} />
+      <Stack.Screen name="TeaPage" component={TeaPage} />
     </Stack.Navigator>
   );
 };

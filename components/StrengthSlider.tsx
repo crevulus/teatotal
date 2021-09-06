@@ -1,5 +1,5 @@
 import React, { ReactNode, useContext, useState } from "react";
-import { Text, Slider, View } from "native-base";
+import { Text, Slider, VStack } from "native-base";
 import AppContext from "../data/createContext";
 
 export default function StrengthSlider(): ReactNode {
@@ -12,8 +12,8 @@ export default function StrengthSlider(): ReactNode {
   };
 
   return (
-    <View maxWidth="80%">
-      <Text>Strengthometer: {sliderValue * 10}</Text>
+    <VStack space={4} mx={10} width="80%">
+      <Text color="gray.700">Strengthometer: {sliderValue * 10}</Text>
       <Slider
         minValue={0}
         maxValue={1}
@@ -26,6 +26,6 @@ export default function StrengthSlider(): ReactNode {
         </Slider.Track>
         <Slider.Thumb />
       </Slider>
-    </View>
+    </VStack>
   );
 }

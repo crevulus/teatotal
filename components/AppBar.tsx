@@ -1,18 +1,21 @@
-import React, { ReactNode } from "react";
-import { HStack, IconButton, Icon, Text, Box, StatusBar } from "native-base";
-import { MaterialIcons } from "@expo/vector-icons";
+import React, { ReactNode, useContext } from "react";
+import { HStack, IconButton, Text, Box } from "native-base";
+import { Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/core";
+import AppContext from "../data/createContext";
 
 export function AppBar(): ReactNode {
   const navigation = useNavigation();
+  const { user } = useContext(AppContext);
+
+  console.log(navigation);
+  const profileTarget = user.email ? "Profile" : "Auth";
+
   return (
     <>
-      <StatusBar backgroundColor="#3700B3" barStyle="light-content" />
-
-      <Box safeAreaTop backgroundColor="#6200ee" />
-
+      <Box safeAreaTop backgroundColor="primary.900" />
       <HStack
-        bg="amber.400"
+        bg="primary.700"
         px={1}
         py={3}
         justifyContent="space-between"
@@ -22,8 +25,8 @@ export function AppBar(): ReactNode {
           <IconButton
             icon={
               <Icon
-                size="sm"
-                as={<MaterialIcons name="menu" />}
+                name="menu"
+                size={30}
                 color="white"
                 onPress={() => navigation.toggleDrawer()}
               />
@@ -37,27 +40,10 @@ export function AppBar(): ReactNode {
           <IconButton
             icon={
               <Icon
-                as={<MaterialIcons name="favorite" />}
-                size="sm"
+                name="account-circle"
+                size={30}
                 color="white"
-              />
-            }
-          />
-          <IconButton
-            icon={
-              <Icon
-                as={<MaterialIcons name="search" />}
-                color="white"
-                size="sm"
-              />
-            }
-          />
-          <IconButton
-            icon={
-              <Icon
-                as={<MaterialIcons name="more-vert" />}
-                size="sm"
-                color="white"
+                onPress={() => navigation.navigate(profileTarget)}
               />
             }
           />
