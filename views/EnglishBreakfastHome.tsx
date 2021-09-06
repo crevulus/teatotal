@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, ReactNode } from "react";
 import { View } from "native-base";
 
 import TeaCard from "../components/TeaCard";
@@ -9,7 +9,7 @@ import AppContext from "../data/createContext";
 import { AdMobBanner } from "expo-ads-admob";
 import { ScrollView } from "react-native-gesture-handler";
 
-export const EnglishBreakfastHome = () => {
+export const EnglishBreakfastHome = (): ReactNode => {
   const { teas, setDesiredStrength } = useContext(AppContext);
 
   const handleChildSliderChange = (value) => {
@@ -17,23 +17,21 @@ export const EnglishBreakfastHome = () => {
   };
 
   return (
-    <>
-      <View maxWidth="100%">
-        <ScrollView>
-          {teas.length > 0 &&
-            teas.map((teaObj) => (
-              <TeaCard id={teaObj.id} teaData={teaObj.data} key={teaObj.id} />
-            ))}
-        </ScrollView>
+    <View flex={1}>
+      <ScrollView maxWidth="100%">
+        {teas.length > 0 &&
+          teas.map((teaObj) => (
+            <TeaCard id={teaObj.id} teaData={teaObj.data} key={teaObj.id} />
+          ))}
+      </ScrollView>
+      <View width="100%">
         <StrengthSlider handleChildSliderChange={handleChildSliderChange} />
-      </View>
-      <View>
         <AdMobBanner
-          bannerSize="banner"
+          bannerSize="smartBannerPortrait"
           adUnitID="ca-app-pub-3940256099942544/6300978111"
           servePersonalizedAds
         />
       </View>
-    </>
+    </View>
   );
 };

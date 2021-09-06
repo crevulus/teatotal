@@ -3,8 +3,8 @@ import React, { ReactNode } from "react";
 
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { EnglishBreakfastHome } from "../../views/EnglishBreakfastHome";
-import TeaPage from "../../views/TeaPage";
+import { EnglishBreakfastHome } from "../../views/EnglishBreakfastHome.tsx";
+import TeaPage from "../../views/TeaPage.tsx";
 import Auth from "../../views/Auth";
 import Profile from "../../views/Profile";
 import { AppBar } from "../AppBar";

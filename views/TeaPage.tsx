@@ -9,7 +9,7 @@ import {
   Button,
 } from "react-native";
 
-const TeaPage = (props) => {
+const TeaPage = ({ teaData }) => {
   return (
     <>
       {teaData && (

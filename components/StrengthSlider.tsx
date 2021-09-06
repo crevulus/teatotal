@@ -1,39 +1,31 @@
-import React, { ReactNode, useState } from "react";
-import { StyleSheet } from "react-native";
-import { Text, Container, Slider } from "native-base";
+import React, { ReactNode, useContext, useState } from "react";
+import { Text, Slider, View } from "native-base";
+import AppContext from "../data/createContext";
 
-type StrengthSliderPropTypes = {
-  handleChildSliderChange: () => void;
-};
-
-export default function StrengthSlider({
-  handleChildSliderChange,
-}: StrengthSliderPropTypes): ReactNode {
+export default function StrengthSlider(): ReactNode {
+  const { setDesiredStrength } = useContext(AppContext);
   const [sliderValue, setSliderValue] = useState(0.5);
 
   const handleSliderChange = (value) => {
     setSliderValue(value);
-    handleChildSliderChange(value);
+    setDesiredStrength(value);
   };
 
   return (
-    <Container style={styles.container}>
+    <View maxWidth="80%">
       <Text>Strengthometer: {sliderValue * 10}</Text>
       <Slider
-        style={{ width: 200, height: 40 }}
-        minimumValue={0}
-        maximumValue={1}
+        minValue={0}
+        maxValue={1}
         value={sliderValue}
         step={0.1}
         onChange={(value) => handleSliderChange(value)}
-      />
-    </Container>
+      >
+        <Slider.Track>
+          <Slider.FilledTrack />
+        </Slider.Track>
+        <Slider.Thumb />
+      </Slider>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    bottom: 0,
-    width: "100%",
-  },
-});
