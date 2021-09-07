@@ -10,7 +10,11 @@ npm-debug.*
 web-build/
 firebaseConfig.js
 firestore.rules
-
+storage.rules
+ui-debug.log
+firestore-debug.log
+firebase-debug.log
 
 # macOS
 .DS_Store
+
