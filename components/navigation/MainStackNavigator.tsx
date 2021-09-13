@@ -2,7 +2,7 @@
 import React, { ReactNode } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { useTeasFromFirebase } from "../../data/firebase";
+import { useBlackTeasFromFirebase } from "../../data/firebase";
 
 import { Home } from "../../views/Home.tsx";
 import Auth from "../../views/Auth";
@@ -12,7 +12,7 @@ import { AppBar } from "../AppBar";
 const Stack = createStackNavigator();
 
 const MainStackNavigator = (): ReactNode => {
-  useTeasFromFirebase();
+  useBlackTeasFromFirebase();
   return (
     <Stack.Navigator
       initialRouteName="Home"

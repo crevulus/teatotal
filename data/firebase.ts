@@ -17,23 +17,23 @@ export type TeaType = {
 
 const TEA_TOTAL_STORAGE_FILEPATH = "gs://teatotal-358fc.appspot.com/";
 
-export const useTeasFromFirebase = (): void => {
+export const useBlackTeasFromFirebase = (): void => {
   const db = firebase.firestore(app);
-  const { teas, setTeas } = useContext(AppContext);
+  const { blackTeas, setBlackTeas } = useContext(AppContext);
 
   useEffect(() => {
     const getTeas = async () => {
-      if (teas.length === 0) {
+      if (blackTeas.length === 0) {
         const teaData = [];
         await db
-          .collection("teas")
+          .collection("blackTeas")
           .get()
           .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
               teaData.push({ id: doc.id, data: doc.data() });
             });
           });
-        setTeas(teaData);
+        setBlackTeas(teaData);
       }
     };
     getTeas();

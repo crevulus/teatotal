@@ -20,8 +20,6 @@ const renderScene = SceneMap({
 });
 
 export const Home = (): ReactNode => {
-  const { teas } = useContext(AppContext);
-
   const layout = useWindowDimensions();
 
   const [index, setIndex] = React.useState(0);

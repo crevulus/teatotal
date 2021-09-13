@@ -29,7 +29,11 @@ function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
     <Card
       id={id}
       name={teaData.name}
-      minutes={roundToHalf(desiredStrength * 2 * (10 - teaData.strength))}
+      minutes={roundToHalf(
+        desiredStrength *
+          2 *
+          (teaData.strength === 10 ? 1 : 10 - teaData.strength)
+      )}
       stars={teaData.rating}
       imageUrl={teaData.logo}
     />

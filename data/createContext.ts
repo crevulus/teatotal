@@ -4,8 +4,8 @@ import { TeaType } from "./firebase";
 export type ContextProps = {
   loggedIn: boolean;
   setLoggedIn: () => void;
-  teas: TeaType[];
-  setTeas: () => void;
+  blackTeas: TeaType[];
+  setBlackTeas: () => void;
   user: any;
   setUser: () => void;
   chosenTea: TeaType;

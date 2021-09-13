@@ -8,11 +8,11 @@ import StrengthSlider from "../components/StrengthSlider";
 import AppContext from "../data/createContext";
 
 export const EnglishBreakfastHome = (): ReactNode => {
-  const { teas } = useContext(AppContext);
+  const { blackTeas } = useContext(AppContext);
 
   return (
     <View flex={1} bg="secondary.500">
-      <ScrollCards teas={teas} />
+      <ScrollCards teas={blackTeas} />
     </View>
   );
 };
