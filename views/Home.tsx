@@ -4,8 +4,6 @@ import { useWindowDimensions } from "react-native";
 import { TabView, SceneMap } from "react-native-tab-view";
 import { AdMobBanner } from "expo-ads-admob";
 
-import ScrollCards from "../components/ScrollCards";
-
 import StrengthSlider from "../components/StrengthSlider";
 import AppContext from "../data/createContext";
 import { EnglishBreakfastHome } from "./EnglishBreakfastHome";
@@ -28,8 +26,8 @@ export const Home = (): ReactNode => {
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: "first", title: "First" },
-    { key: "second", title: "Second" },
+    { key: "first", title: "Black" },
+    { key: "second", title: "Herbal" },
   ]);
 
   return (

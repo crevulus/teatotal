@@ -8,7 +8,6 @@ import { NativeBaseProvider } from "native-base";
 import * as firebase from "firebase";
 
 import AppContext from "./data/createContext.ts";
-import theme from "./styles/theme";
 import MainStackNavigator from "./components/navigation/MainStackNavigator";
 
 const App = (): ReactNode => {
@@ -45,7 +44,7 @@ const App = (): ReactNode => {
             setDesiredStrength,
           }}
         >
-          <NativeBaseProvider theme={theme}>
+          <NativeBaseProvider>
             <MainStackNavigator />
           </NativeBaseProvider>
         </Provider>
