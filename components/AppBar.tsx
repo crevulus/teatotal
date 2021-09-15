@@ -41,7 +41,7 @@ export function AppBar(props: AppBarPropsType): ReactNode {
             />
           )}
           <Text color="white" fontSize={20} fontWeight="bold">
-            {route.name}
+            {route.params ? route.params.teaName : route.name}
           </Text>
         </HStack>
         <HStack space={2}>

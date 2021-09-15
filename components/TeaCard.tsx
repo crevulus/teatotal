@@ -33,9 +33,7 @@ function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
 
   const handleTeaSelection = (tea) => {
     setChosenTea(tea);
-    navigation.navigate("TeaPage", {
-      teaId: id,
-    });
+    navigation.navigate("TeaPage", { teaName: teaData.name });
   };
 
   return (
