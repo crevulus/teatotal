@@ -10,6 +10,7 @@ exports.addMessage = functions
   .https.onRequest(async (req, res) => {
     // Grab the text parameter.
     const original = req.query.text;
+    console.log("test");
     // Push the new message into Firestore using the Firebase Admin SDK.
     const writeResult = await admin
       .firestore()
@@ -40,13 +41,11 @@ exports.makeUppercase = functions
   });
 
 // not working on emulator
-exports.testFunction = functions
-  .useEmulator("localhost", 5001)
-  .https.onRequest(async (req, res) => {
-    const original = req.query.string;
-    const writeResult = await admin
-      .firestore()
-      .collection("test")
-      .add({ original });
-    res.json({ result: `Message with ID: ${writeResult.id} added.` });
-  });
+exports.testFunction = functions.https.onRequest(async (req, res) => {
+  const original = req.query.string;
+  const writeResult = await admin
+    .firestore()
+    .collection("test")
+    .add({ original });
+  res.json({ result: `Message with ID: ${writeResult.id} added.` });
+});
