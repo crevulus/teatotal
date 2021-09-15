@@ -38,3 +38,15 @@ exports.makeUppercase = functions
     // Setting an 'uppercase' field in Firestore document returns a Promise.
     return snap.ref.set({ uppercase }, { merge: true });
   });
+
+// not working on emulator
+exports.testFunction = functions
+  .useEmulator("localhost", 5001)
+  .https.onRequest(async (req, res) => {
+    const original = req.query.string;
+    const writeResult = await admin
+      .firestore()
+      .collection("test")
+      .add({ original });
+    res.json({ result: `Message with ID: ${writeResult.id} added.` });
+  });
