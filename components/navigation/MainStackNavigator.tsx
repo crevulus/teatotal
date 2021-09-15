@@ -8,6 +8,7 @@ import { Home } from "../../views/Home.tsx";
 import Auth from "../../views/Auth";
 import Profile from "../../views/Profile";
 import { AppBar } from "../AppBar";
+import TeaPage from "../../views/TeaPage";
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,7 @@ const MainStackNavigator = (): ReactNode => {
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Auth" component={Auth} />
+      <Stack.Screen name="TeaPage" component={TeaPage} />
     </Stack.Navigator>
   );
 };
