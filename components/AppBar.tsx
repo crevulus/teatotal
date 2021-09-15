@@ -18,9 +18,9 @@ export function AppBar(props: AppBarPropsType): ReactNode {
 
   return (
     <>
-      <Box safeAreaTop backgroundColor="primary.900" />
+      <Box safeAreaTop backgroundColor="cyan.500" />
       <HStack
-        bg="primary.700"
+        bg="cyan.500"
         px={1}
         py={3}
         justifyContent="space-between"
