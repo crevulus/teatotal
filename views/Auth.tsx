@@ -1,5 +1,5 @@
 import React, { ReactNode, useContext, useState } from "react";
-import { Text, SafeAreaView } from "react-native";
+import { Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import firebase from "firebase/app";
@@ -8,6 +8,8 @@ import "firebase/firestore";
 import AppContext from "../data/createContext";
 import SignupForm from "../components/Signup";
 import LoginForm from "../components/Login";
+import { View } from "native-base";
+import { AdMobBanner } from "expo-ads-admob";
 
 const Auth = (): ReactNode => {
   const navigation = useNavigation();
@@ -72,24 +74,33 @@ const Auth = (): ReactNode => {
   };
 
   return (
-    <SafeAreaView>
-      {signUp ? (
-        <SignupForm
-          togglePage={() => setSignUp(!signUp)}
-          setEmail={setEmail}
-          setPw={setPw}
-          handlePress={onSignUp}
+    <View safeAreaTop flex flexDir="column" justifyContent="space-between">
+      <View flexGrow={2} bg="white" overflow="none">
+        {signUp ? (
+          <SignupForm
+            togglePage={() => setSignUp(!signUp)}
+            setEmail={setEmail}
+            setPw={setPw}
+            handlePress={onSignUp}
+          />
+        ) : (
+          <LoginForm
+            togglePage={() => setSignUp(!signUp)}
+            setEmail={setEmail}
+            setPw={setPw}
+            handlePress={onLogIn}
+          />
+        )}
+        {errorMsg && <Text>{errorMsg}</Text>}
+      </View>
+      <View width="100%">
+        <AdMobBanner
+          bannerSize="smartBannerPortrait"
+          adUnitID="ca-app-pub-3940256099942544/6300978111"
+          servePersonalizedAds
         />
-      ) : (
-        <LoginForm
-          togglePage={() => setSignUp(!signUp)}
-          setEmail={setEmail}
-          setPw={setPw}
-          handlePress={onLogIn}
-        />
-      )}
-      {errorMsg && <Text>{errorMsg}</Text>}
-    </SafeAreaView>
+      </View>
+    </View>
   );
 };
 

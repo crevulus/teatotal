@@ -1,11 +1,10 @@
-import React, { useContext, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { View, Center } from "native-base";
 import { useWindowDimensions } from "react-native";
 import { TabView, SceneMap } from "react-native-tab-view";
 import { AdMobBanner } from "expo-ads-admob";
 
 import StrengthSlider from "../components/StrengthSlider";
-import AppContext from "../data/createContext";
 import { EnglishBreakfastHome } from "./EnglishBreakfastHome";
 
 const FirstRoute = () => <EnglishBreakfastHome />;
@@ -29,7 +28,7 @@ export const Home = (): ReactNode => {
   ]);
 
   return (
-    <View flex={1} bg="secondary.500">
+    <View flex={1}>
       <TabView
         navigationState={{ index, routes }}
         renderScene={renderScene}

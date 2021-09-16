@@ -16,7 +16,7 @@ const MainStackNavigator = (): ReactNode => {
   useBlackTeasFromFirebase();
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="Auth"
       screenOptions={{
         header: ({ navigation }) => {
           return <AppBar navigation={navigation} style={{ height: 80 }} />;

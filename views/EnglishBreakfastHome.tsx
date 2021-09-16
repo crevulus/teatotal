@@ -1,17 +1,15 @@
 import React, { useContext, ReactNode } from "react";
-import { View, Center } from "native-base";
-import { AdMobBanner } from "expo-ads-admob";
+import { View } from "native-base";
 
 import ScrollCards from "../components/ScrollCards";
 
-import StrengthSlider from "../components/StrengthSlider";
 import AppContext from "../data/createContext";
 
 export const EnglishBreakfastHome = (): ReactNode => {
   const { blackTeas } = useContext(AppContext);
 
   return (
-    <View flex={1} bg="secondary.500">
+    <View flex={1} bg="white">
       <ScrollCards teas={blackTeas} />
     </View>
   );
