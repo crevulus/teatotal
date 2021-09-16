@@ -12,7 +12,7 @@ export default function StrengthSlider(): ReactNode {
   };
 
   return (
-    <VStack space={4} mx={10} width="80%">
+    <VStack space={4} mx={10} width="100%" bg="cyan.50">
       <Text color="gray.700">Strengthometer: {sliderValue * 10}</Text>
       <Slider
         minValue={0}
@@ -20,6 +20,7 @@ export default function StrengthSlider(): ReactNode {
         value={sliderValue}
         step={0.1}
         onChange={(value) => handleSliderChange(value)}
+        colorScheme="amber"
       >
         <Slider.Track>
           <Slider.FilledTrack />

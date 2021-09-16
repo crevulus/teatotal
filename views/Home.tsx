@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
-import { View, Center } from "native-base";
-import { useWindowDimensions } from "react-native";
-import { TabView, SceneMap } from "react-native-tab-view";
+import { View, Center, Box, Pressable } from "native-base";
+import { useWindowDimensions, Animated } from "react-native";
+import { TabView, SceneMap, TabViewProps } from "react-native-tab-view";
 import { AdMobBanner } from "expo-ads-admob";
 
 import StrengthSlider from "../components/StrengthSlider";
@@ -27,11 +27,49 @@ export const Home = (): ReactNode => {
     { key: "second", title: "Herbal" },
   ]);
 
+  const renderTabBar = ({ navigationState, position }: TabViewProps) => {
+    const inputRange = navigationState.routes.map((_, i) => i);
+    return (
+      <Box flexDirection="row" style={{ backgroundColor: "#ecfeff" }}>
+        {navigationState.routes.map((route, i) => {
+          const opacity = position.interpolate({
+            inputRange,
+            outputRange: inputRange.map((inputIndex) =>
+              inputIndex === i ? 1 : 0.5
+            ),
+          });
+
+          return (
+            <Box
+              bg="cyan"
+              key={navigationState.key}
+              flex={1}
+              alignItems="center"
+              p={2}
+              cursor="pointer"
+            >
+              <Pressable
+                onPress={() => {
+                  setIndex(i);
+                }}
+              >
+                <Animated.Text style={{ opacity, color: "#f59e0b" }} bold>
+                  {route.title}
+                </Animated.Text>
+              </Pressable>
+            </Box>
+          );
+        })}
+      </Box>
+    );
+  };
+
   return (
     <View flex={1}>
       <TabView
         navigationState={{ index, routes }}
         renderScene={renderScene}
+        renderTabBar={renderTabBar}
         onIndexChange={setIndex}
         initialLayout={{ width: layout.width }}
       />
