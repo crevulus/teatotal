@@ -1,12 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 
 import firebase from "firebase/compat/app";
+import { initializeApp } from "firebase/app";
+import { collection, getFirestore, getDocs } from "firebase/firestore";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import firebaseConfig from "../firebaseConfig";
-import 'firebase/compat/firestore';
-import 'firebase/compat/storage';
 
 import AppContext from "./createContext";
 
+export const firebaseApp = initializeApp(firebaseConfig);
 const app = firebase.initializeApp(firebaseConfig);
 
 export type TeaType = {
@@ -21,21 +23,17 @@ export type TeaType = {
 const TEA_TOTAL_STORAGE_FILEPATH = "gs://teatotal-358fc.appspot.com/";
 
 export const useBlackTeasFromFirebase = (): void => {
-  const db = firebase.firestore(app);
+  const db = getFirestore();
   const { blackTeas, setBlackTeas } = useContext(AppContext);
 
   useEffect(() => {
     const getTeas = async () => {
       if (blackTeas.length === 0) {
         const teaData = [];
-        await db
-          .collection("blackTeas")
-          .get()
-          .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-              teaData.push({ id: doc.id, data: doc.data() });
-            });
-          });
+        const querySnapshot = await getDocs(collection(db, "blackTeas"));
+        querySnapshot.forEach((doc) => {
+          teaData.push({ id: doc.id, data: doc.data() });
+        });
         setBlackTeas(teaData);
       }
     };
@@ -44,7 +42,7 @@ export const useBlackTeasFromFirebase = (): void => {
 };
 
 export const useImageFromFirebase = (urlString: string): void => {
-  const storageRef = firebase.storage(app).ref();
+  const storage = getStorage();
   const [imageUrl, setImageUrl] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -52,13 +50,11 @@ export const useImageFromFirebase = (urlString: string): void => {
     return filepath.replace(TEA_TOTAL_STORAGE_FILEPATH, "");
   };
 
-  const storageChild = trimFilepath(urlString);
+  const storageRef = ref(storage, trimFilepath(urlString));
 
   useEffect(() => {
     const getImage = async () => {
-      await storageRef
-        .child(storageChild)
-        .getDownloadURL()
+      await getDownloadURL(storageRef)
         .then((url) => {
           setImageUrl(url);
         })
