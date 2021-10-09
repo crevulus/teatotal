@@ -5,7 +5,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NativeBaseProvider } from "native-base";
 
-import * as firebase from "firebase";
+import firebase from "firebase/compat/app";
+import 'firebase/compat/auth';
 
 import AppContext from "./data/createContext.ts";
 import MainStackNavigator from "./components/navigation/MainStackNavigator";

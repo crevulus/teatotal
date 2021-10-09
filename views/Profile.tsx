@@ -2,7 +2,7 @@ import React, { useContext, ReactNode } from "react";
 import { SafeAreaView, Text, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import firebase from "firebase/app";
+import firebase from "firebase/compat/app";
 import AppContext from "../data/createContext";
 
 const Profile = (): ReactNode => {

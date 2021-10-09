@@ -1,10 +1,9 @@
 import React, { useContext, ReactNode } from "react";
 
 import AppContext from "../data/createContext";
-import { TeaType } from "../data/firebase";
+import { TeaType, useImageFromFirebase } from "../data/firebase";
 import { Image, Text, Box, Stack, Heading, Pressable } from "native-base";
 import Rating from "./Rating";
-import { useImageFromFirebase } from "../data/firebase";
 import { useNavigation } from "@react-navigation/core";
 
 type TeaCardProps = {
