@@ -2,17 +2,17 @@ import React, { useContext, ReactNode } from "react";
 import { SafeAreaView, Text, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import firebase from "firebase/compat/app";
+import { getAuth, signOut } from "firebase/auth";
 import AppContext from "../data/createContext";
 
 const Profile = (): ReactNode => {
   const navigation = useNavigation();
   const { user } = useContext(AppContext);
 
-  const onLogOut = () => {
-    firebase
-      .auth()
-      .signOut()
+  const auth = getAuth();
+
+  const onLogOut = async () => {
+    await signOut(auth)
       .then(() => {
         console.log("Signed out!");
       })

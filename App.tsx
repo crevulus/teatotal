@@ -1,12 +1,11 @@
-import "react-native-gesture-handler"
+import "react-native-gesture-handler";
 import React, { useEffect, useState, ReactNode } from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NativeBaseProvider } from "native-base";
 
-import firebase from "firebase/compat/app";
-import 'firebase/compat/auth';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import AppContext from "./data/createContext.ts";
 import MainStackNavigator from "./components/navigation/MainStackNavigator";
@@ -21,7 +20,8 @@ const App = (): ReactNode => {
   const { Provider } = AppContext;
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((currentUser) => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setLoggedIn(true);
       }

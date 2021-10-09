@@ -2,14 +2,20 @@ import React, { ReactNode, useContext, useState } from "react";
 import { Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import firebase from "firebase/compat/app";
-import "firebase/firestore";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 
 import AppContext from "../data/createContext";
 import SignupForm from "../components/Signup";
 import LoginForm from "../components/Login";
 import { View } from "native-base";
 import { AdMobBanner } from "expo-ads-admob";
+
+// TODO: Add Logout
+// TODO: Add auth persistence
 
 const Auth = (): ReactNode => {
   const navigation = useNavigation();
@@ -20,11 +26,11 @@ const Auth = (): ReactNode => {
 
   const { setUser } = useContext(AppContext);
 
+  const auth = getAuth();
+
   const onLogIn = async () => {
     let success = false;
-    await firebase
-      .auth()
-      .signInWithEmailAndPassword(email, pw)
+    await signInWithEmailAndPassword(auth, email, pw)
       .then((userCredential) => {
         const user = userCredential.user;
         return user;
@@ -46,9 +52,7 @@ const Auth = (): ReactNode => {
 
   const onSignUp = async () => {
     let success = false;
-    await firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, pw)
+    await createUserWithEmailAndPassword(auth, email, pw)
       .then((res) => {
         firebase
           .firestore()
