@@ -1,5 +1,5 @@
 import React, { ReactNode, useContext, useState } from "react";
-import { Text, Slider, VStack } from "native-base";
+import { Box, Fab } from "native-base";
 import AppContext from "../data/createContext";
 
 // TODO: Change to hovering buttons
@@ -21,21 +21,10 @@ export default function StrengthSlider(): ReactNode {
   };
 
   return (
-    <VStack space={4} mx={10} width="100%" bg="cyan.50">
-      <Text color="gray.700">Strengthometer: {sliderValue * 10}</Text>
-      <Slider
-        minValue={0}
-        maxValue={1}
-        value={sliderValue}
-        step={0.1}
-        onChange={(value) => handleSliderChange(value)}
-        colorScheme="amber"
-      >
-        <Slider.Track>
-          <Slider.FilledTrack />
-        </Slider.Track>
-        <Slider.Thumb />
-      </Slider>
-    </VStack>
+    <Box position="relative" w="100%">
+      <Fab bottom={112}>+</Fab>
+      <Fab bottom={16}>Tea</Fab>
+      <Fab>-</Fab>
+    </Box>
   );
 }

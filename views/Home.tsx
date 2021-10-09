@@ -72,9 +72,10 @@ export const Home = (): ReactNode => {
         renderTabBar={renderTabBar}
         onIndexChange={setIndex}
         initialLayout={{ width: layout.width }}
+        style={{ flex: 1 }}
       />
 
-      <View width="100%">
+      <View width="100%" flex={1}>
         <Center width="100%">
           <StrengthSlider />
         </Center>
