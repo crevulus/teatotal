@@ -1,6 +1,7 @@
-import React, { ReactNode, useContext, useState } from "react";
+import React, { ReactNode, useContext } from "react";
 import { Box, Fab } from "native-base";
 import AppContext from "../data/createContext";
+import { theme } from "../theme";
 
 // TODO: Change to hovering buttons
 /*
@@ -12,19 +13,32 @@ import AppContext from "../data/createContext";
 */
 
 export default function StrengthSlider(): ReactNode {
-  const { setDesiredStrength } = useContext(AppContext);
-  const [sliderValue, setSliderValue] = useState(0.5);
+  const { desiredStrength, setDesiredStrength } = useContext(AppContext);
 
-  const handleSliderChange = (value) => {
-    setSliderValue(value);
-    setDesiredStrength(value);
+  const incrementStrength = () => {
+    if (Math.round(desiredStrength * 10) >= 10) {
+      return;
+    }
+    setDesiredStrength(desiredStrength + Math.round(0.1 * 10) / 10);
+  };
+
+  const decrementStrength = () => {
+    if (Math.round(desiredStrength * 10) <= 1) {
+      return;
+    }
+    setDesiredStrength(desiredStrength - Math.round(0.1 * 10) / 10);
   };
 
   return (
     <Box position="relative" w="100%">
-      <Fab bottom={112}>+</Fab>
-      <Fab bottom={16}>Tea</Fab>
-      <Fab>-</Fab>
+      <Fab size={10} bottom={112} label="+" onPress={incrementStrength} />
+      <Fab
+        size={10}
+        bottom={16}
+        colorScheme={theme.secondaryColorScheme}
+        label={Math.round(desiredStrength * 10)}
+      />
+      <Fab size={10} label="-" onPress={decrementStrength} />
     </Box>
   );
 }

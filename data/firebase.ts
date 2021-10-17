@@ -59,7 +59,7 @@ export const useImageFromFirebase = (urlString: string): void => {
         .catch((error) => setErrorMsg(error.message));
     };
     getImage();
-  });
+  }, []);
 
   return [imageUrl, errorMsg];
 };

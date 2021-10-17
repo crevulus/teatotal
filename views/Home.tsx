@@ -6,6 +6,7 @@ import { AdMobBanner } from "expo-ads-admob";
 
 import StrengthSlider from "../components/StrengthSlider";
 import { EnglishBreakfastHome } from "./EnglishBreakfastHome";
+import { theme } from "../theme";
 
 const FirstRoute = () => <EnglishBreakfastHome />;
 
@@ -41,7 +42,7 @@ export const Home = (): ReactNode => {
 
           return (
             <Box
-              bg="cyan"
+              bg={theme.secondary}
               key={navigationState.key}
               flex={1}
               alignItems="center"
@@ -53,7 +54,7 @@ export const Home = (): ReactNode => {
                   setIndex(i);
                 }}
               >
-                <Animated.Text style={{ opacity, color: "#f59e0b" }} bold>
+                <Animated.Text style={{ opacity, color: "white" }} bold>
                   {route.title}
                 </Animated.Text>
               </Pressable>
@@ -72,10 +73,9 @@ export const Home = (): ReactNode => {
         renderTabBar={renderTabBar}
         onIndexChange={setIndex}
         initialLayout={{ width: layout.width }}
-        style={{ flex: 1 }}
       />
 
-      <View width="100%" flex={1}>
+      <View width="100%">
         <Center width="100%">
           <StrengthSlider />
         </Center>

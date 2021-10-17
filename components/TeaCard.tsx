@@ -20,7 +20,7 @@ function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
   const roundToHalf = (value) => {
     let decimal = value - parseInt(value, 10);
     decimal = Math.round(decimal * 10);
-    if (decimal == 5) {
+    if (decimal === 5) {
       return parseInt(value, 10) + 0.5;
     }
     if (decimal < 3 || decimal > 7) {
@@ -34,6 +34,10 @@ function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
     setChosenTea(tea);
     navigation.navigate("TeaPage", { teaName: teaData.name });
   };
+
+  if (!image) {
+    return null;
+  }
 
   return (
     <Box bg="white" shadow={2} rounded="lg" m={4} width={["xs", "sm", "lg"]}>

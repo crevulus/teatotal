@@ -5,6 +5,7 @@ import { HStack, IconButton, Text, Box } from "native-base";
 import { Icon } from "react-native-elements";
 
 import AppContext from "../data/createContext";
+import { theme } from "../theme";
 
 type AppBarPropsType = {
   navigation: NavigationProp;
@@ -18,9 +19,9 @@ export function AppBar(props: AppBarPropsType): ReactNode {
 
   return (
     <>
-      <Box safeAreaTop backgroundColor="cyan.500" />
+      <Box safeAreaTop backgroundColor={theme.primary} />
       <HStack
-        bg="cyan.500"
+        bg={theme.primary}
         px={1}
         py={3}
         justifyContent="space-between"

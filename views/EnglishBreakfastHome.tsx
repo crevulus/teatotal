@@ -9,7 +9,7 @@ export const EnglishBreakfastHome = (): ReactNode => {
   const { blackTeas } = useContext(AppContext);
 
   return (
-    <View bg="white">
+    <View flex={1} bg="white">
       <ScrollCards teas={blackTeas} />
     </View>
   );
