@@ -1,10 +1,21 @@
-import React, { useContext, ReactNode } from "react";
+import React, { useContext, ReactNode, useState, useEffect } from "react";
 
 import AppContext from "../data/createContext";
 import { TeaType, useImageFromFirebase } from "../data/firebase";
-import { Image, Text, Box, Stack, Heading, Pressable } from "native-base";
+import {
+  Image,
+  Box,
+  Stack,
+  Heading,
+  Pressable,
+  HStack,
+  View,
+} from "native-base";
 import Rating from "./Rating";
 import { useNavigation } from "@react-navigation/core";
+import { Icon } from "react-native-elements";
+
+import SimpleButton from "./atoms/Button";
 
 type TeaCardProps = {
   id: string;
@@ -16,6 +27,8 @@ function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
   const { desiredStrength, setChosenTea } = useContext(AppContext);
   const { name, strength, logo, rating } = teaData;
   const [image] = useImageFromFirebase(logo);
+  const [roundedMinutes, setRoundedMinutes] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const roundToHalf = (value) => {
     let decimal = value - parseInt(value, 10);
@@ -29,6 +42,13 @@ function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
       return parseInt(value, 10) + 0.5;
     }
   };
+
+  useEffect(() => {
+    setRoundedMinutes(
+      roundToHalf(desiredStrength * 2 * (strength === 10 ? 1 : 10 - strength))
+    );
+    setIsLoading(false);
+  }, [desiredStrength]);
 
   const handleTeaSelection = (tea) => {
     setChosenTea(tea);
@@ -49,22 +69,28 @@ function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
           height={150}
           roundedTop="md"
         />
-        <Stack space={4} p={[4, 4, 8]}>
-          <Heading color="primary.700" size={["md", "lg", "md"]} noOfLines={2}>
-            {name}
-          </Heading>
-          <Text
-            lineHeight={[5, 5, 7]}
-            noOfLines={[4, 4, 2]}
-            color="secondary.700"
-          >
-            {roundToHalf(
-              desiredStrength * 2 * (strength === 10 ? 1 : 10 - strength)
-            )}{" "}
-            mins for the perfect brew
-          </Text>
-          <Rating count={parseInt(rating)} />
-        </Stack>
+        <HStack flexGrow={1}>
+          <Stack space={4} p={[4, 4, 8]}>
+            <Heading
+              color="primary.700"
+              size={["md", "lg", "md"]}
+              noOfLines={2}
+            >
+              {name}
+            </Heading>
+            <Rating count={parseInt(rating)} />
+          </Stack>
+          <View flex flexGrow={1} alignContent="center" justifyContent="center">
+            <SimpleButton
+              m={6}
+              isLoading={isLoading}
+              isLoadingText="Loading..."
+            >
+              <Icon name="timer" size={30} color="white" />
+              {`${roundedMinutes} mins`}
+            </SimpleButton>
+          </View>
+        </HStack>
       </Pressable>
     </Box>
   );

@@ -1,13 +1,13 @@
 import React, { ReactNode } from "react";
 import { StyleSheet, SafeAreaView } from "react-native";
 import { Icon } from "react-native-elements";
-import PropTypes from "prop-types";
 
 import FadeInView from "../utils/animations/FadeIn.tsx";
 
 type RatingPropType = {
   count: number;
 };
+
 export default function Rating({ count }: RatingPropType): ReactNode {
   const emptyStarsCount = 5 - count;
   const emptyStars = Array.from({ length: emptyStarsCount }, (_, i) => (
@@ -25,10 +25,6 @@ export default function Rating({ count }: RatingPropType): ReactNode {
     </SafeAreaView>
   );
 }
-
-Rating.propTypes = {
-  count: PropTypes.number,
-};
 
 const childStyles = {
   ratingsRow: {

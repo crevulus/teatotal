@@ -24,6 +24,7 @@ export default function SimpleButton({
     <Button
       colorScheme={theme.secondaryColorScheme}
       variant={variant}
+      shadow={3}
       _text={{ color: "white" }}
       {...props}
     />
