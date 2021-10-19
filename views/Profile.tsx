@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { getAuth, signOut } from "firebase/auth";
 import AppContext from "../data/createContext";
 
-const Profile = (): ReactNode => {
+export const Profile = (): ReactNode => {
   const navigation = useNavigation();
   const { user } = useContext(AppContext);
 
@@ -37,5 +37,3 @@ const Profile = (): ReactNode => {
     <Text>Not logged in</Text>
   );
 };
-
-export default Profile;

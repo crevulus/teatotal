@@ -5,11 +5,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useBlackTeasFromFirebase } from "../../data/firebase";
 
 import { Home } from "../../views/Home.tsx";
-import Auth from "../../views/Auth";
-import Profile from "../../views/Profile";
+import { Auth } from "../../views/Auth";
+import { Profile } from "../../views/Profile";
 import { AppBar } from "../AppBar";
-import TeaPage from "../../views/TeaPage";
-import TimerPage from "../../views/TimerPage";
+import { TeaPage } from "../../views/TeaPage";
+import { TimerPage } from "../../views/TimerPage";
 
 const Stack = createStackNavigator();
 
@@ -17,7 +17,7 @@ const MainStackNavigator = (): ReactNode => {
   useBlackTeasFromFirebase();
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="TimerPage"
       screenOptions={{
         header: ({ navigation }) => {
           return <AppBar navigation={navigation} style={{ height: 80 }} />;

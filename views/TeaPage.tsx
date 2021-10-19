@@ -10,7 +10,7 @@ import {
 import AppContext from "../data/createContext";
 import { useImageFromFirebase } from "../data/firebase";
 
-const TeaPage = (): ReactNode => {
+export const TeaPage = (): ReactNode => {
   const { chosenTea } = useContext(AppContext);
   const [image] = useImageFromFirebase(chosenTea.logo);
   return (
@@ -35,5 +35,3 @@ const styles = StyleSheet.create({
     height: 100,
   },
 });
-
-export default TeaPage;

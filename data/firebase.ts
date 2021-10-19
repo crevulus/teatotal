@@ -16,6 +16,7 @@ export type TeaType = {
   name: string;
   logo: string;
   id: string;
+  roundedMinutes?: number;
 };
 
 const TEA_TOTAL_STORAGE_FILEPATH = "gs://teatotal-358fc.appspot.com/";

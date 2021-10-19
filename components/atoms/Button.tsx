@@ -1,13 +1,16 @@
 import React, { ReactNode } from "react";
-import { Button } from "native-base";
+import { Button, IconButton } from "native-base";
+import { Icon } from "react-native-elements";
 import { theme } from "../../theme";
 
 type ButtonProps = {
   variant?: string;
+  iconName?: string;
 };
 
-export default function SimpleButton({
+export function SimpleButton({
   variant,
+  iconName,
   ...props
 }: ButtonProps): ReactNode {
   if (variant === "anchor") {
@@ -15,6 +18,17 @@ export default function SimpleButton({
       <Button
         colorScheme={theme.primaryColorScheme}
         variant={variant}
+        {...props}
+      />
+    );
+  }
+
+  if (variant === "icon") {
+    return (
+      <IconButton
+        bg={theme.secondary}
+        shadow={3}
+        icon={<Icon name={iconName} size={30} color={theme.other.white} />}
         {...props}
       />
     );

@@ -15,7 +15,7 @@ import Rating from "./Rating";
 import { useNavigation } from "@react-navigation/core";
 import { Icon } from "react-native-elements";
 
-import SimpleButton from "./atoms/Button";
+import { SimpleButton } from "./atoms/Button";
 import { theme } from "../theme";
 
 type TeaCardProps = {
@@ -23,7 +23,7 @@ type TeaCardProps = {
   teaData: TeaType;
 };
 
-function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
+export function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
   const navigation = useNavigation();
   const { desiredStrength, setChosenTea } = useContext(AppContext);
   const { name, strength, logo, rating } = teaData;
@@ -108,5 +108,3 @@ function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
     </Box>
   );
 }
-
-export default TeaCard;

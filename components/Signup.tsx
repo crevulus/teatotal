@@ -9,7 +9,7 @@ import {
   HStack,
   Text,
 } from "native-base";
-import SimpleButton from "./atoms/Button";
+import { SimpleButton } from "./atoms/Button";
 
 type SignupFormProps = {
   togglePage: () => void;

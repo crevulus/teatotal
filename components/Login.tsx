@@ -8,7 +8,7 @@ import {
   Input,
   HStack,
 } from "native-base";
-import SimpleButton from "./atoms/Button";
+import { SimpleButton } from "./atoms/Button";
 
 type LoginFormProps = {
   togglePage: () => void;

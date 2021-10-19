@@ -3,7 +3,7 @@ import { Center, ScrollView } from "native-base";
 
 import { TeaType } from "../data/firebase";
 
-import TeaCard from "./TeaCard";
+import { TeaCard } from "./TeaCard";
 
 type ScrollCardsPropsType = {
   teas: TeaType[];

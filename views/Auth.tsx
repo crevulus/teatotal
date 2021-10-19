@@ -13,11 +13,12 @@ import SignupForm from "../components/Signup";
 import LoginForm from "../components/Login";
 import { View } from "native-base";
 import { AdMobBanner } from "expo-ads-admob";
+import { theme } from "../theme";
 
 // TODO: Add Logout
 // TODO: Add auth persistence
 
-const Auth = (): ReactNode => {
+export const Auth = (): ReactNode => {
   const navigation = useNavigation();
   const [signUp, setSignUp] = useState(false);
   const [email, setEmail] = useState("");
@@ -78,8 +79,14 @@ const Auth = (): ReactNode => {
   };
 
   return (
-    <View safeAreaTop flex flexDir="column" justifyContent="space-between">
-      <View flexGrow={2} bg="white" overflow="none">
+    <View
+      safeAreaTop
+      flex={1}
+      flexDir="column"
+      justifyContent="space-between"
+      bg={theme.other.white}
+    >
+      <View flexBasis={1} bg={theme.other.white} overflow="none">
         {signUp ? (
           <SignupForm
             togglePage={() => setSignUp(!signUp)}
@@ -107,5 +114,3 @@ const Auth = (): ReactNode => {
     </View>
   );
 };
-
-export default Auth;
