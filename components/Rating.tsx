@@ -11,11 +11,11 @@ type RatingPropType = {
 export default function Rating({ count }: RatingPropType): ReactNode {
   const emptyStarsCount = 5 - count;
   const emptyStars = Array.from({ length: emptyStarsCount }, (_, i) => (
-    <Icon name="star-border" size={30} key={i} />
+    <Icon name="star-border" color="#155e75" size={30} key={i} />
   ));
 
   const fullStars = Array.from({ length: count }, (_, i) => (
-    <Icon name="star" size={30} key={i} />
+    <Icon name="star" color="#155e75" size={30} key={i} />
   ));
 
   return (

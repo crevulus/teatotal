@@ -7,5 +7,6 @@ export const theme = {
   other: {
     primaryLight: "cyan.300",
     primaryDark: "cyan.700",
+    white: "white",
   },
 };

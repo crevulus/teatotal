@@ -16,6 +16,7 @@ import { useNavigation } from "@react-navigation/core";
 import { Icon } from "react-native-elements";
 
 import SimpleButton from "./atoms/Button";
+import { theme } from "../theme";
 
 type TeaCardProps = {
   id: string;
@@ -24,10 +25,10 @@ type TeaCardProps = {
 
 function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
   const navigation = useNavigation();
-  const { desiredStrength, setChosenTea, roundedMinutes, setRoundedMinutes } =
-    useContext(AppContext);
+  const { desiredStrength, setChosenTea } = useContext(AppContext);
   const { name, strength, logo, rating } = teaData;
   const [image] = useImageFromFirebase(logo);
+  const [roundedMinutes, setRoundedMinutes] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   const roundToHalf = (value) => {
@@ -51,12 +52,12 @@ function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
   }, [desiredStrength]);
 
   const handleTeaSelection = (tea) => {
-    setChosenTea(tea);
+    setChosenTea({ ...tea, roundedMinutes });
     navigation.navigate("TeaPage", { teaName: teaData.name });
   };
 
   const handleGoToTimer = (tea) => {
-    setChosenTea(tea);
+    setChosenTea({ ...tea, roundedMinutes });
     navigation.navigate("TimerPage", { teaName: teaData.name });
   };
 
@@ -65,7 +66,13 @@ function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
   }
 
   return (
-    <Box bg="white" shadow={2} rounded="lg" m={4} width={["xs", "sm", "lg"]}>
+    <Box
+      bg={theme.other.white}
+      shadow={2}
+      rounded="lg"
+      m={4}
+      width={["xs", "sm", "lg"]}
+    >
       <Pressable key={id} onPress={() => handleTeaSelection(teaData)}>
         <Image
           source={{ uri: image }}
@@ -77,7 +84,7 @@ function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
         <HStack flexGrow={1}>
           <Stack space={4} p={[4, 4, 8]}>
             <Heading
-              color="primary.700"
+              color={theme.primary}
               size={["md", "lg", "md"]}
               noOfLines={2}
             >
@@ -92,7 +99,7 @@ function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
               isLoadingText="Loading..."
               onPress={() => handleGoToTimer(teaData)}
             >
-              <Icon name="timer" size={30} color="white" />
+              <Icon name="timer" size={30} color={theme.other.white} />
               {`${roundedMinutes} mins`}
             </SimpleButton>
           </View>

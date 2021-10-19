@@ -16,7 +16,6 @@ const App = (): ReactNode => {
   const [user, setUser] = useState({});
   const [chosenTea, setChosenTea] = useState({});
   const [desiredStrength, setDesiredStrength] = useState(0.5);
-  const [roundedMinutes, setRoundedMinutes] = useState(0);
 
   const { Provider } = AppContext;
 
@@ -44,8 +43,6 @@ const App = (): ReactNode => {
             setChosenTea,
             desiredStrength,
             setDesiredStrength,
-            roundedMinutes,
-            setRoundedMinutes,
           }}
         >
           <NativeBaseProvider>

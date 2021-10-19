@@ -24,14 +24,14 @@ export const Home = (): ReactNode => {
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: "first", title: "Black" },
+    { key: "first", title: "Breakfast" },
     { key: "second", title: "Herbal" },
   ]);
 
   const renderTabBar = ({ navigationState, position }: TabViewProps) => {
     const inputRange = navigationState.routes.map((_, i) => i);
     return (
-      <Box flexDirection="row" style={{ backgroundColor: "#ecfeff" }}>
+      <Box flexDirection="row">
         {navigationState.routes.map((route, i) => {
           const opacity = position.interpolate({
             inputRange,
@@ -76,12 +76,12 @@ export const Home = (): ReactNode => {
         initialLayout={{ width: layout.width }}
       />
 
-      <View width="100%" minH={100}>
+      <View width="100%" minH={50}>
         <Center width="100%">
           <StrengthSlider />
         </Center>
         <AdMobBanner
-          bannerSize="Banner"
+          bannerSize="smartBannerPortrait"
           adUnitID="ca-app-pub-3940256099942544/6300978111"
           servePersonalizedAds
         />

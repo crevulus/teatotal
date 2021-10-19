@@ -31,14 +31,14 @@ export default function StrengthSlider(): ReactNode {
 
   return (
     <Box position="relative" w="100%">
-      <Fab size={10} bottom={222} label="+" onPress={incrementStrength} />
+      <Fab size={10} bottom={172} label="+" onPress={incrementStrength} />
       <Fab
         size={10}
-        bottom={166}
+        bottom={116}
         bgColor={theme.other.white}
         label={Math.round(desiredStrength * 10)}
       />
-      <Fab bottom={110} size={10} label="-" onPress={decrementStrength} />
+      <Fab bottom={60} size={10} label="-" onPress={decrementStrength} />
     </Box>
   );
 }
