@@ -2,8 +2,9 @@ import React, { ReactNode, useContext } from "react";
 import AppContext from "../data/createContext";
 
 import { Timer } from "../components/Timer.tsx";
-import { Center, View } from "native-base";
+import { Center, Divider, View } from "native-base";
 import { theme } from "../theme";
+import TeaReading from "../components/TeaReading";
 
 const chosenTea = {
   strength: 7,
@@ -24,6 +25,8 @@ export function TimerPage(): ReactNode {
     <View safeArea bg={theme.other.white} flex={1}>
       <Center>
         <Timer expiryTimestamp={brewTime} teaData={chosenTea} />
+        <Divider width="90%" my={2} thickness="2" />
+        <TeaReading />
       </Center>
     </View>
   );

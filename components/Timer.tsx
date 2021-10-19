@@ -11,7 +11,7 @@ type TimerProps = {
 };
 
 export function Timer({ expiryTimestamp, teaData }: TimerProps): ReactNode {
-  const { seconds, minutes, isRunning, start, pause, restart } = useTimer({
+  const { seconds, minutes, start, pause, restart } = useTimer({
     expiryTimestamp,
     autoStart: false,
     onExpire: () => console.warn("onExpire called"),

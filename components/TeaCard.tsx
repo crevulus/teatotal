@@ -45,6 +45,9 @@ export function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
   };
 
   useEffect(() => {
+    if (!desiredStrength) {
+      return;
+    }
     setRoundedMinutes(
       roundToHalf(desiredStrength * 2 * (strength === 10 ? 1 : 10 - strength))
     );
