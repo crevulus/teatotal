@@ -10,7 +10,7 @@ export default function SimpleButton({
   variant,
   ...props
 }: ButtonProps): ReactNode {
-  if (variant === "link") {
+  if (variant === "anchor") {
     return (
       <Button
         colorScheme={theme.primaryColorScheme}

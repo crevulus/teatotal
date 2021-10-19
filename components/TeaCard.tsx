@@ -24,10 +24,10 @@ type TeaCardProps = {
 
 function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
   const navigation = useNavigation();
-  const { desiredStrength, setChosenTea } = useContext(AppContext);
+  const { desiredStrength, setChosenTea, roundedMinutes, setRoundedMinutes } =
+    useContext(AppContext);
   const { name, strength, logo, rating } = teaData;
   const [image] = useImageFromFirebase(logo);
-  const [roundedMinutes, setRoundedMinutes] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   const roundToHalf = (value) => {
@@ -53,6 +53,11 @@ function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
   const handleTeaSelection = (tea) => {
     setChosenTea(tea);
     navigation.navigate("TeaPage", { teaName: teaData.name });
+  };
+
+  const handleGoToTimer = (tea) => {
+    setChosenTea(tea);
+    navigation.navigate("TimerPage", { teaName: teaData.name });
   };
 
   if (!image) {
@@ -85,6 +90,7 @@ function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
               m={6}
               isLoading={isLoading}
               isLoadingText="Loading..."
+              onPress={() => handleGoToTimer(teaData)}
             >
               <Icon name="timer" size={30} color="white" />
               {`${roundedMinutes} mins`}

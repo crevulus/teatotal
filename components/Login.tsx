@@ -48,7 +48,7 @@ export default function LoginForm({
             Password
           </FormControl.Label>
           <Input type="password" onChangeText={setPw} />
-          <SimpleButton variant="link" p={0} size="sm" alignSelf="flex-end">
+          <SimpleButton variant="anchor" p={0} size="sm" alignSelf="flex-end">
             Forget something?
           </SimpleButton>
         </FormControl>
@@ -59,7 +59,7 @@ export default function LoginForm({
           <Text fontSize="sm" color="muted.700" fontWeight={400}>
             Are you new here?{" "}
           </Text>
-          <SimpleButton variant="link" p={0} size="sm" onPress={togglePage}>
+          <SimpleButton variant="anchor" p={0} size="sm" onPress={togglePage}>
             Sign Up
           </SimpleButton>
         </HStack>

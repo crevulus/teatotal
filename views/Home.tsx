@@ -68,6 +68,7 @@ export const Home = (): ReactNode => {
   return (
     <View flex={1}>
       <TabView
+        style={{ flexBasis: 0 }}
         navigationState={{ index, routes }}
         renderScene={renderScene}
         renderTabBar={renderTabBar}
@@ -75,12 +76,12 @@ export const Home = (): ReactNode => {
         initialLayout={{ width: layout.width }}
       />
 
-      <View width="100%">
+      <View width="100%" minH={100}>
         <Center width="100%">
           <StrengthSlider />
         </Center>
         <AdMobBanner
-          bannerSize="smartBannerPortrait"
+          bannerSize="Banner"
           adUnitID="ca-app-pub-3940256099942544/6300978111"
           servePersonalizedAds
         />

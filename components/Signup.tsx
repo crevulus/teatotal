@@ -66,7 +66,7 @@ export default function SignupForm({
             <Text fontSize="sm" color="muted.700" fontWeight={400}>
               Already a member?{" "}
             </Text>
-            <SimpleButton variant="link" p={0} size="sm" onPress={togglePage}>
+            <SimpleButton variant="anchor" p={0} size="sm" onPress={togglePage}>
               Log in
             </SimpleButton>
           </HStack>

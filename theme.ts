@@ -3,6 +3,7 @@ export const theme = {
   primaryColorScheme: "cyan",
   secondary: "amber.500",
   secondaryColorScheme: "amber",
+  text: "darkText",
   other: {
     primaryLight: "cyan.300",
     primaryDark: "cyan.700",
