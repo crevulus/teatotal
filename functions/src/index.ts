@@ -1,12 +1,12 @@
 import admin = require("firebase-admin");
 import functions = require("firebase-functions");
-// import * as axios from "axios";
+import axios from "axios";
 
 admin.initializeApp();
 
 // Take the text parameter passed to this HTTP endpoint and insert it into
 // Firestore under the path /messages/:documentId/original
-exports.addMessage = functions
+const addMessage = functions
   .region("europe-west1")
   .https.onRequest(async (req, res) => {
     // Grab the text parameter.
@@ -22,7 +22,7 @@ exports.addMessage = functions
 
 // Listens for new messages added to /messages/:documentId/original and creates an
 // uppercase version of the message to /messages/:documentId/uppercase
-exports.makeUppercase = functions
+const makeUppercase = functions
   .region("europe-west1")
   .firestore.document("/messages/{documentId}")
   .onCreate((snap, context) => {
@@ -40,7 +40,7 @@ exports.makeUppercase = functions
     return snap.ref.set({ uppercase }, { merge: true });
   });
 
-exports.updateReviews = functions
+const updateReviews = functions
   .region("europe-west1")
   .firestore.document("/reviews/{documentId}")
   .onUpdate((change, context) => {
@@ -59,7 +59,7 @@ exports.updateReviews = functions
     );
   });
 
-exports.testFunction = functions
+const testFunction = functions
   .region("europe-west1")
   .https.onRequest(async (req, res) => {
     const original = req.query.string;
@@ -70,28 +70,41 @@ exports.testFunction = functions
     res.json({ result: `Message with ID: ${writeResult.id} added.` });
   });
 
-exports.scheduledFunction = functions
+const getBitcoinPrice = async () => {
+  const fetchData = () => {
+    return axios
+      .get("https://api.coindesk.com/v1/bpi/currentprice.json")
+      .then((response: any) => response.data);
+  };
+
+  try {
+    const data = await fetchData();
+    console.log(await data.bpi.USD.rate);
+    return await data.bpi.USD.rate;
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+};
+
+const scheduledFunction = functions
   .region("europe-west1")
-  .pubsub.schedule("every 1 mins")
-  .onRun((context) => {
-    console.log(context);
-    console.log(`The time is ${Date.now()}`);
+  .pubsub.schedule("every day 00:00")
+  .onRun(async () => {
+    const priceRate = await getBitcoinPrice();
+    const updatedTimestamp = admin.firestore.Timestamp.fromDate(new Date());
+    await admin
+      .firestore()
+      .collection("prices")
+      .doc("BTC")
+      .set({ priceRate, time: updatedTimestamp });
     return null;
   });
 
-// exports.getBitcoinPrice = functions
-//   .region("europe-west1")
-//   .runWith({ timeoutSeconds: 5 })
-//   .https.onRequest(async (req, res) => {
-//     const fetchData = async () => {
-//       return await axios
-//         .get("https://api.coindesk.com/v1/bpi/currentprice.json", {
-//           timeout: 2000,
-//         })
-//         .then((res) => res.json())
-//         .catch((error) => console.log(error));
-//     };
-//     const data = await fetchData();
-//     console.log(await data);
-//     return null;
-//   });
+module.exports = {
+  addMessage,
+  makeUppercase,
+  updateReviews,
+  testFunction,
+  scheduledFunction,
+};
