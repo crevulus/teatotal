@@ -1,5 +1,6 @@
 import admin = require("firebase-admin");
 import functions = require("firebase-functions");
+import * as axios from "axios";
 
 admin.initializeApp();
 
@@ -59,3 +60,20 @@ exports.scheduledFunction = functions
     console.log(`The time is ${Date.now()}`);
     return null;
   });
+
+// exports.getBitcoinPrice = functions
+//   .region("europe-west1")
+//   .runWith({ timeoutSeconds: 5 })
+//   .https.onRequest(async (req, res) => {
+//     const fetchData = async () => {
+//       return await axios
+//         .get("https://api.coindesk.com/v1/bpi/currentprice.json", {
+//           timeout: 2000,
+//         })
+//         .then((res) => res.json())
+//         .catch((error) => console.log(error));
+//     };
+//     const data = await fetchData();
+//     console.log(await data);
+//     return null;
+//   });
