@@ -70,17 +70,56 @@ const testFunction = functions
     res.json({ result: `Message with ID: ${writeResult.id} added.` });
   });
 
-const getBitcoinPrice = async () => {
-  const fetchData = () => {
-    return axios
-      .get("https://api.coindesk.com/v1/bpi/currentprice.json")
-      .then((response: any) => response.data);
-  };
+const makeAxiosCall = (url: string) => {
+  return axios.get(url).then((response) => response.data);
+};
 
+const getBitcoinPrice = async () => {
   try {
-    const data = await fetchData();
+    const data: any = await makeAxiosCall(
+      "https://api.coindesk.com/v1/bpi/currentprice.json"
+    );
     console.log(await data.bpi.USD.rate);
     return await data.bpi.USD.rate;
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+};
+
+const getAdviceSlip = async () => {
+  try {
+    const data: any = await makeAxiosCall("https://api.adviceslip.com/advice");
+    console.log(await data.slip.advice);
+    return await data.slip.advice;
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+};
+
+const animals = [
+  { name: "cat", endpoint: "https://aws.random.cat/meow", returns: "file" },
+  { name: "dog", endpoint: "https://random.dog/woof.json", returns: "url" },
+  {
+    name: "duck",
+    endpoint: "https://random-d.uk/api/v2/random",
+    returns: "url",
+  },
+  { name: "fox", endpoint: "https://randomfox.ca/floof", returns: "image" },
+];
+
+const selectRandomAnimal = () => {
+  const random = Math.floor(Math.random() * animals.length);
+  return animals[random];
+};
+
+const getRandomAnimal = async () => {
+  const animal = selectRandomAnimal();
+  try {
+    const data: any = await makeAxiosCall(animal.endpoint);
+    console.log(await data[`${animal.returns}`]);
+    return await data[`${animal.returns}`];
   } catch (error) {
     console.log(error);
   }
@@ -92,12 +131,19 @@ const scheduledFunction = functions
   .pubsub.schedule("every day 00:00")
   .onRun(async () => {
     const priceRate = await getBitcoinPrice();
+    const advice = await getAdviceSlip();
+    const animalImg = await getRandomAnimal();
     const updatedTimestamp = admin.firestore.Timestamp.fromDate(new Date());
     await admin
       .firestore()
-      .collection("prices")
-      .doc("BTC")
-      .set({ priceRate, time: updatedTimestamp });
+      .collection("tea-leaves")
+      .doc("daily-data")
+      .set({
+        time: updatedTimestamp,
+        bitcoin: { type: "bitcoin", priceRate },
+        advice: { type: "advice", advice },
+        animal: { type: "animal", animalImg },
+      });
     return null;
   });
 
