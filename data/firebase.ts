@@ -3,11 +3,15 @@ import { useContext, useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
 import { collection, getFirestore, getDocs } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 import firebaseConfig from "../firebaseConfig";
 
 import AppContext from "./createContext";
 
 export const firebaseApp = initializeApp(firebaseConfig);
+
+const functions = getFunctions(firebaseApp);
+connectFunctionsEmulator(functions, "localhost", 5001);
 
 export type TeaType = {
   url: string;

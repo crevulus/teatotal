@@ -1,5 +1,5 @@
-import * as functions from "firebase/compat/functions";
-import * as admin from "firebase/compat/admin";
+import admin = require("firebase-admin");
+import functions = require("firebase-functions");
 
 admin.initializeApp();
 
@@ -40,12 +40,22 @@ exports.makeUppercase = functions
     return snap.ref.set({ uppercase }, { merge: true });
   });
 
-// not working on emulator
-exports.testFunction = functions.https.onRequest(async (req, res) => {
-  const original = req.query.string;
-  const writeResult = await admin
-    .firestore()
-    .collection("test")
-    .add({ original });
-  res.json({ result: `Message with ID: ${writeResult.id} added.` });
-});
+exports.testFunction = functions
+  .region("europe-west1")
+  .https.onRequest(async (req, res) => {
+    const original = req.query.string;
+    const writeResult = await admin
+      .firestore()
+      .collection("test")
+      .add({ original });
+    res.json({ result: `Message with ID: ${writeResult.id} added.` });
+  });
+
+exports.scheduledFunction = functions
+  .region("europe-west1")
+  .pubsub.schedule("every 1 mins")
+  .onRun((context) => {
+    console.log(context);
+    console.log(`The time is ${Date.now()}`);
+    return null;
+  });
