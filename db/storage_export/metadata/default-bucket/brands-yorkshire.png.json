@@ -1,0 +1,19 @@
+{
+  "name": "brands-yorkshire.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1634730584568,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "ed5bbe04-52e5-4094-b3c1-df887a9be6c8"
+  ],
+  "timeCreated": "2021-10-20T11:49:44.567Z",
+  "updated": "2021-10-20T11:49:44.570Z",
+  "size": 29026,
+  "md5Hash": "DBzjbHg5Jepj1ltKojXiQQ==",
+  "crc32c": "517555871"
+}

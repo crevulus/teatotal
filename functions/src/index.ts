@@ -1,6 +1,6 @@
 import admin = require("firebase-admin");
 import functions = require("firebase-functions");
-import * as axios from "axios";
+// import * as axios from "axios";
 
 admin.initializeApp();
 
@@ -11,7 +11,6 @@ exports.addMessage = functions
   .https.onRequest(async (req, res) => {
     // Grab the text parameter.
     const original = req.query.text;
-    console.log("test");
     // Push the new message into Firestore using the Firebase Admin SDK.
     const writeResult = await admin
       .firestore()
@@ -39,6 +38,25 @@ exports.makeUppercase = functions
     // writing to Firestore.
     // Setting an 'uppercase' field in Firestore document returns a Promise.
     return snap.ref.set({ uppercase }, { merge: true });
+  });
+
+exports.updateReviews = functions
+  .region("europe-west1")
+  .firestore.document("/reviews/{documentId}")
+  .onUpdate((change, context) => {
+    const data = change.after.data();
+    console.log(data);
+    const prevData = change.before.data();
+    if (data.userReviews.length === prevData.userReviews.length) {
+      return null;
+    }
+    const reviewCount = data.userReviews.length;
+    return change.after.ref.set(
+      {
+        reviewCount,
+      },
+      { merge: true }
+    );
   });
 
 exports.testFunction = functions

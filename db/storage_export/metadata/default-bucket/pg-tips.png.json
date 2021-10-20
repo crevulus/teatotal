@@ -1,0 +1,19 @@
+{
+  "name": "pg-tips.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1634730584580,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "1765bb6b-b61d-4932-9244-48e05decf6db"
+  ],
+  "timeCreated": "2021-10-20T11:49:44.579Z",
+  "updated": "2021-10-20T11:49:44.582Z",
+  "size": 119350,
+  "md5Hash": "hAv3AfrN55+XwCiA/v8rJA==",
+  "crc32c": "3364419877"
+}

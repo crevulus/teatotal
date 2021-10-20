@@ -1,0 +1,19 @@
+{
+  "name": "Tetley_Group_Logo.png",
+  "bucket": "default-bucket",
+  "contentType": "image/png",
+  "metageneration": 1,
+  "generation": 1634730584607,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "88533978-2a11-4172-8903-f17d627ef2a0"
+  ],
+  "timeCreated": "2021-10-20T11:49:44.606Z",
+  "updated": "2021-10-20T11:49:44.610Z",
+  "size": 1162417,
+  "md5Hash": "D6q42n0SR+s+Zx1SlbFaUw==",
+  "crc32c": "1692820331"
+}
