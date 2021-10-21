@@ -2,7 +2,10 @@
 import React, { ReactNode } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { useBlackTeasFromFirebase } from "../../data/firebase";
+import {
+  useBlackTeasFromFirebase,
+  useTeaLeavesFromFirebase,
+} from "../../data/firebase";
 
 import { Home } from "../../views/Home.tsx";
 import { Auth } from "../../views/Auth";
@@ -15,6 +18,7 @@ const Stack = createStackNavigator();
 
 const MainStackNavigator = (): ReactNode => {
   useBlackTeasFromFirebase();
+  useTeaLeavesFromFirebase();
   return (
     <Stack.Navigator
       initialRouteName="TimerPage"

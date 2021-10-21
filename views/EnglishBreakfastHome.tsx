@@ -1,7 +1,7 @@
 import React, { useContext, ReactNode } from "react";
 import { View } from "native-base";
 
-import ScrollCards from "../components/ScrollCards";
+import ScrollCards from "../components/layout/ScrollCards";
 
 import AppContext from "../data/createContext";
 
@@ -10,7 +10,7 @@ export const EnglishBreakfastHome = (): ReactNode => {
 
   return (
     <View flex={1} bg="white">
-      <ScrollCards teas={blackTeas} />
+      <ScrollCards data={blackTeas} type="tea" />
     </View>
   );
 };

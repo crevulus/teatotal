@@ -13,6 +13,7 @@ import MainStackNavigator from "./components/navigation/MainStackNavigator";
 const App = (): ReactNode => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [blackTeas, setBlackTeas] = useState([]);
+  const [teaLeaves, setTeaLeaves] = useState([]);
   const [user, setUser] = useState({});
   const [chosenTea, setChosenTea] = useState({});
   const [desiredStrength, setDesiredStrength] = useState(0.5);
@@ -37,6 +38,8 @@ const App = (): ReactNode => {
             setLoggedIn,
             blackTeas,
             setBlackTeas,
+            teaLeaves,
+            setTeaLeaves,
             user,
             setUser,
             chosenTea,

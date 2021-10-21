@@ -1,7 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 
 import { initializeApp } from "firebase/app";
-import { collection, getFirestore, getDocs } from "firebase/firestore";
+import {
+  collection,
+  getFirestore,
+  getDocs,
+  doc,
+  getDoc,
+} from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 import firebaseConfig from "../firebaseConfig";
@@ -23,10 +29,15 @@ export type TeaType = {
   roundedMinutes?: number;
 };
 
+export type TeaLeavesType = {
+  [key: string]: unknown;
+};
+
 const TEA_TOTAL_STORAGE_FILEPATH = "gs://teatotal-358fc.appspot.com/";
 
+const db = getFirestore();
+
 export const useBlackTeasFromFirebase = (): void => {
-  const db = getFirestore();
   const { blackTeas, setBlackTeas } = useContext(AppContext);
 
   useEffect(() => {
@@ -41,6 +52,29 @@ export const useBlackTeasFromFirebase = (): void => {
       }
     };
     getTeas();
+  }, []);
+};
+
+export const useTeaLeavesFromFirebase = (): void => {
+  const { teaLeaves, setTeaLeaves } = useContext(AppContext);
+
+  useEffect(() => {
+    const getTeaLeaves = async () => {
+      if (teaLeaves.length === 0) {
+        const docRef = doc(db, "tea-leaves", "daily-data");
+        const docSnapshot = await getDoc(docRef);
+        if (docSnapshot.exists()) {
+          const data = docSnapshot.data();
+
+          const teaLeavesData = Object.keys(data).map((key) => {
+            return data[key];
+          });
+
+          setTeaLeaves(teaLeavesData);
+        }
+      }
+    };
+    getTeaLeaves();
   }, []);
 };
 

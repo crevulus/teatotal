@@ -1,11 +1,13 @@
 import { createContext } from "react";
-import { TeaType } from "./firebase";
+import { TeaLeavesType, TeaType } from "./firebase";
 
 export type ContextProps = {
   loggedIn: boolean;
   setLoggedIn: () => void;
   blackTeas: TeaType[];
   setBlackTeas: () => void;
+  teaLeaves: TeaLeavesType[];
+  setTeaLeaves: () => void;
   user: any;
   setUser: () => void;
   chosenTea: TeaType;
