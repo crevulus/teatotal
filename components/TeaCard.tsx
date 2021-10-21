@@ -2,21 +2,14 @@ import React, { useContext, ReactNode, useState, useEffect } from "react";
 
 import AppContext from "../data/createContext";
 import { TeaType, useImageFromFirebase } from "../data/firebase";
-import {
-  Image,
-  Box,
-  Stack,
-  Heading,
-  Pressable,
-  HStack,
-  View,
-} from "native-base";
+import { Image, Stack, Heading, Pressable, HStack, View } from "native-base";
 import Rating from "./Rating";
 import { useNavigation } from "@react-navigation/core";
 import { Icon } from "react-native-elements";
 
 import { SimpleButton } from "./atoms/Button";
 import { theme } from "../theme";
+import { Card } from "./atoms/Card";
 
 type TeaCardProps = {
   id: string;
@@ -69,13 +62,7 @@ export function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
   }
 
   return (
-    <Box
-      bg={theme.other.white}
-      shadow={2}
-      rounded="lg"
-      m={4}
-      width={["xs", "sm", "lg"]}
-    >
+    <Card>
       <Pressable key={id} onPress={() => handleTeaSelection(teaData)}>
         <Image
           source={{ uri: image }}
@@ -108,6 +95,6 @@ export function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
           </View>
         </HStack>
       </Pressable>
-    </Box>
+    </Card>
   );
 }

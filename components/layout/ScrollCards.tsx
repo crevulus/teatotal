@@ -4,6 +4,7 @@ import { Center, ScrollView } from "native-base";
 import { TeaLeavesType, TeaType } from "../../data/firebase";
 
 import { TeaCard } from "../TeaCard";
+import { TeaLeafCard } from "../TeaLeafCard";
 
 type ScrollCardsPropsType = {
   data: TeaType[] | TeaLeavesType[];
@@ -19,6 +20,16 @@ export default function ScrollCards({
       return data.map((teaObj) => (
         <TeaCard id={teaObj.id} teaData={teaObj.data} key={teaObj.id} />
       ));
+    } else if (type === "leaves") {
+      return data.map((leavesObj) => {
+        return (
+          <TeaLeafCard
+            id={leavesObj.type}
+            teaLeafData={leavesObj}
+            key={leavesObj.type}
+          />
+        );
+      });
     }
   };
 
