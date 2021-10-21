@@ -14,17 +14,19 @@ export const Home = (): ReactNode => {
   const scenes = [
     {
       key: "first",
+      title: "Breakfast",
       component: EnglishBreakfastHome,
     },
     {
       key: "second",
+      title: "Herbal",
       component: SecondRoute,
     },
   ];
 
   return (
     <View flex={1}>
-      <Tabs scenes={scenes} />
+      <Tabs scenes={scenes} styles={{ flexBasis: 0 }} />
       <View width="100%" minH={50}>
         <Center width="100%">
           <StrengthSlider />

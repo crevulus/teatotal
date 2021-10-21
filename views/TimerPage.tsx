@@ -22,8 +22,8 @@ export function TimerPage(): ReactNode {
   brewTime.setSeconds(brewTime.getSeconds() + chosenTea.roundedMinutes * 60);
 
   return (
-    <View safeArea bg={theme.other.white} flex={1}>
-      <Center>
+    <View safeArea bg={theme.other.white} flexGrow={1}>
+      <Center flex>
         <Timer expiryTimestamp={brewTime} teaData={chosenTea} />
         <Divider width="90%" my={2} thickness="2" />
         <TeaReading />

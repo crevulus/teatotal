@@ -6,14 +6,16 @@ import { theme } from "../../theme";
 
 type ScenesType = {
   key: string;
+  title: string;
   component: () => ReactNode;
 };
 
 type TabsProps = {
   scenes: ScenesType[];
+  styles: any;
 };
 
-export const Tabs = ({ scenes }: TabsProps): ReactNode => {
+export const Tabs = ({ scenes, styles }: TabsProps): ReactNode => {
   const layout = useWindowDimensions();
 
   const renderScenes = useMemo(() =>
@@ -24,12 +26,7 @@ export const Tabs = ({ scenes }: TabsProps): ReactNode => {
   );
 
   const renderScene = SceneMap(renderScenes);
-
   const [index, setIndex] = useState(0);
-  const [routes] = useState([
-    { key: "first", title: "Breakfast" },
-    { key: "second", title: "Herbal" },
-  ]);
 
   const renderTabBar = ({ navigationState, position }: TabViewProps) => {
     const inputRange = navigationState.routes.map((_, i) => i);
@@ -70,8 +67,8 @@ export const Tabs = ({ scenes }: TabsProps): ReactNode => {
 
   return (
     <TabView
-      style={{ flexBasis: 0 }}
-      navigationState={{ index, routes }}
+      style={styles}
+      navigationState={{ index, routes: scenes }}
       renderScene={renderScene}
       renderTabBar={renderTabBar}
       onIndexChange={setIndex}

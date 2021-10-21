@@ -21,7 +21,7 @@ const MainStackNavigator = (): ReactNode => {
   useTeaLeavesFromFirebase();
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="TimerPage"
       screenOptions={{
         header: ({ navigation }) => {
           return <AppBar navigation={navigation} style={{ height: 80 }} />;
