@@ -1,6 +1,6 @@
 import React, { ReactNode, useContext } from "react";
 import { Box, Fab } from "native-base";
-import AppContext from "../data/createContext";
+import AppContext from "../data/createContext.tsx";
 import { theme } from "../theme";
 
 // TODO: Change to hovering buttons

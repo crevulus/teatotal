@@ -1,6 +1,6 @@
 import React, { useContext, ReactNode, useState, useEffect } from "react";
 
-import AppContext from "../data/createContext";
+import AppContext from "../data/createContext.tsx";
 import { TeaType, useImageFromFirebase } from "../data/firebase";
 import { Image, Stack, Pressable, HStack, View } from "native-base";
 import Rating from "./Rating";

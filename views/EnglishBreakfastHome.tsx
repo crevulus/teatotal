@@ -1,16 +1,16 @@
-import React, { useContext, ReactNode, useMemo } from "react";
+import React, { ReactNode, useMemo } from "react";
 import { View } from "native-base";
 
 import ScrollCards from "../components/layout/ScrollCards";
 
-import AppContext from "../data/createContext";
+import { useContentContext } from "../data/createContext.tsx";
 
 export const EnglishBreakfastHome = (): ReactNode => {
-  const { blackTeas } = useContext(AppContext);
+  const { state } = useContentContext();
 
   return useMemo(() => (
     <View flex={1} bg="white">
-      <ScrollCards data={blackTeas} type="tea" />
+      <ScrollCards data={state.blackTeas} type="tea" />
     </View>
   ));
 };

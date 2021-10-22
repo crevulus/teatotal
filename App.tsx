@@ -7,7 +7,7 @@ import { NativeBaseProvider } from "native-base";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-import AppContext from "./data/createContext.ts";
+import AppContext from "./data/createContext.tsx";
 import MainStackNavigator from "./components/navigation/MainStackNavigator";
 
 const App = (): ReactNode => {
@@ -19,6 +19,8 @@ const App = (): ReactNode => {
   const [desiredStrength, setDesiredStrength] = useState(0.5);
 
   const { Provider } = AppContext;
+
+  console.log("re-render");
 
   useEffect(() => {
     const auth = getAuth();

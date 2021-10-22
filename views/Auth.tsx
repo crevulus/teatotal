@@ -8,7 +8,7 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 
-import AppContext from "../data/createContext";
+import AppContext from "../data/createContext.tsx";
 import SignupForm from "../components/Signup";
 import LoginForm from "../components/Login";
 import { View } from "native-base";

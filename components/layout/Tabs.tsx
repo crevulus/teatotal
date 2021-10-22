@@ -12,7 +12,7 @@ type ScenesType = {
 
 type TabsProps = {
   scenes: ScenesType[];
-  styles: any;
+  styles: Record<string, unknown>;
 };
 
 export const Tabs = ({ scenes, styles }: TabsProps): ReactNode => {

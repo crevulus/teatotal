@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useMemo } from "react";
 import { Center, ScrollView } from "native-base";
 
 import { TeaLeavesType, TeaType } from "../../data/firebase";
@@ -34,9 +34,9 @@ export default function ScrollCards({
     }
   };
 
-  return (
+  return useMemo(() => (
     <ScrollView>
       <Center>{data.length > 0 && <Component />}</Center>
     </ScrollView>
-  );
+  ));
 }

@@ -1,5 +1,5 @@
 import React, { ReactNode, useContext } from "react";
-import AppContext from "../data/createContext";
+import AppContext from "../data/createContext.tsx";
 
 import { Timer } from "../components/Timer.tsx";
 import { Center, Divider, View } from "native-base";

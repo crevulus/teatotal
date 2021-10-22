@@ -5,12 +5,14 @@ import { AdMobBanner } from "expo-ads-admob";
 import StrengthSlider from "../components/StrengthSlider";
 import { Tabs } from "../components/layout/Tabs";
 import { EnglishBreakfastHome } from "./EnglishBreakfastHome";
+import { useBlackTeasFromFirebase } from "../data/firebase";
 
 const SecondRoute = () => (
   <View style={{ flex: 1, backgroundColor: "#673ab7" }} />
 );
 
 export const Home = (): ReactNode => {
+  useBlackTeasFromFirebase();
   const scenes = [
     {
       key: "first",

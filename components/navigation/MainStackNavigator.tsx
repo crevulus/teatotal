@@ -2,10 +2,10 @@
 import React, { ReactNode } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import {
-  useBlackTeasFromFirebase,
-  useTeaLeavesFromFirebase,
-} from "../../data/firebase";
+// import {
+//   useBlackTeasFromFirebase,
+//   useTeaLeavesFromFirebase,
+// } from "../../data/firebase";
 
 import { Home } from "../../views/Home.tsx";
 import { Auth } from "../../views/Auth";
@@ -13,12 +13,17 @@ import { Profile } from "../../views/Profile";
 import { AppBar } from "../AppBar";
 import { TeaPage } from "../../views/TeaPage";
 import { TimerPage } from "../../views/TimerPage";
+import { ContentProvider } from "../../data/createContext";
 
 const Stack = createStackNavigator();
 
+const HomeComponent = () => (
+  <ContentProvider>
+    <Home />
+  </ContentProvider>
+);
+
 const MainStackNavigator = (): ReactNode => {
-  useBlackTeasFromFirebase();
-  useTeaLeavesFromFirebase();
   return (
     <Stack.Navigator
       initialRouteName="Home"
@@ -29,7 +34,7 @@ const MainStackNavigator = (): ReactNode => {
         headerShown: "screen",
       }}
     >
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Home" component={HomeComponent} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Auth" component={Auth} />
       <Stack.Screen name="TeaPage" component={TeaPage} />

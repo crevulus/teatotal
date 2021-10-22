@@ -12,7 +12,7 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 import firebaseConfig from "../firebaseConfig";
 
-import AppContext from "./createContext";
+import { useContentContext } from "./createContext.tsx";
 
 export const firebaseApp = initializeApp(firebaseConfig);
 
@@ -38,17 +38,17 @@ const TEA_TOTAL_STORAGE_FILEPATH = "gs://teatotal-358fc.appspot.com/";
 const db = getFirestore();
 
 export const useBlackTeasFromFirebase = (): void => {
-  const { blackTeas, setBlackTeas } = useContext(AppContext);
+  const { state, dispatch } = useContentContext();
 
   useEffect(() => {
     const getTeas = async () => {
-      if (blackTeas.length === 0) {
+      if (state.blackTeas.length === 0) {
         const teaData = [];
         const querySnapshot = await getDocs(collection(db, "blackTeas"));
         querySnapshot.forEach((doc) => {
           teaData.push({ id: doc.id, data: doc.data() });
         });
-        setBlackTeas(teaData);
+        dispatch({ payload: teaData, type: "black-teas" });
       }
     };
     getTeas();
@@ -56,11 +56,11 @@ export const useBlackTeasFromFirebase = (): void => {
 };
 
 export const useTeaLeavesFromFirebase = (): void => {
-  const { teaLeaves, setTeaLeaves } = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
 
   useEffect(() => {
     const getTeaLeaves = async () => {
-      if (teaLeaves.length === 0) {
+      if (state.teaLeaves.length === 0) {
         const docRef = doc(db, "tea-leaves", "daily-data");
         const docSnapshot = await getDoc(docRef);
         if (docSnapshot.exists()) {
@@ -70,7 +70,7 @@ export const useTeaLeavesFromFirebase = (): void => {
             return data[key];
           });
 
-          setTeaLeaves(teaLeavesData);
+          dispatch({ payload: teaLeavesData, type: "tea-leaves" });
         }
       }
     };
@@ -98,7 +98,7 @@ export const useImageFromFirebase = (urlString: string): void => {
         .catch((error) => setErrorMsg(error.message));
     };
     getImage();
-  }, []);
+  }, [urlString]);
 
   return [imageUrl, errorMsg];
 };

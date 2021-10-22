@@ -1,9 +1,9 @@
 import React, { ReactNode, useContext } from "react";
-import { View, Text } from "native-base";
+import { View } from "native-base";
 import { Tabs } from "./layout/Tabs";
 import { theme } from "../theme";
 import ScrollCards from "./layout/ScrollCards";
-import AppContext from "../data/createContext";
+import AppContext from "../data/createContext.tsx";
 
 const FirstRoute = () => {
   const { teaLeaves } = useContext(AppContext);
