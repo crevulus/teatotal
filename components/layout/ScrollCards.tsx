@@ -21,7 +21,8 @@ export default function ScrollCards({
         <TeaCard id={teaObj.id} teaData={teaObj.data} key={teaObj.id} />
       ));
     } else if (type === "leaves") {
-      return data.map((leavesObj) => {
+      const filteredData = data.filter((leavesObj) => leavesObj.type);
+      return filteredData.map((leavesObj) => {
         return (
           <TeaLeafCard
             id={leavesObj.type}

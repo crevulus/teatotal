@@ -34,7 +34,6 @@ const TeaReading = (): ReactNode => {
   ];
   return (
     <View flex={1} flexGrow={1} maxW="100%">
-      <Text>Some easy reading while you wait</Text>
       <Tabs scenes={scenes} />
     </View>
   );

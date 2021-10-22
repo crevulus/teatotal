@@ -9,7 +9,12 @@ type CardPropsType = {
   data: TeaType | TeaLeavesType;
 };
 
-export function Card({ children, id, data }: CardPropsType): ReactNode {
+export function Card({
+  children,
+  id,
+  data,
+  ...props
+}: CardPropsType): ReactNode {
   return (
     <Box
       bg={theme.other.white}
@@ -19,6 +24,7 @@ export function Card({ children, id, data }: CardPropsType): ReactNode {
       width={["xs", "sm", "lg"]}
       id={id}
       data={data}
+      {...props}
     >
       {children}
     </Box>

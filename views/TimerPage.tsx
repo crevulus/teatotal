@@ -25,7 +25,7 @@ export function TimerPage(): ReactNode {
     <View safeArea bg={theme.other.white} flexGrow={1}>
       <Center flex>
         <Timer expiryTimestamp={brewTime} teaData={chosenTea} />
-        <Divider width="90%" my={2} thickness="2" />
+        <Divider my={2} />
         <TeaReading />
       </Center>
     </View>

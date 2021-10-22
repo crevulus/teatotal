@@ -10,6 +10,7 @@ import { Icon } from "react-native-elements";
 import { SimpleButton } from "./atoms/Button";
 import { theme } from "../theme";
 import { Card } from "./atoms/Card";
+import { SimpleHeading } from "./atoms/Heading";
 
 type TeaCardProps = {
   id: string;
@@ -73,13 +74,7 @@ export function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
         />
         <HStack flexGrow={1}>
           <Stack space={4} p={[4, 4, 8]}>
-            <Heading
-              color={theme.primary}
-              size={["md", "lg", "md"]}
-              noOfLines={2}
-            >
-              {name}
-            </Heading>
+            <SimpleHeading>{name}</SimpleHeading>
             <Rating count={parseInt(rating)} />
           </Stack>
           <View flex flexGrow={1} alignContent="center" justifyContent="center">
