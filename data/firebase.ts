@@ -12,7 +12,8 @@ import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 import firebaseConfig from "../firebaseConfig";
 
-import { useContentContext } from "./createContext.tsx";
+import { useContentContext } from "../store/createContext.ts";
+import { ContentActions } from "../store/ContentContext";
 
 export const firebaseApp = initializeApp(firebaseConfig);
 
@@ -48,7 +49,7 @@ export const useBlackTeasFromFirebase = (): void => {
         querySnapshot.forEach((doc) => {
           teaData.push({ id: doc.id, data: doc.data() });
         });
-        dispatch({ payload: teaData, type: "black-teas" });
+        dispatch({ payload: teaData, type: ContentActions.BlackTeas });
       }
     };
     getTeas();
@@ -70,7 +71,7 @@ export const useTeaLeavesFromFirebase = (): void => {
             return data[key];
           });
 
-          dispatch({ payload: teaLeavesData, type: "tea-leaves" });
+          dispatch({ payload: teaLeavesData, type: ContentActions.TeaLeaves });
         }
       }
     };

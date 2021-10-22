@@ -7,7 +7,7 @@ import {
   Linking,
   Button,
 } from "react-native";
-import AppContext from "../data/createContext.tsx";
+import AppContext from "../store/createContext.ts";
 import { useImageFromFirebase } from "../data/firebase";
 
 export const TeaPage = (): ReactNode => {

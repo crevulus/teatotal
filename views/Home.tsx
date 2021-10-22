@@ -6,6 +6,7 @@ import StrengthSlider from "../components/StrengthSlider";
 import { Tabs } from "../components/layout/Tabs";
 import { EnglishBreakfastHome } from "./EnglishBreakfastHome";
 import { useBlackTeasFromFirebase } from "../data/firebase";
+import { TeaSettingsProvider } from "../store/createContext";
 
 const SecondRoute = () => (
   <View style={{ flex: 1, backgroundColor: "#673ab7" }} />
@@ -31,7 +32,9 @@ export const Home = (): ReactNode => {
       <Tabs scenes={scenes} styles={{ flexBasis: 0 }} />
       <View width="100%" minH={50}>
         <Center width="100%">
-          <StrengthSlider />
+          <TeaSettingsProvider>
+            <StrengthSlider />
+          </TeaSettingsProvider>
         </Center>
         <AdMobBanner
           bannerSize="smartBannerPortrait"

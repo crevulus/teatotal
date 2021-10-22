@@ -3,7 +3,7 @@ import { View } from "native-base";
 
 import ScrollCards from "../components/layout/ScrollCards";
 
-import { useContentContext } from "../data/createContext.tsx";
+import { useContentContext } from "../store/createContext.ts";
 
 export const EnglishBreakfastHome = (): ReactNode => {
   const { state } = useContentContext();

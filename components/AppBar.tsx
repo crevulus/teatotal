@@ -4,7 +4,7 @@ import { useRoute } from "@react-navigation/native";
 import { HStack, IconButton, Text, Box } from "native-base";
 import { Icon } from "react-native-elements";
 
-import AppContext from "../data/createContext.tsx";
+import AppContext from "../store/createContext.ts";
 import { theme } from "../theme";
 
 type AppBarPropsType = {

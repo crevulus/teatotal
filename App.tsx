@@ -7,16 +7,12 @@ import { NativeBaseProvider } from "native-base";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-import AppContext from "./data/createContext.tsx";
+import AppContext from "./store/createContext.ts";
 import MainStackNavigator from "./components/navigation/MainStackNavigator";
 
 const App = (): ReactNode => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [blackTeas, setBlackTeas] = useState([]);
-  const [teaLeaves, setTeaLeaves] = useState([]);
   const [user, setUser] = useState({});
-  const [chosenTea, setChosenTea] = useState({});
-  const [desiredStrength, setDesiredStrength] = useState(0.5);
 
   const { Provider } = AppContext;
 
@@ -36,16 +32,8 @@ const App = (): ReactNode => {
           value={{
             loggedIn,
             setLoggedIn,
-            blackTeas,
-            setBlackTeas,
-            teaLeaves,
-            setTeaLeaves,
             user,
             setUser,
-            chosenTea,
-            setChosenTea,
-            desiredStrength,
-            setDesiredStrength,
           }}
         >
           <NativeBaseProvider>

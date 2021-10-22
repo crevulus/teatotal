@@ -3,7 +3,7 @@ import { View } from "native-base";
 import { Tabs } from "./layout/Tabs";
 import { theme } from "../theme";
 import ScrollCards from "./layout/ScrollCards";
-import { useContentContext } from "../data/createContext.tsx";
+import { useContentContext } from "../store/createContext.ts";
 
 const FirstRoute = () => {
   const { state } = useContentContext();

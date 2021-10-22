@@ -7,7 +7,10 @@ import { Profile } from "../../views/Profile";
 import { AppBar } from "../AppBar";
 import { TeaPage } from "../../views/TeaPage";
 import { TimerPage } from "../../views/TimerPage";
-import { ContentProvider } from "../../data/createContext";
+import {
+  ContentProvider,
+  TeaSettingsProvider,
+} from "../../store/createContext.ts";
 
 const Stack = createStackNavigator();
 
@@ -19,7 +22,9 @@ const HomeComponent = () => (
 
 const TimerComponent = () => (
   <ContentProvider>
-    <TimerPage />
+    <TeaSettingsProvider>
+      <TimerPage />
+    </TeaSettingsProvider>
   </ContentProvider>
 );
 

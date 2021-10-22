@@ -5,6 +5,7 @@ import { TeaLeavesType, TeaType } from "../../data/firebase";
 
 import { TeaCard } from "../TeaCard";
 import { TeaLeafCard } from "../TeaLeafCard";
+import { TeaSettingsProvider } from "../../store/createContext";
 
 type ScrollCardsPropsType = {
   data: TeaType[] | TeaLeavesType[];
@@ -34,9 +35,15 @@ export default function ScrollCards({
     }
   };
 
-  return useMemo(() => (
+  return (
     <ScrollView>
-      <Center>{data.length > 0 && <Component />}</Center>
+      <Center>
+        {data.length > 0 && (
+          <TeaSettingsProvider>
+            <Component />
+          </TeaSettingsProvider>
+        )}
+      </Center>
     </ScrollView>
-  ));
+  );
 }

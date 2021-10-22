@@ -1,6 +1,6 @@
 import React, { useContext, ReactNode, useState, useEffect } from "react";
 
-import AppContext from "../data/createContext.tsx";
+import AppContext from "../store/createContext.ts";
 import { TeaType, useImageFromFirebase } from "../data/firebase";
 import { Image, Stack, Pressable, HStack, View } from "native-base";
 import Rating from "./Rating";
@@ -11,6 +11,8 @@ import { SimpleButton } from "./atoms/Button";
 import { theme } from "../theme";
 import { Card } from "./atoms/Card";
 import { SimpleHeading } from "./atoms/Heading";
+import { useTeaSettingsContext } from "../store/createContext";
+import { TeaSettingsActions } from "../store/TeaSettingsContext";
 
 type TeaCardProps = {
   id: string;
@@ -19,7 +21,7 @@ type TeaCardProps = {
 
 export function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
   const navigation = useNavigation();
-  const { desiredStrength, setChosenTea } = useContext(AppContext);
+  const { state, dispatch } = useTeaSettingsContext();
   const { name, strength, logo, rating } = teaData;
   const [image] = useImageFromFirebase(logo);
   const [roundedMinutes, setRoundedMinutes] = useState(0);
@@ -39,22 +41,30 @@ export function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
   };
 
   useEffect(() => {
-    if (!desiredStrength) {
+    if (!state.desiredStrength) {
       return;
     }
-    setRoundedMinutes(
-      roundToHalf(desiredStrength * 2 * (strength === 10 ? 1 : 10 - strength))
-    );
+    setRoundedMinutes(() => {
+      return roundToHalf(
+        state.desiredStrength * 2 * (strength === 10 ? 1 : 10 - strength)
+      );
+    });
     setIsLoading(false);
-  }, [desiredStrength]);
+  }, [state]);
 
   const handleTeaSelection = (tea) => {
-    setChosenTea({ ...tea, roundedMinutes });
+    dispatch({
+      payload: { ...tea, roundedMinutes },
+      type: TeaSettingsActions.ChooseTea,
+    });
     navigation.navigate("TeaPage", { teaName: teaData.name });
   };
 
   const handleGoToTimer = (tea) => {
-    setChosenTea({ ...tea, roundedMinutes });
+    dispatch({
+      payload: { ...tea, roundedMinutes },
+      type: TeaSettingsActions.ChooseTea,
+    });
     navigation.navigate("TimerPage", { teaName: teaData.name });
   };
 

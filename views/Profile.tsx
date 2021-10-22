@@ -3,7 +3,7 @@ import { SafeAreaView, Text, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { getAuth, signOut } from "firebase/auth";
-import AppContext from "../data/createContext.tsx";
+import AppContext from "../store/createContext.ts";
 
 export const Profile = (): ReactNode => {
   const navigation = useNavigation();
