@@ -26,7 +26,7 @@ export const TeaLeafCard = ({
       case "bitcoin":
         setHeading("Current BTC Price");
         setContent(() => {
-          return <Heading>{teaLeafData.priceRate}</Heading>;
+          return <Heading>$ {teaLeafData.priceRate}</Heading>;
         });
         break;
       case "animal":

@@ -2,7 +2,7 @@ import React, { useContext, ReactNode, useState, useEffect } from "react";
 
 import AppContext from "../data/createContext";
 import { TeaType, useImageFromFirebase } from "../data/firebase";
-import { Image, Stack, Heading, Pressable, HStack, View } from "native-base";
+import { Image, Stack, Pressable, HStack, View } from "native-base";
 import Rating from "./Rating";
 import { useNavigation } from "@react-navigation/core";
 import { Icon } from "react-native-elements";
