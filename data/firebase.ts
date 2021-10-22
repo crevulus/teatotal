@@ -56,7 +56,7 @@ export const useBlackTeasFromFirebase = (): void => {
 };
 
 export const useTeaLeavesFromFirebase = (): void => {
-  const { state, dispatch } = useContext(AppContext);
+  const { state, dispatch } = useContentContext();
 
   useEffect(() => {
     const getTeaLeaves = async () => {

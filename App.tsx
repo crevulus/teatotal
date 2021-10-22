@@ -20,8 +20,6 @@ const App = (): ReactNode => {
 
   const { Provider } = AppContext;
 
-  console.log("re-render");
-
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (currentUser) => {

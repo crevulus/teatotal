@@ -1,11 +1,5 @@
-/* eslint-disable react/prop-types */
 import React, { ReactNode } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-
-// import {
-//   useBlackTeasFromFirebase,
-//   useTeaLeavesFromFirebase,
-// } from "../../data/firebase";
 
 import { Home } from "../../views/Home.tsx";
 import { Auth } from "../../views/Auth";
@@ -20,6 +14,12 @@ const Stack = createStackNavigator();
 const HomeComponent = () => (
   <ContentProvider>
     <Home />
+  </ContentProvider>
+);
+
+const TimerComponent = () => (
+  <ContentProvider>
+    <TimerPage />
   </ContentProvider>
 );
 
@@ -38,7 +38,7 @@ const MainStackNavigator = (): ReactNode => {
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Auth" component={Auth} />
       <Stack.Screen name="TeaPage" component={TeaPage} />
-      <Stack.Screen name="TimerPage" component={TimerPage} />
+      <Stack.Screen name="TimerPage" component={TimerComponent} />
     </Stack.Navigator>
   );
 };

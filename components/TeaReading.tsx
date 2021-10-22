@@ -1,16 +1,16 @@
-import React, { ReactNode, useContext } from "react";
+import React, { ReactNode } from "react";
 import { View } from "native-base";
 import { Tabs } from "./layout/Tabs";
 import { theme } from "../theme";
 import ScrollCards from "./layout/ScrollCards";
-import AppContext from "../data/createContext.tsx";
+import { useContentContext } from "../data/createContext.tsx";
 
 const FirstRoute = () => {
-  const { teaLeaves } = useContext(AppContext);
+  const { state } = useContentContext();
 
   return (
     <View flex={1} bg={theme.primary} h="100%" flexGrow={1}>
-      <ScrollCards type="leaves" data={teaLeaves} />
+      <ScrollCards type="leaves" data={state.teaLeaves} />
     </View>
   );
 };
@@ -19,7 +19,7 @@ const SecondRoute = () => (
   <View style={{ flex: 1, backgroundColor: "#673ab7" }} />
 );
 
-const TeaReading = (): ReactNode => {
+export const TeaReading = (): ReactNode => {
   const scenes = [
     {
       key: "first",
@@ -38,5 +38,3 @@ const TeaReading = (): ReactNode => {
     </View>
   );
 };
-
-export default TeaReading;
