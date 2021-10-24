@@ -1,8 +1,7 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useContext } from "react";
 import { Box, Fab } from "native-base";
-import { useTeaSettingsContext } from "../store/createContext.ts";
 import { theme } from "../theme";
-import { TeaSettingsActions } from "../store/TeaSettingsContext";
+import AppContext from "../store/createContext";
 
 // TODO: Change to hovering buttons
 /*
@@ -14,26 +13,20 @@ import { TeaSettingsActions } from "../store/TeaSettingsContext";
 */
 
 export default function StrengthSlider(): ReactNode {
-  const { state, dispatch } = useTeaSettingsContext();
+  const { desiredStrength, setDesiredStrength } = useContext(AppContext);
 
   const incrementStrength = () => {
-    if (Math.round(state.desiredStrength * 10) >= 10) {
+    if (Math.round(desiredStrength * 10) >= 10) {
       return;
     }
-    dispatch({
-      payload: state.desiredStrength + Math.round(0.1 * 10) / 10,
-      type: TeaSettingsActions.ChangeStrength,
-    });
+    setDesiredStrength(desiredStrength + Math.round(0.1 * 10) / 10);
   };
 
   const decrementStrength = () => {
-    if (Math.round(state.desiredStrength * 10) <= 1) {
+    if (Math.round(desiredStrength * 10) <= 1) {
       return;
     }
-    dispatch({
-      payload: state.desiredStrength - Math.round(0.1 * 10) / 10,
-      type: TeaSettingsActions.ChangeStrength,
-    });
+    setDesiredStrength(desiredStrength - Math.round(0.1 * 10) / 10);
   };
 
   return (
@@ -43,7 +36,7 @@ export default function StrengthSlider(): ReactNode {
         size={10}
         bottom={116}
         bgColor={theme.other.white}
-        label={Math.round(state.desiredStrength * 10)}
+        label={Math.round(desiredStrength * 10)}
       />
       <Fab bottom={60} size={10} label="-" onPress={decrementStrength} />
     </Box>

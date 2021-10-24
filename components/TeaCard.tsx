@@ -1,4 +1,4 @@
-import React, { ReactNode, useState, useEffect } from "react";
+import React, { ReactNode, useState, useEffect, useContext } from "react";
 
 import { TeaType, useImageFromFirebase } from "../data/firebase";
 import { Image, Stack, Pressable, HStack, View } from "native-base";
@@ -10,7 +10,7 @@ import { SimpleButton } from "./atoms/Button";
 import { theme } from "../theme";
 import { Card } from "./atoms/Card";
 import { SimpleHeading } from "./atoms/Heading";
-import { useTeaSettingsContext } from "../store/createContext";
+import AppContext, { useTeaSettingsContext } from "../store/createContext";
 import { TeaSettingsActions } from "../store/TeaSettingsContext";
 
 type TeaCardProps = {
@@ -20,7 +20,8 @@ type TeaCardProps = {
 
 export function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
   const navigation = useNavigation();
-  const { state, dispatch } = useTeaSettingsContext();
+  const { desiredStrength } = useContext(AppContext);
+  const { dispatch } = useTeaSettingsContext();
   const { name, strength, logo, rating } = teaData;
   const [image] = useImageFromFirebase(logo);
   const [roundedMinutes, setRoundedMinutes] = useState(0);
@@ -40,16 +41,16 @@ export function TeaCard({ id, teaData }: TeaCardProps): ReactNode {
   };
 
   useEffect(() => {
-    if (!state.desiredStrength) {
+    if (!desiredStrength) {
       return;
     }
     setRoundedMinutes(() => {
       return roundToHalf(
-        state.desiredStrength * 2 * (strength === 10 ? 1 : 10 - strength)
+        desiredStrength * 2 * (strength === 10 ? 1 : 10 - strength)
       );
     });
     setIsLoading(false);
-  }, [state]);
+  }, [desiredStrength]);
 
   const handleTeaSelection = (tea) => {
     dispatch({

@@ -10,6 +10,8 @@ export type ContextProps = {
   setLoggedIn: () => void;
   user: any;
   setUser: () => void;
+  desiredStrength: any;
+  setDesiredStrength: () => void;
 };
 
 const AppContext = createContext<ContextProps>();

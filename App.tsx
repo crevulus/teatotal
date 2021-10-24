@@ -13,6 +13,7 @@ import MainStackNavigator from "./components/navigation/MainStackNavigator";
 const App = (): ReactNode => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
+  const [desiredStrength, setDesiredStrength] = useState(0.5);
 
   const { Provider } = AppContext;
 
@@ -34,6 +35,8 @@ const App = (): ReactNode => {
             setLoggedIn,
             user,
             setUser,
+            desiredStrength,
+            setDesiredStrength,
           }}
         >
           <NativeBaseProvider>
