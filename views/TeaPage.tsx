@@ -1,4 +1,4 @@
-import React, { ReactNode, useContext } from "react";
+import React, { ReactNode } from "react";
 import {
   SafeAreaView,
   Text,
@@ -7,21 +7,21 @@ import {
   Linking,
   Button,
 } from "react-native";
-import AppContext from "../store/createContext.ts";
 import { useImageFromFirebase } from "../data/firebase";
+import { useTeaSettingsContext } from "../store/createContext";
 
 export const TeaPage = (): ReactNode => {
-  const { chosenTea } = useContext(AppContext);
-  const [image] = useImageFromFirebase(chosenTea.logo);
+  const { state } = useTeaSettingsContext();
+  const [image] = useImageFromFirebase(state.chosenTea.logo);
   return (
     <>
-      {chosenTea && (
+      {state.chosenTea && (
         <SafeAreaView>
-          <Text>{chosenTea.name}</Text>
+          <Text>{state.chosenTea.name}</Text>
           <Image style={styles.logo} source={{ uri: image }} />
           <Button
-            title={`Get some ${chosenTea.name}`}
-            onPress={() => Linking.openURL(chosenTea.url)}
+            title={`Get some ${state.chosenTea.name}`}
+            onPress={() => Linking.openURL(state.chosenTea.url)}
           />
         </SafeAreaView>
       )}

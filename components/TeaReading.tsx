@@ -1,17 +1,20 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useMemo } from "react";
 import { View } from "native-base";
 import { Tabs } from "./layout/Tabs";
 import { theme } from "../theme";
-import ScrollCards from "./layout/ScrollCards";
+import { ScrollCards } from "./layout/ScrollCards";
 import { useContentContext } from "../store/createContext.ts";
 
 const FirstRoute = () => {
   const { state } = useContentContext();
 
-  return (
-    <View flex={1} bg={theme.primary} h="100%" flexGrow={1}>
-      <ScrollCards type="leaves" data={state.teaLeaves} />
-    </View>
+  return useMemo(
+    () => (
+      <View flex={1} bg={theme.primary} h="100%" flexGrow={1}>
+        <ScrollCards type="leaves" data={state.teaLeaves} />
+      </View>
+    ),
+    [state.teaLeaves]
   );
 };
 

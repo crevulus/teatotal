@@ -1,21 +1,20 @@
-import React, { ReactNode, useMemo } from "react";
+import React, { ReactNode } from "react";
 import { Center, ScrollView } from "native-base";
 
 import { TeaLeavesType, TeaType } from "../../data/firebase";
 
 import { TeaCard } from "../TeaCard";
 import { TeaLeafCard } from "../TeaLeafCard";
-import { TeaSettingsProvider } from "../../store/createContext";
 
 type ScrollCardsPropsType = {
   data: TeaType[] | TeaLeavesType[];
   type: "tea" | "leaves";
 };
 
-export default function ScrollCards({
+export const ScrollCards = ({
   data,
   type,
-}: ScrollCardsPropsType): ReactNode {
+}: ScrollCardsPropsType): ReactNode => {
   const Component = () => {
     if (type === "tea") {
       return data.map((teaObj) => (
@@ -37,13 +36,7 @@ export default function ScrollCards({
 
   return (
     <ScrollView>
-      <Center>
-        {data.length > 0 && (
-          <TeaSettingsProvider>
-            <Component />
-          </TeaSettingsProvider>
-        )}
-      </Center>
+      <Center>{data.length > 0 && <Component />}</Center>
     </ScrollView>
   );
-}
+};

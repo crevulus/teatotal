@@ -22,29 +22,29 @@ const HomeComponent = () => (
 
 const TimerComponent = () => (
   <ContentProvider>
-    <TeaSettingsProvider>
-      <TimerPage />
-    </TeaSettingsProvider>
+    <TimerPage />
   </ContentProvider>
 );
 
 const MainStackNavigator = (): ReactNode => {
   return (
-    <Stack.Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        header: ({ navigation }) => {
-          return <AppBar navigation={navigation} style={{ height: 80 }} />;
-        },
-        headerShown: "screen",
-      }}
-    >
-      <Stack.Screen name="Home" component={HomeComponent} />
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Auth" component={Auth} />
-      <Stack.Screen name="TeaPage" component={TeaPage} />
-      <Stack.Screen name="TimerPage" component={TimerComponent} />
-    </Stack.Navigator>
+    <TeaSettingsProvider>
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          header: ({ navigation }) => {
+            return <AppBar navigation={navigation} style={{ height: 80 }} />;
+          },
+          headerShown: "screen",
+        }}
+      >
+        <Stack.Screen name="Home" component={HomeComponent} />
+        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="Auth" component={Auth} />
+        <Stack.Screen name="TeaPage" component={TeaPage} />
+        <Stack.Screen name="TimerPage" component={TimerComponent} />
+      </Stack.Navigator>
+    </TeaSettingsProvider>
   );
 };
 

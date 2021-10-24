@@ -15,7 +15,6 @@ import { TeaSettingsActions } from "../store/TeaSettingsContext";
 
 export default function StrengthSlider(): ReactNode {
   const { state, dispatch } = useTeaSettingsContext();
-  console.log(state);
 
   const incrementStrength = () => {
     if (Math.round(state.desiredStrength * 10) >= 10) {
