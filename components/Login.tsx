@@ -7,6 +7,8 @@ import {
   FormControl,
   Input,
   HStack,
+  Pressable,
+  Image,
 } from "native-base";
 import { SimpleButton } from "./atoms/Button";
 

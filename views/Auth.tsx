@@ -1,18 +1,20 @@
 import React, { ReactNode, useContext, useState } from "react";
-import { Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-
+import { View, Text, Pressable, Image } from "native-base";
+import { AdMobBanner } from "expo-ads-admob";
 import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  setPersistence,
+  inMemoryPersistence,
 } from "firebase/auth";
 
 import AppContext from "../store/createContext.ts";
 import SignupForm from "../components/Signup";
 import LoginForm from "../components/Login";
-import { View } from "native-base";
-import { AdMobBanner } from "expo-ads-admob";
 import { theme } from "../theme";
 
 // TODO: Add Logout
@@ -28,6 +30,13 @@ export const Auth = (): ReactNode => {
   const { setUser } = useContext(AppContext);
 
   const auth = getAuth();
+  const googleProvider = new GoogleAuthProvider();
+
+  const navigateToProfile = (success: boolean) => {
+    if (success) {
+      navigation.navigate("Profile");
+    }
+  };
 
   const onLogIn = async () => {
     let success = false;
@@ -39,6 +48,7 @@ export const Auth = (): ReactNode => {
       .then((user) => {
         success = true;
         setUser(user);
+        // setPersistence(auth, inMemoryPersistence);
       })
       .catch((error) => {
         console.log(error);
@@ -46,9 +56,7 @@ export const Auth = (): ReactNode => {
         const errorMessage = error.message;
         setErrorMsg(errorCode + ": " + errorMessage);
       });
-    if (success) {
-      navigation.navigate("Profile");
-    }
+    navigateToProfile(success);
   };
 
   const onSignUp = async () => {
@@ -73,9 +81,20 @@ export const Auth = (): ReactNode => {
         const errorMessage = error.message;
         setErrorMsg(errorCode + ": " + errorMessage);
       });
-    if (success) {
-      navigation.navigate("Profile");
-    }
+    navigateToProfile(success);
+  };
+
+  const handleGoogleLogIn = async () => {
+    let success = false;
+    await signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        setUser(result.user);
+        success = true;
+      })
+      .catch((error) => {
+        setErrorMsg(error.message);
+      });
+    navigateToProfile(success);
   };
 
   return (
@@ -103,6 +122,14 @@ export const Auth = (): ReactNode => {
           />
         )}
         {errorMsg && <Text>{errorMsg}</Text>}
+        <Pressable onPress={handleGoogleLogIn}>
+          <Image
+            source={require("assets/google-signin.png")}
+            alt="Log in with Google"
+            height={46}
+            width={191}
+          />
+        </Pressable>
       </View>
       <View width="100%">
         <AdMobBanner
