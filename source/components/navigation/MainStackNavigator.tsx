@@ -30,7 +30,7 @@ const MainStackNavigator = (): ReactNode => {
   return (
     <TeaSettingsProvider>
       <Stack.Navigator
-        initialRouteName="Auth"
+        initialRouteName="Home"
         screenOptions={{
           header: ({ navigation }) => {
             return <AppBar navigation={navigation} style={{ height: 80 }} />;

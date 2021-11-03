@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Admin, Resource, ListGuesser } from "react-admin";
 import {
   FirebaseDataProvider,

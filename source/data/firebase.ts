@@ -1,8 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { initializeApp } from "firebase/app";
 import {
   collection,
+  collectionGroup,
   getFirestore,
   getDocs,
   doc,
@@ -54,6 +55,18 @@ export const useBlackTeasFromFirebase = (): void => {
     };
     getTeas();
   }, []);
+};
+
+export const useHerbalTeasFromFirebase = (): void => {
+  useEffect(() => {
+    const getTeas = async () => {
+      const collectionRef = await getDocs(collection(db, "herbalTeas"));
+      collectionRef.forEach((doc) => {
+        console.log(doc.data());
+      });
+    };
+    getTeas();
+  });
 };
 
 export const useTeaLeavesFromFirebase = (): void => {

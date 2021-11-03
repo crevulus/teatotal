@@ -8,8 +8,6 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
-  setPersistence,
-  inMemoryPersistence,
 } from "firebase/auth";
 
 import AppContext from "../store/createContext.ts";
@@ -63,13 +61,6 @@ export const Auth = (): ReactNode => {
     let success = false;
     await createUserWithEmailAndPassword(auth, email, pw)
       .then((res) => {
-        firebase
-          .firestore()
-          .collection("users")
-          .doc(firebase.auth().currentUser.uid)
-          .set({
-            email,
-          });
         return res.user;
       })
       .then((user) => {
