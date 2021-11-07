@@ -98,10 +98,13 @@ const createNewUser = functions
   .auth.user()
   .onCreate(async (user: UserRecord) => {
     const svg = createNewProfileImage();
-    return await admin.firestore().collection("users").doc(user.uid).set({
-      createdAt: admin.firestore.Timestamp.now(),
-      profileAvatar: svg,
-    });
+    return await admin.firestore().collection("users").doc(user.uid).set(
+      {
+        createdAt: admin.firestore.Timestamp.now(),
+        profileAvatar: svg,
+      },
+      { merge: true }
+    );
   });
 
 module.exports = {

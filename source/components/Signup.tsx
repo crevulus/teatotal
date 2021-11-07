@@ -13,6 +13,7 @@ import { SimpleButton } from "./atoms/Button";
 
 type SignupFormProps = {
   togglePage: () => void;
+  setName: () => void;
   setEmail: () => void;
   setPw: () => void;
   handlePress: () => void;
@@ -20,6 +21,7 @@ type SignupFormProps = {
 
 export default function SignupForm({
   togglePage,
+  setName,
   setEmail,
   setPw,
   handlePress,
@@ -35,6 +37,14 @@ export default function SignupForm({
         </Heading>
 
         <VStack space={2} mt={5}>
+          <FormControl>
+            <FormControl.Label
+              _text={{ color: "muted.700", fontSize: "sm", fontWeight: 600 }}
+            >
+              Name
+            </FormControl.Label>
+            <Input onChangeText={setName} />
+          </FormControl>
           <FormControl>
             <FormControl.Label
               _text={{ color: "muted.700", fontSize: "sm", fontWeight: 600 }}

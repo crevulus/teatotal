@@ -8,6 +8,7 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
+  updateProfile,
 } from "firebase/auth";
 import { doc, getFirestore, setDoc } from "@firebase/firestore";
 
@@ -22,6 +23,7 @@ import { theme } from "../theme";
 export const Auth = (): ReactNode => {
   const navigation = useNavigation();
   const [signUp, setSignUp] = useState(false);
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
@@ -63,9 +65,14 @@ export const Auth = (): ReactNode => {
     let success = false;
     await createUserWithEmailAndPassword(auth, email, pw)
       .then((res) => {
-        setDoc(doc(db, "users", res.user.uid), {
-          email,
-        });
+        setDoc(
+          doc(db, "users", res.user.uid),
+          {
+            displayName: name,
+            email,
+          },
+          { merge: true }
+        );
         return res.user;
       })
       .then((user) => {
@@ -76,6 +83,15 @@ export const Auth = (): ReactNode => {
         const errorCode = error.code;
         const errorMessage = error.message;
         setErrorMsg(errorCode + ": " + errorMessage);
+      });
+    updateProfile(auth.currentUser, {
+      displayName: name,
+    })
+      .then(() => {
+        console.log("profile updated!");
+      })
+      .catch((err) => {
+        throw new Error(err);
       });
     navigateToProfile(success);
   };
@@ -105,6 +121,7 @@ export const Auth = (): ReactNode => {
         {signUp ? (
           <SignupForm
             togglePage={() => setSignUp(!signUp)}
+            setName={setName}
             setEmail={setEmail}
             setPw={setPw}
             handlePress={onSignUp}

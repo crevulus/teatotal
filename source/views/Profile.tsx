@@ -1,10 +1,13 @@
 import React, { useContext, ReactNode } from "react";
-import { SafeAreaView, Text, Button } from "react-native";
+import { View, Text, Icon } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 
 import { getAuth, signOut } from "firebase/auth";
+import format from "date-fns/format";
+
 import AppContext from "../store/createContext.ts";
 import { useUserDataFromFirebase } from "../data/firebase";
+import { SimpleButton } from "../components/atoms/Button";
 
 const userObj = {
   providerId: "firebase",
@@ -55,13 +58,17 @@ export const Profile = (): ReactNode => {
   };
 
   return user.email ? (
-    <SafeAreaView>
+    <View>
       <Text>{user.email}</Text>
-      <Text>{user.createdAt && user.createdAt.seconds}</Text>
-      <Button title="console log" onPress={handleLog} />
-      <Button title="Log out" onPress={onLogOut} />
-      <Button title="Home" onPress={() => navigation.navigate("Home")} />
-    </SafeAreaView>
+      {user.createdAt && (
+        <Text>
+          Member since{" "}
+          {format(new Date(user.createdAt.seconds * 1000), "dd MMM yyyy")}
+        </Text>
+      )}
+      <SimpleButton onPress={handleLog}>Console Log</SimpleButton>
+      <SimpleButton onPress={onLogOut}>Log out</SimpleButton>
+    </View>
   ) : (
     <Text>Not logged in</Text>
   );
