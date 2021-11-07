@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { initializeApp } from "firebase/app";
 import {
   collection,
-  collectionGroup,
   getFirestore,
   getDocs,
   doc,
@@ -15,6 +14,7 @@ import firebaseConfig from "../firebaseConfig";
 
 import { useContentContext } from "../store/createContext.ts";
 import { ContentActions } from "../store/ContentContext";
+import AppContext from "../store/createContext";
 
 export const firebaseApp = initializeApp(firebaseConfig);
 
@@ -43,6 +43,7 @@ export const useBlackTeasFromFirebase = (): void => {
   const { state, dispatch } = useContentContext();
 
   useEffect(() => {
+    console.log("Running: useBlackTeasFromFirebase");
     const getTeas = async () => {
       if (state.blackTeas.length === 0) {
         const teaData = [];
@@ -59,6 +60,7 @@ export const useBlackTeasFromFirebase = (): void => {
 
 export const useHerbalTeasFromFirebase = (): void => {
   useEffect(() => {
+    console.log("Running: useHerbalTeasFromFirebase");
     const getTeas = async () => {
       const collectionRef = await getDocs(collection(db, "herbalTeas"));
       collectionRef.forEach((doc) => {
@@ -66,13 +68,14 @@ export const useHerbalTeasFromFirebase = (): void => {
       });
     };
     getTeas();
-  });
+  }, []);
 };
 
 export const useTeaLeavesFromFirebase = (): void => {
   const { state, dispatch } = useContentContext();
 
   useEffect(() => {
+    console.log("Running: useTeaLeavesFromFirebase");
     const getTeaLeaves = async () => {
       if (state.teaLeaves.length === 0) {
         const docRef = doc(db, "tea-leaves", "daily-data");
@@ -104,6 +107,7 @@ export const useImageFromFirebase = (urlString: string): void => {
   const storageRef = ref(storage, trimFilepath(urlString));
 
   useEffect(() => {
+    console.log("Running: useImageFromFirebase");
     const getImage = async () => {
       await getDownloadURL(storageRef)
         .then((url) => {
@@ -115,4 +119,21 @@ export const useImageFromFirebase = (urlString: string): void => {
   }, [urlString]);
 
   return [imageUrl, errorMsg];
+};
+
+export const useUserDataFromFirebase = (uid: string) => {
+  const { user, setUser } = useContext(AppContext);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const docRef = doc(db, "users", uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setUser({ ...user, ...docSnap.data() });
+      } else {
+        throw new Error("User doc doesn't exist");
+      }
+    };
+    getUser();
+  }, []);
 };

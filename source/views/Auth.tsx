@@ -9,6 +9,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
+import { doc, getFirestore, setDoc } from "@firebase/firestore";
 
 import AppContext from "../store/createContext.ts";
 import SignupForm from "../components/Signup";
@@ -28,6 +29,7 @@ export const Auth = (): ReactNode => {
   const { setUser } = useContext(AppContext);
 
   const auth = getAuth();
+  const db = getFirestore();
   const googleProvider = new GoogleAuthProvider();
 
   const navigateToProfile = (success: boolean) => {
@@ -61,6 +63,9 @@ export const Auth = (): ReactNode => {
     let success = false;
     await createUserWithEmailAndPassword(auth, email, pw)
       .then((res) => {
+        setDoc(doc(db, "users", res.user.uid), {
+          email,
+        });
         return res.user;
       })
       .then((user) => {

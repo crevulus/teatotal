@@ -99,7 +99,6 @@ const createNewUser = functions
   .onCreate(async (user: UserRecord) => {
     const svg = createNewProfileImage();
     return await admin.firestore().collection("users").doc(user.uid).set({
-      user: user.email,
       createdAt: admin.firestore.Timestamp.now(),
       profileAvatar: svg,
     });
