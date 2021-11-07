@@ -1,5 +1,5 @@
-import React, { ReactNode, useEffect } from "react";
-import { useIsFocused, useNavigation } from "@react-navigation/core";
+import React, { ReactNode } from "react";
+import { useIsFocused } from "@react-navigation/core";
 import { View, Center } from "native-base";
 import { AdMobBanner } from "expo-ads-admob";
 
