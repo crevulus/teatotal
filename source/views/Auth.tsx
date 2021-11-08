@@ -117,7 +117,7 @@ export const Auth = (): ReactNode => {
       justifyContent="space-between"
       bg={theme.other.white}
     >
-      <View flexBasis={1} bg={theme.other.white} overflow="none">
+      <View flexBasis={1} bg={theme.other.white}>
         {signUp ? (
           <SignupForm
             togglePage={() => setSignUp(!signUp)}
@@ -134,7 +134,7 @@ export const Auth = (): ReactNode => {
             handlePress={onLogIn}
           />
         )}
-        {errorMsg && <Text>{errorMsg}</Text>}
+        <Text>{errorMsg ?? null}</Text>
         <Pressable onPress={handleGoogleLogIn}>
           <Image
             source={require("assets/google-signin.png")}
