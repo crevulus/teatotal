@@ -7,6 +7,7 @@ import {
   getDocs,
   doc,
   getDoc,
+  onSnapshot,
 } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
@@ -123,17 +124,10 @@ export const useImageFromFirebase = (urlString: string): void => {
 
 export const useUserDataFromFirebase = (uid: string) => {
   const { user, setUser } = useContext(AppContext);
-
   useEffect(() => {
-    const getUser = async () => {
-      const docRef = doc(db, "users", uid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setUser({ ...user, ...docSnap.data() });
-      } else {
-        throw new Error("User doc doesn't exist");
-      }
-    };
-    getUser();
+    const unsubscribe = onSnapshot(doc(db, "users", uid), (doc) => {
+      setUser({ ...user, ...doc.data() });
+    });
+    return () => unsubscribe();
   }, []);
 };

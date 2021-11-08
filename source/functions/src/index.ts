@@ -107,6 +107,19 @@ const createNewUser = functions
     );
   });
 
+const deleteUser = functions
+  .region("europe-west1")
+  .auth.user()
+  .onDelete(async (user: UserRecord) => {
+    return await admin
+      .firestore()
+      .collection("users")
+      .doc(user.uid)
+      .delete()
+      .then(() => console.log("deleted!"))
+      .catch((err) => console.log(err));
+  });
+
 module.exports = {
   addMessage,
   makeUppercase,
@@ -114,4 +127,5 @@ module.exports = {
   testFunction,
   scheduledFunction,
   createNewUser,
+  deleteUser,
 };

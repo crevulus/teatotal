@@ -1,13 +1,14 @@
-import React, { useContext, ReactNode } from "react";
-import { View, Text, Icon } from "native-base";
+import React, { useContext, ReactNode, useEffect } from "react";
+import { View, Text, Icon, Heading } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, signOut, deleteUser } from "firebase/auth";
 import format from "date-fns/format";
 
 import AppContext from "../store/createContext.ts";
 import { useUserDataFromFirebase } from "../data/firebase";
 import { SimpleButton } from "../components/atoms/Button";
+import { ThemeConsumer } from "react-native-elements";
 
 const userObj = {
   providerId: "firebase",
@@ -35,17 +36,27 @@ const userObj = {
 
 export const Profile = (): ReactNode => {
   const navigation = useNavigation();
-  // const { user, setUser } = useContext(AppContext);
-  // useUserDataFromFirebase(user.uid);
-
-  const user = userObj;
+  const { user, setUser } = useContext(AppContext);
+  useUserDataFromFirebase(user.uid);
 
   const auth = getAuth();
-  const onLogOut = async () => {
+  const handleLogOut = async () => {
     await signOut(auth)
       .then(() => {
         setUser({});
         console.log("Signed out!");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    navigation.navigate("Home");
+  };
+
+  const handleDeleteProfile = () => {
+    deleteUser(auth.currentUser)
+      .then(() => {
+        setUser({});
+        console.log("user deleted!");
       })
       .catch((error) => {
         console.error(error);
@@ -59,6 +70,7 @@ export const Profile = (): ReactNode => {
 
   return user.email ? (
     <View>
+      {user.displayName && <Text>{user.displayName}</Text>}
       <Text>{user.email}</Text>
       {user.createdAt && (
         <Text>
@@ -67,7 +79,10 @@ export const Profile = (): ReactNode => {
         </Text>
       )}
       <SimpleButton onPress={handleLog}>Console Log</SimpleButton>
-      <SimpleButton onPress={onLogOut}>Log out</SimpleButton>
+      <SimpleButton onPress={handleLogOut}>Log out</SimpleButton>
+      <SimpleButton variant="outline" onPress={handleDeleteProfile}>
+        Delete Profile
+      </SimpleButton>
     </View>
   ) : (
     <Text>Not logged in</Text>

@@ -20,6 +20,7 @@ const App = (): ReactNode => {
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (currentUser) => {
+      console.log("changed!");
       if (currentUser) {
         setLoggedIn(true);
       }
