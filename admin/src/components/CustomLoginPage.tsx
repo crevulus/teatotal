@@ -1,32 +1,31 @@
-import { Login, LoginForm } from "react-admin";
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import firebase from "firebase";
+import React, { useState } from "react";
+import firebase from "firebase/app";
+import "firebase/auth";
 
-// Configure FirebaseUI.
-const uiConfig = {
-  signInFlow: "popup",
-  signInSuccessUrl: "#/",
-  signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebase.auth.EmailAuthProvider.PROVIDER_ID,
-  ],
+export const CustomLoginPage = (props: any) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [_, setErrors] = useState({});
+  const handleLogin = (e: any) => {
+    e.preventDefault();
+    props.handleLogin(true);
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setErrors({ errorCode, errorMessage });
+      });
+  };
+  return (
+    <div>
+      <form onSubmit={handleLogin}>
+        Email: <input name="email" onChange={(e) => setEmail(e.target.value)} />
+        Password:{" "}
+        <input name="password" onChange={(e) => setPassword(e.target.value)} />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
 };
-
-const SignInScreen = () => (
-  <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-);
-
-const CustomLoginForm = (props: any) => (
-  <div>
-    <LoginForm {...props} />
-    <SignInScreen />
-  </div>
-);
-
-const CustomLoginPage = (props: any) => (
-  <Login {...props}>
-    <CustomLoginForm {...props} />
-  </Login>
-);
-
-export default CustomLoginPage;

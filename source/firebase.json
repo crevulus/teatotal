@@ -27,7 +27,7 @@
       "enabled": true
     },
     "pubsub": {
-      "port": 8085
+      "port": 8081
     }
   },
   "storage": {
