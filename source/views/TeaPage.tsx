@@ -25,6 +25,8 @@ import { checkUserAlreadyActed } from "../utils/checkUser";
 const db = getFirestore();
 const auth = getAuth();
 
+// TODO: Add disabling for button when use has already voted.
+
 export const TeaPage = (): ReactNode => {
   const { state } = useTeaSettingsContext();
   const [teaRating, setTeaRating] = useState(state.chosenTea.rating);
@@ -32,15 +34,18 @@ export const TeaPage = (): ReactNode => {
   const alreadyVotedToast = useToast();
 
   const handleRateTea = async () => {
+    // get data
     const docRef = doc(db, "reviews", state.chosenTea.adminId);
     const docSnapshot = await getDoc(docRef);
     if (!docSnapshot.exists()) {
+      // add a new doc if non-existent
       await setDoc(doc(db, "reviews", state.chosenTea.adminId), {
         userReviews: [],
         rating: teaRating,
         reviewCount: 1,
       });
     } else {
+      // if exists, check for a) whether there are user reviews and b) whether the user has already voted
       const hasVoted =
         docSnapshot.data().userReviews.length > 0 &&
         checkUserAlreadyActed(
@@ -53,6 +58,7 @@ export const TeaPage = (): ReactNode => {
         return;
       }
     }
+    // if allowed, add the user rating
     await updateDoc(docRef, {
       userReviews: arrayUnion({
         userId: auth.currentUser.uid,
