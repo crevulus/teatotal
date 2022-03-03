@@ -1,5 +1,14 @@
 import React from "react";
-import { Admin, Resource, ListGuesser } from "react-admin";
+import {
+  Admin,
+  Resource,
+  ReferenceField,
+  List,
+  Datagrid,
+  TextField,
+  EmailField,
+  DateField,
+} from "react-admin";
 import {
   FirebaseDataProvider,
   FirebaseAuthProvider,
@@ -8,47 +17,53 @@ import {
 
 import { BlackteaEdit } from "./components/BlackTea/BlackteaEdit";
 import { BlackteaList } from "./components/BlackTea/BlackteaList";
+import { ReviewList } from "./components/Reviews/ReviewList";
 
+import firebase from "firebase/app";
 import firebaseConfig from "./firebaseConfig.js";
-import CustomLoginPage from "./components/CustomLoginPage";
+
+firebase.initializeApp(firebaseConfig);
 
 const options: RAFirebaseOptions = {
   logging: true,
-  watch: ["blackTeas", "users", "reviews"],
+  watch: ["blackTeas", "users", "reviews", "admins"],
 };
 
 const dataProvider = FirebaseDataProvider(firebaseConfig, options);
-const authBase: any = FirebaseAuthProvider(firebaseConfig, options);
+const authProvider = FirebaseAuthProvider(firebaseConfig, options);
 
-const authProvider = {
-  ...authBase,
-  login: async (params: any) => {
-    const user = await authProvider.login(params);
-    // getPermissions is how when get the custom claims for the logged in user
-    const claims = await authProvider.getPermissions();
-    const isAdmin = Array.isArray(claims) && claims.includes("admin");
-    if (isAdmin) {
-      return user;
-    }
-    // Make sure user is logged out, if not an admin
-    await authProvider.logout();
-    throw new Error("Login error, invalid permissions");
-  },
-  getPermissions: async (params: any) => {
-    console.log(await authProvider.login(params));
-  },
+const AdminsList = (props: any) => {
+  return (
+    <List {...props}>
+      <Datagrid rowClick="edit">
+        <TextField source="id" />
+        <EmailField source="email" />
+      </Datagrid>
+    </List>
+  );
 };
+
+export const UserList = (props: any) => (
+  <List {...props}>
+    <Datagrid rowClick="edit">
+      <ReferenceField source="id" reference="admins">
+        <TextField source="id" />
+      </ReferenceField>
+      <TextField source="displayName" />
+      <TextField source="role" />
+      <DateField source="createdAt" />
+      <EmailField source="email" />
+    </Datagrid>
+  </List>
+);
 
 function App() {
   return (
-    <Admin
-      dataProvider={dataProvider}
-      authProvider={authProvider}
-      loginPage={CustomLoginPage}
-    >
+    <Admin dataProvider={dataProvider} authProvider={authProvider}>
+      <Resource name="users" list={UserList} />
+      <Resource name="admins" list={AdminsList} />
       <Resource name="blackTeas" list={BlackteaList} edit={BlackteaEdit} />
-      <Resource name="users" list={ListGuesser} />
-      <Resource name="reviews" list={ListGuesser} />
+      <Resource name="reviews" list={ReviewList} />
     </Admin>
   );
 }

@@ -8,7 +8,6 @@ import {
   ReferenceField,
   EditButton,
 } from "react-admin";
-import { CustomImageField } from "../CustomImageField";
 
 export const BlackteaList = (props: any) => {
   return (
