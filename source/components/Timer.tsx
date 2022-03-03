@@ -1,6 +1,7 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import { Center, Heading, HStack, Text, View } from "native-base";
 import { useTimer } from "react-timer-hook";
+import { Audio } from "expo-av";
 
 import { SimpleButton } from "./atoms/Button";
 import { TeaType } from "../data/firebase";
@@ -24,11 +25,24 @@ export function Timer({ expiryTimestamp, teaData }: TimerProps): ReactNode {
     } else return value;
   };
 
+  async function playSound() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../assets/ringer2.mp3")
+    );
+    await sound.playAsync();
+  }
+
   const handleRestart = () => {
     const brewTime = new Date();
     brewTime.setSeconds(brewTime.getSeconds() + teaData.roundedMinutes * 60);
     restart(brewTime, false);
   };
+
+  useEffect(() => {
+    if (seconds === 0 && minutes === 0) {
+      playSound();
+    }
+  }, [seconds, minutes]);
 
   return (
     <View>
@@ -36,9 +50,9 @@ export function Timer({ expiryTimestamp, teaData }: TimerProps): ReactNode {
         <Heading>{teaData.name}</Heading>
         <Text>Your tea will be ready in</Text>
         <View>
-          <Text>
+          <Heading>
             {padTimings(minutes)}:{padTimings(seconds)}
-          </Text>
+          </Heading>
         </View>
         <HStack space={3}>
           <SimpleButton variant="icon" iconName="play-arrow" onPress={start} />
